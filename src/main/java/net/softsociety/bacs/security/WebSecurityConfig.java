@@ -1,4 +1,4 @@
-package net.softsociety.spring5.security;
+package net.softsociety.bacs.security;
 
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
