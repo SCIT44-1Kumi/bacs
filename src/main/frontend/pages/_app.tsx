@@ -1,12 +1,14 @@
 import '@/styles/globals.css'
 import { AppProps } from 'next/app'
-import { Inter } from "next/dist/compiled/@next/font/dist/google";
+import { Inter } from "next/font/google";
+import { appWithTranslation } from 'next-i18next'
 
-const inter = Inter({subsets:['latin']});
-export default function App({ Component, pageProps }: AppProps) {
-  return <main
-    className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-  >
+const inter = Inter({subsets:['latin'], weight: "400"});
+
+const MyApp = ({ Component, pageProps }: AppProps)  => {
+  return <main className={`p-24 ${inter.className}`}>
   <Component {...pageProps} />
   </main>
-}
+};
+
+export default appWithTranslation(MyApp);
