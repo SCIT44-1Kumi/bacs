@@ -13,6 +13,7 @@ const Home = () => {
         <Link href={"/"}>B A C S</Link>
       </div>
       <div>{t("Japanese")}</div>
+      <div>{t("products")}</div>
     </div>
   )
 }
