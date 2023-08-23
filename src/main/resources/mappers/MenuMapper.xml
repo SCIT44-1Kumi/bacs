@@ -2,8 +2,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="net.softsociety.bacs.dao.AdminDAO">
+<mapper namespace="net.softsociety.bacs.dao.MenuDAO">
     <select id="getStoreInfo" resultType="String">
-        select * from bacs_store where store_id like #{store_id}
+
     </select>
 </mapper>

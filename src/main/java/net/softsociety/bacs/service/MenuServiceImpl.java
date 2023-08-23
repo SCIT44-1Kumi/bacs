@@ -1,22 +1,22 @@
 package net.softsociety.bacs.service;
 
 import lombok.extern.slf4j.Slf4j;
-import net.softsociety.bacs.dao.AdminDAO;
+import net.softsociety.bacs.dao.MenuDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
-public class AdminServiceImpl implements AdminService {
-
+public class MenuServiceImpl implements MenuService
+{
     @Autowired
-    AdminDAO dao;
+    MenuDAO dao;
+
     /**
      * @return
      */
     @Override
-    public String getStoreInfo() {
-        String ex = dao.getStoreInfo();
+    public String menuForm() {
         return null;
     }
 }
