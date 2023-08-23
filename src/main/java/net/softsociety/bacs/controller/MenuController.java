@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 
 @RestController
 public class MenuController
@@ -13,9 +14,9 @@ public class MenuController
     MenuService service;
 
     @GetMapping("/menuForm")
-    public String menuForm()
+    public ArrayList<Menu> menuForm()
     {
-        String menuForm = service.menuForm();
+//        ArrayList<Menu> menuForm = service.menuForm();
         return menuForm;
     }
 }
