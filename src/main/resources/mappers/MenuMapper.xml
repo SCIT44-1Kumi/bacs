@@ -1,9 +1,50 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="net.softsociety.bacs.dao.MenuDAO">
-    <select id="getMenuList" parameterType="String" resultType="BacsMenu">
-        select * from BACS_MENU where STORE_ID = #{store_id}
+
+    <!-- 메뉴 추가 -->
+    <insert id="menuInsert" parameterType="BacsMenu">
+        <selectKey resultType="int" keyProperty="menuNum" order="BEFORE">
+            select BACS_MENU_SEQ.nextval from dual
+        </selectKey>
+        insert into bacsmenu
+            ( menuNum
+            , menuName
+            , menuPrice
+            , menuImg
+            , menuDesc
+            , storeId
+            , categoryNum)
+        values
+            ( BACS_MENU_SEQ.nextval
+            , #{menuName}
+            , #{menuPrice}
+            , #{menuImg}
+            , #{menuDesc}
+            , #{storeId}
+            , #{categoryNum})
+    </insert>
+
+
+    <insert id="menuOptionInsert" parameterType="BacsMenuOption">
+        insert into bacsMenuOption
+            ( optionNum
+            , optionName
+            , optionValue
+            , optionPrice
+            , menuNum)
+        values
+            ( BACS_MENU_OPTION_SEQ.nextval
+            , #{optionName}
+            , #{optionValue}
+            , #{optionPrice}
+            , #{menuNum})
+    </insert>
+
+
+    <select>
+
+
     </select>
 </mapper>
