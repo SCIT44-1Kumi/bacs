@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class BacsOrder {
 
   private String orderNum;
-  private java.sql.Date orderDate;
+  private String orderDate;
   private String totalPrice;
   private String toGo;
   private String storeId;

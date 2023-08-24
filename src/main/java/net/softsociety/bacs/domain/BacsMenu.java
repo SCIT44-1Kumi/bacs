@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 public class BacsMenu {
 
   private String menuNum;
-  private String menuCategory;
   private String menuName;
   private String menuPrice;
   private String menuImg;
