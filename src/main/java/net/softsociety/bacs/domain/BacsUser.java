@@ -16,7 +16,7 @@ public class BacsUser {
   private String phone;
   private String rolename;
   private String enabled;
-  private java.sql.Date createdAt;
+  private String createdAt;
 
 
 

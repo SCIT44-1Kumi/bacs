@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="net.softsociety.bacs.dao.MenuDAO">
-    <select id="getStoreInfo" resultType="String">
-
+    <select id="getMenuList" parameterType="String" resultType="BacsMenu">
+        select * from BACS_MENU where STORE_ID = #{store_id}
     </select>
 </mapper>

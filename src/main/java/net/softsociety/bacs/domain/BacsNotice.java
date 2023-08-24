@@ -14,7 +14,7 @@ public class BacsNotice {
   private String noticeTitle;
   private String noticeContents;
   private String noticeViews;
-  private java.sql.Date createdAt;
+  private String createdAt;
   private String userId;
 
 

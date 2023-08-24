@@ -15,7 +15,7 @@ public class BacsStore {
   private String storeAddress;
   private String crNum;
   private String storePhone;
-  private java.sql.Date createdAt;
+  private String createdAt;
   private String userId;
 
 

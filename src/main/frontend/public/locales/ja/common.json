@@ -1,8 +1,8 @@
 {
-  "Japanese": "日本語",
-  "Korean": "韓国語",
-  "products": "商品紹介",
-  "installation": "設置現状",
-  "signup": "サインアップ",
-  "login": "サインイン"
+  "home.Japanese": "日本語",
+  "home.Korean": "韓国語",
+  "home.products": "商品紹介",
+  "home.installation": "設置現状",
+  "home.signup": "サインアップ",
+  "home.login": "サインイン"
 }
