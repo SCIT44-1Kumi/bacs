@@ -16,15 +16,18 @@ export interface IUser {
   createdAt: string
 }
 
-
 const Home = () => {
   const {t} = useTranslation();
   const [users, setUsers] = useState<IUser[]>();
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get('/member/getUserList');
-      console.log(data);
-      setUsers(data);
+      const result = await axios.get('/member/getUserList');
+      // $.ajax({
+      // url: '/member/getUserList',
+      // })
+
+      console.log(result);
+      setUsers(result.data);
   })();
   }, [])
   return (
@@ -32,15 +35,14 @@ const Home = () => {
       <div className={`col-span-2`}>
         <Link href={"/"}>B A C S</Link>
       </div>
-      <div>{t("Japanese")}</div>
-      <div>{t("products")}</div>
+      <div>{t("home.Japanese")}</div>
+      <div>{t("home.products")}</div>
       {users?.map(user => (
         <div key={user.userId} className={`grid grid-cols-2 min-w-full col-span-2 place-content-evenly`}>
           <span>{user.userId}</span>
           <span>{user.email}</span>
         </div>
-      )
-
+        )
       )}
     </div>
   )
