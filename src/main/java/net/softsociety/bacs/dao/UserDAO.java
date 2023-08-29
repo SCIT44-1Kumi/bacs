@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 @Mapper
 public interface UserDAO {
-    public boolean createUser(BacsUser newUser);
+//    public boolean createUser(BacsUser newUser);
 
-    public ArrayList<BacsUser> getUserList();
+    ArrayList<BacsUser> getUserList();
 }

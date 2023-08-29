@@ -3,7 +3,6 @@ package net.softsociety.bacs.service;
 import lombok.extern.slf4j.Slf4j;
 import net.softsociety.bacs.dao.UserDAO;
 import net.softsociety.bacs.domain.BacsUser;
-import net.softsociety.bacs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,18 +15,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserDAO dao;
 
-
     /**
-     * @param newUser
-     * @return
-     */
-    @Override
-    public boolean createUser(BacsUser newUser) {
-        return dao.createUser(newUser);
-    }
-
-    /**
-     * @return
+     * 회원 데이터 가져오기 (임시)
+     * @return list
      */
     @Override
     public ArrayList<BacsUser> getUserList() {

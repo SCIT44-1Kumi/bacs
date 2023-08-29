@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BacsMenu {
 
-  private String menuNum;
+  private int menuNum;
   private String menuName;
   private String menuPrice;
   private String menuImg;

@@ -1,9 +1,15 @@
 package net.softsociety.bacs.service;
 
-public interface MenuService
-{
+import net.softsociety.bacs.domain.BacsMenu;
+import net.softsociety.bacs.domain.BacsMenuOption;
 
-    void menuInsert(BacsMenu menu);
+import java.util.ArrayList;
 
-    void menuOptionInsert(BacsMenuOption menuOption);
+public interface MenuService {
+
+//    public void menuInsert(BacsMenu menu);
+//
+//    public void menuOptionInsert(BacsMenuOption menuOption);
+
+    boolean createMenu(BacsMenu menu, ArrayList<BacsMenuOption> options);
 }

@@ -14,8 +14,6 @@ public class BacsMenuOption {
   private String optionName;
   private String optionValue;
   private String optionPrice;
-  private String menuNum;
-
-
+  private int menuNum;
 
 }

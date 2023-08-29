@@ -1,50 +1,59 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="net.softsociety.bacs.dao.MenuDAO">
 
+<mapper namespace="net.softsociety.bacs.dao.MenuDAO">
     <!-- 메뉴 추가 -->
-    <insert id="menuInsert" parameterType="BacsMenu">
+    <insert id="createMenu" parameterType="BacsMenu">
         <selectKey resultType="int" keyProperty="menuNum" order="BEFORE">
             select BACS_MENU_SEQ.nextval from dual
         </selectKey>
-        insert into bacsmenu
-            ( menuNum
-            , menuName
-            , menuPrice
-            , menuImg
-            , menuDesc
-            , storeId
-            , categoryNum)
+        insert into BACS_MENU
+            (
+                menuNum
+                , menuName
+                , menuPrice
+                <if test="menuImg != '' ">
+                    , menuImg
+                </if>
+                <if test="menuDesc != '' ">
+                    , menuDesc
+                </if>
+                , storeId
+                , categoryNum
+            )
         values
-            ( BACS_MENU_SEQ.nextval
-            , #{menuName}
-            , #{menuPrice}
-            , #{menuImg}
-            , #{menuDesc}
-            , #{storeId}
-            , #{categoryNum})
+            (
+                #{menuNum}
+                , #{menuName}
+                , #{menuPrice}
+                <if test="menuImg != '' ">
+                    , #{menuImg}
+                </if>
+                <if test="menuDesc != '' ">
+                    , #{menuDesc}
+                </if>
+                , #{storeId}
+                , #{categoryNum}
+            )
+
     </insert>
 
 
-    <insert id="menuOptionInsert" parameterType="BacsMenuOption">
-        insert into bacsMenuOption
-            ( optionNum
-            , optionName
-            , optionValue
-            , optionPrice
-            , menuNum)
-        values
-            ( BACS_MENU_OPTION_SEQ.nextval
-            , #{optionName}
-            , #{optionValue}
-            , #{optionPrice}
-            , #{menuNum})
+    <insert id="createOptions" parameterType="java.util.List">
+        insert into BACS_MENU_OPTION
+            (OPTIONNUM, OPTIONNAME, OPTIONVALUE, OPTIONPRICE, MENUNUM)
+            select BACS_MENU_OPTION_SEQ.nextval, A.*
+            from
+            (
+                <foreach collection="list" item="item" separator="union all">
+                    select
+                        #{item.optionName} optionName
+                        , #{item.optionValue} optionValue
+                        , #{item.optionPrice} optionPrice
+                        , #{item.menuNum} menuNum
+                    from dual
+                </foreach>
+            ) A
     </insert>
-
-
-    <select>
-
-
-    </select>
 </mapper>

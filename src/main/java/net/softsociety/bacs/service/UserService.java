@@ -5,7 +5,7 @@ import net.softsociety.bacs.domain.BacsUser;
 import java.util.ArrayList;
 
 public interface UserService {
-    public boolean createUser(BacsUser newUser);
+//    public boolean createUser(BacsUser newUser);
 
-    public ArrayList<BacsUser> getUserList();
+    ArrayList<BacsUser> getUserList();
 }

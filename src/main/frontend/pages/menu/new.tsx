@@ -31,7 +31,11 @@ const CreateMenuForm = () => {
 	const router = useRouter();
 	const onSubmit = async (data: ICreateMenu) => {
 		console.log(data);
-		await axios.post('/menu/menuForm', {data});
+		const {menu, options} = data;
+		await axios.post('/menu/create', {
+			menu,
+			options
+		});
 		await router.push("/");
 		return;
 	}

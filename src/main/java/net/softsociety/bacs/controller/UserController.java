@@ -4,9 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.softsociety.bacs.domain.BacsUser;
 import net.softsociety.bacs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -19,8 +17,18 @@ public class UserController {
     @Autowired
     UserService service;
 
+    /**
+     * 회원 목록 가져오기
+     * @return list
+     */
     @GetMapping("getUserList")
     public ArrayList<BacsUser> getUserList() {
         return service.getUserList();
     }
+
+    // TODO: 회원가입
+    // TODO: 로그인
+    // TODO: 회원탈퇴
+    // TODO: 프로필 업데이트
+
 }
