@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Slf4j
-@RequestMapping("kiosk")
-public class KioskController {
+@RequestMapping("order")
+public class OrderController {
 
-    // TODO:
+    // TODO: 주문생성
+    // TODO: 주문취소(삭제)
+    // TODO: 주문조회(영수증)
 }

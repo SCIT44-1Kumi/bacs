@@ -26,7 +26,7 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public boolean createMenu(BacsMenu menu, ArrayList<BacsMenuOption> options) {
         menu.setStoreId("scitcafe");
-        menu.setCategoryNum(String.valueOf(1));
+        menu.setCategoryNum(String.valueOf(1)); // TODO: 매개변수 타입 변경
         log.debug("=======메뉴=======: {}", menu);
         int n = dao.createMenu(menu);
         log.debug("=======메뉴=======: {}, {}", n, menu);
