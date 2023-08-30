@@ -7,9 +7,5 @@ import java.util.ArrayList;
 
 public interface MenuService {
 
-//    public void menuInsert(BacsMenu menu);
-//
-//    public void menuOptionInsert(BacsMenuOption menuOption);
-
     boolean createMenu(BacsMenu menu, ArrayList<BacsMenuOption> options);
 }
