@@ -2,8 +2,10 @@ package net.softsociety.bacs.service;
 
 import lombok.extern.slf4j.Slf4j;
 import net.softsociety.bacs.dao.MenuDAO;
-import net.softsociety.bacs.domain.BacsMenu;
-import net.softsociety.bacs.domain.BacsMenuOption;
+import net.softsociety.bacs.domain.dto.menu.DeleteMenuDTO;
+import net.softsociety.bacs.domain.dto.menu.DeleteMenuOptionDTO;
+import net.softsociety.bacs.domain.vo.BacsMenu;
+import net.softsociety.bacs.domain.vo.BacsMenuOption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,5 +38,41 @@ public class MenuServiceImpl implements MenuService {
         }
         int m = dao.createOptions(options);
         return n != 0;
+    }
+
+    /**
+     * 메뉴 삭제
+     * @param data
+     */
+    @Override
+    public int deleteMenu(DeleteMenuDTO data) {
+        return dao.deleteMenu(data);
+    }
+
+    /**
+     * 메뉴 옵션 삭제
+     * @param data
+     */
+    @Override
+    public int deleteMenuOption(DeleteMenuOptionDTO data) {
+        return dao.deleteMenuOption(data);
+    }
+
+    /**
+     * 메뉴 수정
+     * @param data
+     */
+    @Override
+    public int updateMenu(BacsMenu data) {
+        return dao.updateMenu(data);
+    }
+
+    /**
+     * 메뉴 옵션 수정
+     * @param data
+     */
+    @Override
+    public int updateMenuOption(BacsMenuOption data) {
+        return dao.updateMenuOption(data);
     }
 }

@@ -1,4 +1,4 @@
-package net.softsociety.bacs.domain;
+package net.softsociety.bacs.domain.vo;
 
 
 import lombok.AllArgsConstructor;
@@ -8,13 +8,15 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class StoreNotice {
+public class BacsNotice {
 
   private String noticeNum;
   private String noticeTitle;
   private String noticeContents;
   private String noticeViews;
   private String createdAt;
-  private String storeId;
+  private String userId;
+
+
 
 }

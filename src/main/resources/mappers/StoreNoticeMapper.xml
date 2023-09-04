@@ -1,0 +1,43 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.softsociety.bacs.dao.StoreNoticeDAO">
+
+    <!-- 매장 공지 등록 -->
+    <insert id="createStoreNotice" parameterType="CreateStoreNoticeDTO">
+        insert into STORE_NOTICE
+                        (noticeNum
+                        , noticeTitle
+                        , noticeContents
+                        , storeId)
+                    VALUES
+                        (STORE_NOTICE_SEQ.nextval
+                        , #{noticeTitle}
+                        , #{noticeContents}
+                        , #{storeId})
+    </insert>
+
+    <!-- 매장 공지 수정 -->
+    <update id="updateStoreNotice" parameterType="updateStoreNoticeDTO">
+        update STORE_NOTICE
+        set noticeTitle = #{noticeTitle}
+            , noticeContents = #{noticeContents}
+        where noticeNum = #{noticeNum} and storeId = #{storeId}
+    </update>
+
+    <!-- 매장 공지 삭제 -->
+    <delete id="deleteStoreNotice" parameterType="deleteStoreNoticeDTO">
+        delete from STORE_NOTICE where noticeNum = #{noticeNum} and storeId = #{storeId}
+    </delete>
+
+    <!-- 매장 공지 리스트 -->
+    <select id="selectStoreNotice" parameterType="String" resultType="StoreNotice">
+        select * from STORE_NOTICE where storeId = #{storeId} order by noticeNum desc
+    </select>
+
+    <!-- 매장 공지 읽기 -->
+    <select id="readStoreNotice" parameterType="int" resultType="StoreNotice">
+        select * from STORE_NOTICE where NOTICENUM = #{noticeNum}
+    </select>
+</mapper>

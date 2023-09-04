@@ -1,7 +1,7 @@
 package net.softsociety.bacs.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import net.softsociety.bacs.domain.BacsUser;
+import net.softsociety.bacs.domain.vo.BacsUser;
 import net.softsociety.bacs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package net.softsociety.bacs.domain;
+package net.softsociety.bacs.domain.vo;
 
 
 import lombok.AllArgsConstructor;

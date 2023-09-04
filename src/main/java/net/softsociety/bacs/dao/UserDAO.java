@@ -1,6 +1,6 @@
 package net.softsociety.bacs.dao;
 
-import net.softsociety.bacs.domain.BacsUser;
+import net.softsociety.bacs.domain.vo.BacsUser;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.ArrayList;

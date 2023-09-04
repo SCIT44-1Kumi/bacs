@@ -39,7 +39,7 @@
 
     </insert>
 
-
+    <!--메뉴 옵션 추가 -->
     <insert id="createOptions" parameterType="java.util.List">
         insert into BACS_MENU_OPTION
             (OPTIONNUM, OPTIONNAME, OPTIONVALUE, OPTIONPRICE, MENUNUM)
@@ -56,4 +56,40 @@
                 </foreach>
             ) A
     </insert>
+
+    <!-- 메뉴 삭제 (메뉴를 삭제하면 옵션이 같이 삭제됨) -->
+<!--    <delete id="deleteMenuOptions" parameterType="DeleteMenuDTO">-->
+<!--        DELETE FROM BACS_MENU_OPTION-->
+<!--        WHERE menuNum = #{menuNum}-->
+<!--    </delete>-->
+    <delete id="deleteMenu" parameterType="DeleteMenuDTO">
+        DELETE FROM BACS_MENU
+        WHERE menuNum = #{menuNum}
+    </delete>
+
+    <!-- 메뉴 옵션 삭제 -->
+    <delete id="deleteMenuOption" parameterType="deleteMenuOptionDTO">
+        DELETE FROM BACS_MENU_OPTION
+        where optionNum = #{optionNum} and menuNum = #{menuNum}
+    </delete>
+
+    <!-- 메뉴 수정 -->
+        <update id="updateMenu" parameterType="BacsMenu">
+            update BACS_MENU
+            set menuName = #{menuName}
+                , menuPrice = #{menuPrice}
+                , menuImg = #{menuImg}
+                , menuDesc = #{menuDesc}
+                , categoryNum = #{categoryNum}
+            where menuNum = #{menuNum} and storeId = #{storeId}
+        </update>
+
+    <!-- 메뉴 옵션 수정 -->
+    <update id="updateMenuOption" parameterType="BacsMenuOption">
+        update BACS_MENU_OPTION
+        set optionName = #{optionName}
+          , optionValue = #{optionValue}
+          , optionPrice = #{optionPrice}
+        where menuNum = #{menuNum} and optionNum = #{optionNum}
+    </update>
 </mapper>

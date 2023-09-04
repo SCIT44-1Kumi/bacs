@@ -1,6 +1,6 @@
 package net.softsociety.bacs.service;
 
-import net.softsociety.bacs.domain.BacsUser;
+import net.softsociety.bacs.domain.vo.BacsUser;
 
 import java.util.ArrayList;
 
