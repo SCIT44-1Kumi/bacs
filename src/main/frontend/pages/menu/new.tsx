@@ -4,8 +4,14 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import InputMenu from "@/components/inputMenu";
 
+export type Category = {
+	categoryNum: number,
+	categoryName: string,
+	storeId: string,
+}
+
 export type Option = {
-	optionNum: number;
+	optionNum: number,
 	optionName: string,
 	optionValue: string,
 	optionPrice: number,
@@ -19,6 +25,7 @@ type Menu = {
 };
 
 export type ICreateMenu = {
+	category: Category,
 	menu: Menu,
 	options: Option[],
 }

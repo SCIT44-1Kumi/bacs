@@ -1,6 +1,7 @@
 package net.softsociety.bacs.controller;
 
 import lombok.extern.slf4j.Slf4j;
+<<<<<<< HEAD
 import net.softsociety.bacs.domain.dto.storeNotice.CreateStoreNoticeDTO;
 import net.softsociety.bacs.domain.dto.storeNotice.DeleteStoreNoticeDTO;
 import net.softsociety.bacs.domain.dto.storeNotice.UpdateStoreNoticeDTO;
@@ -10,12 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+=======
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+>>>>>>> origin/dev
 
 @RestController
 @Slf4j
 @RequestMapping("") // TODO: "매장아이디"/notice
 public class StoreNoticeController {
 
+<<<<<<< HEAD
     @Autowired
     StoreNoticeService service;
 
@@ -85,5 +91,12 @@ public class StoreNoticeController {
         ArrayList<StoreNotice> storeNotice = service.readStoreNotice(noticeNum);
         return storeNotice;
     }
+=======
+    // TODO: 매장 공지 생성
+    // TODO: 매장 공지 삭제
+    // TODO: 매장 공지 편집
+    // TODO: 매장 공지 리스트조회
+    // TODO: 매장 공지 조회
+>>>>>>> origin/dev
 
 }
