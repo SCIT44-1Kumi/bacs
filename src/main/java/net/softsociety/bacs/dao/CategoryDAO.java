@@ -1,5 +1,6 @@
 package net.softsociety.bacs.dao;
 
+import net.softsociety.bacs.domain.vo.BacsCategory;
 import net.softsociety.bacs.domain.dto.category.CreateCategoryDTO;
 import net.softsociety.bacs.domain.dto.category.SelectCategoryDTO;
 import net.softsociety.bacs.domain.dto.category.UpdateCategoryDTO;
