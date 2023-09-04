@@ -1,0 +1,29 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.softsociety.bacs.dao.NoticeDAO">
+    <insert id="create" parameterType="CreateNoticeDTO">
+        insert into BACS_NOTICE
+            (NOTICENUM, NOTICETITLE, NOTICECONTENTS,USERID)
+        values
+            (BACS_NOTICE_SEQ.nextval, #{noticeTitle}, #{noticeContents}, #{userId})
+    </insert>
+
+    <delete id="delete" parameterType="DeleteNoticeDTO">
+        delete from BACS_NOTICE where USERID = #{userId} and NOTICENUM = #{noticeNum}
+    </delete>
+
+    <update id="edit" parameterType="EditNoticeDTO">
+        update BACS_NOTICE set NOTICECONTENTS = #{noticeContents} , NOTICETITLE = #{noticeTitle} where NOTICENUM = #{noticeNum} and USERID = #{userId}
+    </update>
+
+    <select id="read" resultType="BacsNotice">
+        select * from BACS_NOTICE
+    </select>
+
+    <select id="readOne" resultType="int">
+        select NOTICENUM, NOTICETITLE, NOTICECONTENTS from BACS_NOTICE where NOTICENUM = #{noticeNum}
+    </select>
+
+</mapper>
