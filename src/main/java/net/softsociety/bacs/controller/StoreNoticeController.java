@@ -8,10 +8,10 @@ import net.softsociety.bacs.domain.vo.StoreNotice;
 import net.softsociety.bacs.service.StoreNoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 
 @RestController
 @Slf4j
