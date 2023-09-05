@@ -1,7 +1,6 @@
 package net.softsociety.bacs.controller;
 
 import lombok.extern.slf4j.Slf4j;
-<<<<<<< HEAD
 import net.softsociety.bacs.domain.dto.storeNotice.CreateStoreNoticeDTO;
 import net.softsociety.bacs.domain.dto.storeNotice.DeleteStoreNoticeDTO;
 import net.softsociety.bacs.domain.dto.storeNotice.UpdateStoreNoticeDTO;

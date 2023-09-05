@@ -25,8 +25,8 @@ public class NLPServiceImpl implements NLPService {
 //        log.info(this.getClass().getName() + ".WordAnalysisService creator Start !");
 
         //NLP 분석 객체 메모리 로딩합니다.
-        this.nlp = new Komoran(DEFAULT_MODEL.LIGHT); // 학습데이터 경량화 버전( 웹 서비스에 적합합니다. )
-        //this.nlp = new Komoran(DEFAULT_MODEL.FULL); // 학습데이터 전체 버전(일괄처리 : 배치 서비스에 적합합니다.)
+//        this.nlp = new Komoran(DEFAULT_MODEL.LIGHT); // 학습데이터 경량화 버전( 웹 서비스에 적합합니다. )
+        this.nlp = new Komoran(DEFAULT_MODEL.FULL); // 학습데이터 전체 버전(일괄처리 : 배치 서비스에 적합합니다.)
 
 //        log.info("난 톰켓이 부팅되면서 스프링 프렝미워크가 자동 실행되었고, 스프링 실행될 때 nlp 변수에 Komoran 객체를 생성하여 저장하였다.");
 
@@ -139,18 +139,21 @@ public class NLPServiceImpl implements NLPService {
     }
 
     @Override
-    public String getPlainResults(String text) {
-        Komoran komoran = new Komoran(DEFAULT_MODEL.FULL);
-        KomoranResult analyzeResultList = komoran.analyze(text);
-        log.debug("---plainText: {}", analyzeResultList.getPlainText());
-        List<Token> tokenList = analyzeResultList.getTokenList();
-        for(Token token : tokenList) {
-            log.debug("({}, {}), {}/{}", token.getBeginIndex(), token.getEndIndex(), token.getMorph(), token.getPos());
-        }
+    public List<String> getPlainResults(String text) {
+
+        //분석할 문장에 대해 정제(쓸데없는 특수문자 제거)
+        String replace_text = text.replace("[^가-힣a-zA-Z0-9", " ");
+
+        //분석할 문장의 앞, 뒤에 존재할 수 있는 필요없는 공백 제거
+        String trim_text = replace_text.trim();
+
+        //형태소 분석 시작
+        KomoranResult analyzeResultList = this.nlp.analyze(trim_text);
+
         List<String> nounList = analyzeResultList.getNouns();
         for(String noun: nounList) {
             log.debug("----noun: {}", noun);
         }
-        return null;
+        return nounList;
     }
 }
