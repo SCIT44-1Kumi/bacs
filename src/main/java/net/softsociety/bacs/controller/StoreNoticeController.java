@@ -1,6 +1,7 @@
 package net.softsociety.bacs.controller;
 
 import lombok.extern.slf4j.Slf4j;
+<<<<<<< HEAD
 import net.softsociety.bacs.domain.dto.storeNotice.CreateStoreNoticeDTO;
 import net.softsociety.bacs.domain.dto.storeNotice.DeleteStoreNoticeDTO;
 import net.softsociety.bacs.domain.dto.storeNotice.UpdateStoreNoticeDTO;
@@ -8,14 +9,10 @@ import net.softsociety.bacs.domain.vo.StoreNotice;
 import net.softsociety.bacs.service.StoreNoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-=======
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
->>>>>>> origin/dev
+
 
 @RestController
 @Slf4j
@@ -91,5 +88,6 @@ public class StoreNoticeController {
         ArrayList<StoreNotice> storeNotice = service.readStoreNotice(noticeNum);
         return storeNotice;
     }
+
 
 }
