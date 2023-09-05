@@ -16,10 +16,10 @@ public class UserController {
     UserService service;
 
     /**
-     * 회원 목록 가져오기
+주     * 회원 목록 가져오기 하면서 확인 필요
      * @return list
      */
-    // TODO: 회원가입
+
     @PostMapping("join")
     public String join(BacsUser user){
         log.debug("{}",user);

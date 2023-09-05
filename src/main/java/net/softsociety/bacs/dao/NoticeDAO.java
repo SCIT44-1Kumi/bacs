@@ -1,6 +1,6 @@
 package net.softsociety.bacs.dao;
 
-import net.softsociety.bacs.domain.dto.CreateNoticeDTO;
+import net.softsociety.bacs.domain.dto.notice.CreateNoticeDTO;
 import net.softsociety.bacs.domain.dto.DeleteNoticeDTO;
 import net.softsociety.bacs.domain.dto.EditNoticeDTO;
 import net.softsociety.bacs.domain.vo.BacsNotice;

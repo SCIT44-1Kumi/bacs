@@ -1,7 +1,7 @@
 package net.softsociety.bacs.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import net.softsociety.bacs.domain.dto.CreateNoticeDTO;
+import net.softsociety.bacs.domain.dto.notice.CreateNoticeDTO;
 import net.softsociety.bacs.domain.dto.DeleteNoticeDTO;
 import net.softsociety.bacs.domain.dto.EditNoticeDTO;
 import net.softsociety.bacs.domain.vo.BacsNotice;
@@ -21,26 +21,41 @@ public class BacsNoticeController {
     @Autowired
     NoticeService service;
 
-    // TODO: 메인 공지 생성
+    /**
+     * 전체 공지 생성
+     * @param data
+     */
     @PostMapping("create")
     public void create(@RequestBody CreateNoticeDTO data){
 
         log.debug("{}",data);
         service.create(data);
     }
-    // TODO: 메인 공지 삭제
+
+    /**
+     * 공지 삭제
+     * @param data
+     */
     @PostMapping("delete")
     public void delete(@RequestBody DeleteNoticeDTO data){
         log.debug("{}",data);
         service.delete(data);
     }
-    // TODO: 메인 공지 편집
+
+    /**
+     * 공지 수정
+     * @param data
+     */
     @PostMapping("edit")
     public void edit(@RequestBody EditNoticeDTO data){
         log.debug("{}", data);
         service.edit(data);
     }
-    // TODO: 메인 공지 리스트조회
+
+    /**
+     * 공지 전체 리스트
+     * 
+     */
 
     @GetMapping("read")
     public ArrayList<BacsNotice> read(){
@@ -50,7 +65,11 @@ public class BacsNoticeController {
         return result;
     }
 
-    // TODO: 메인 공지 조회
+    /**
+     * 공지 글 읽기
+     * @param noticeNum
+     * @return
+     */
     @GetMapping("readone/{noticeNum}")
     public ArrayList<BacsNotice> readOne(@PathVariable("noticeNum") int noticeNum) {
         log.debug("{}", noticeNum);
@@ -58,6 +77,6 @@ public class BacsNoticeController {
         return notice;
     }
 
-    // TODO: 회원 차단
+    // TODO: 회원 차단:수정상한테 넘어감
 
 }
