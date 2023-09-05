@@ -13,5 +13,5 @@ public interface NLPService {
     //분석할 문장의 자연어 처리 및 빈도수 분석 수행
     Map<String, Integer> doWordAnalysis(String text) throws Exception;
 
-    String getPlainResults(String text);
+    List<String> getPlainResults(String text);
 }

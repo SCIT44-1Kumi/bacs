@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -39,7 +40,7 @@ public class NLPController {
     }
 
     @GetMapping("test1")
-    public String test1(@RequestBody String text) {
+    public List<String> test1(@RequestBody String text) {
         return service.getPlainResults(text);
     }
 }
