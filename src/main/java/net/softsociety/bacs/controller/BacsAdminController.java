@@ -17,12 +17,9 @@ public class BacsAdminController {
     @Autowired
     UserService service;
 
-    // TODO: 매장 홈페이지 생성
-    // TODO: 매장 홈페이지 삭제
-    // TODO: 매장 홈페이지 편집
-    // TODO: 키오스크 페이지 생성
-    // TODO: 키오스크 페이지 삭제
-    // TODO: 키오스크 페이지 편집
+    // TODO: 매장 조회 /store/list
+    // TODO: 매장삭제 /store/delete
+    // TODO: 매장차단 /store/block
 
     /**
      * 당일 매출 조회
@@ -35,8 +32,6 @@ public class BacsAdminController {
 
     }
 
-
-     
     // TODO: 통계 조회 개발중
      
     @PostMapping("salesWeek")

@@ -38,7 +38,7 @@ public class NLPController {
     @PostMapping("test1")
     public List<String> test1(@RequestBody String text) {
         log.debug("----text: {}", text);
-        return service.getPlainResults(text);
+        return service.getNounList(text);
     }
 
     @GetMapping("test2")

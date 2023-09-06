@@ -2,37 +2,42 @@ package net.softsociety.bacs.controller;
 
 
 import lombok.extern.slf4j.Slf4j;
+import net.softsociety.bacs.domain.dto.category.SelectCategoryDTO;
 import net.softsociety.bacs.domain.dto.menu.DeleteMenuDTO;
 import net.softsociety.bacs.domain.dto.menu.DeleteMenuOptionDTO;
 import net.softsociety.bacs.domain.dto.menu.InsertMenuDTO;
+import net.softsociety.bacs.domain.vo.BacsCategory;
 import net.softsociety.bacs.domain.vo.BacsMenu;
 import net.softsociety.bacs.domain.vo.BacsMenuOption;
+import net.softsociety.bacs.service.CategoryService;
 import net.softsociety.bacs.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.web.bind.annotation.PostMapping;
-
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
 
 @RestController
-@RequestMapping("menu")
+@RequestMapping("{storeId}/admin/menu")
 @Slf4j
 public class MenuController
 {
     @Autowired
-    MenuService service;
+    MenuService menuService;
+
+    @Autowired
+    CategoryService categoryService;
 
     @PostMapping("create")
-    public boolean createMenu(@RequestBody InsertMenuDTO data){
+    public boolean createMenu(@PathVariable(name = "storeId") String storeId, @RequestBody InsertMenuDTO data){
         log.debug("========dto======: {}", data);
+        SelectCategoryDTO selectCategoryDTO = new SelectCategoryDTO();
+        selectCategoryDTO.setStoreId(storeId);
+        ArrayList<BacsCategory> categoryList = categoryService.selectCategory(selectCategoryDTO);
         BacsMenu menu = data.getMenu();
         ArrayList<BacsMenuOption> options = data.getOptions();
-        return service.createMenu(menu, options);
+        return menuService.createMenu(menu, options);
     }
 
     /**
@@ -46,7 +51,7 @@ public class MenuController
         // TODO : 접속자 아이디와 글 쓴 사람 아이디 비교 (로그인 상태가 아니거나 다르면 false)
         // TODO : 이미지 삭제 처리
         log.debug("DTO: {}", data);
-        return service.deleteMenu(data);
+        return menuService.deleteMenu(data);
     }
 
     /**
@@ -58,7 +63,7 @@ public class MenuController
     public int deleteMenuOption(@RequestBody DeleteMenuOptionDTO data)
     {
         log.debug("DTO: {}", data);
-        return service.deleteMenuOption(data);
+        return menuService.deleteMenuOption(data);
     }
 
 
@@ -74,7 +79,7 @@ public class MenuController
         // TODO : 접속자 아이디와 글 쓴 사람 아이디 비교 (로그인 상태가 아니거나 다르면 false)
         // TODO : 이미지 경로 수정 처리
         log.debug("updateMenu: {}", data);
-        return service.updateMenu(data);
+        return menuService.updateMenu(data);
     }
 
     /**
@@ -87,7 +92,7 @@ public class MenuController
     public int updateMenuOption(@RequestBody BacsMenuOption data)
     {
         log.debug("updateMenuOption: {}", data);
-        return service.updateMenuOption(data);
+        return menuService.updateMenuOption(data);
     }
 
 }

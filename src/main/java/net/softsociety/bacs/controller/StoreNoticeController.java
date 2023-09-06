@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Slf4j
-@RequestMapping("") // TODO: "매장아이디"/notice
+@RequestMapping("{storeId}/notice") // "매장아이디"/notice
 public class StoreNoticeController {
 
     @Autowired
@@ -27,9 +27,8 @@ public class StoreNoticeController {
      * @return
      */
     @PostMapping("createStoreNotice")
-    public boolean createStoreNotice(@RequestBody CreateStoreNoticeDTO data)
-    {
-        log.debug("category {}",data);
+    public boolean createStoreNotice(@PathVariable(name = "storeId") String storeId, @RequestBody CreateStoreNoticeDTO data) {
+        data.setStoreId(storeId);
         return service.createStoreNotice(data);
     }
 
@@ -40,9 +39,9 @@ public class StoreNoticeController {
      * @param data
      */
     @PostMapping("deleteStoreNotice")
-    public int deleteStoreNotice(@RequestBody DeleteStoreNoticeDTO data)
-    {
+    public int deleteStoreNotice(@PathVariable(name = "storeId") String storeId, @RequestBody DeleteStoreNoticeDTO data) {
         // TODO : 접속자 아이디와 글 쓴 사람 아이디 비교 (로그인 상태가 아니거나 다르면 false)
+        data.setStoreId(storeId);
         return service.deleteStoreNotice(data);
     }
 
@@ -53,9 +52,9 @@ public class StoreNoticeController {
      * @param data
      */
     @PostMapping("updateStoreNotice")
-    public int updateStoreNotice(@RequestBody UpdateStoreNoticeDTO data)
-    {
+    public int updateStoreNotice(@PathVariable(name = "storeId") String storeId, @RequestBody UpdateStoreNoticeDTO data) {
         // TODO : 접속자 아이디와 글 쓴 사람 아이디 비교 (로그인 상태가 아니거나 다르면 false)
+        data.setStoreId(storeId);
         return service.updateStoreNotice(data);
     }
 
@@ -64,10 +63,8 @@ public class StoreNoticeController {
      * storeID를 받아와서 매장 공지 리스트 검색
      * @param storeId
      */
-    @GetMapping("SelectStoreNotice/{storeId}")
-    public ArrayList<StoreNotice> selectStoreNotice(@PathVariable("storeId") String storeId)
-    {
-        // TODO : storeID 받아와야함
+    @GetMapping("SelectStoreNotice")
+    public ArrayList<StoreNotice> selectStoreNotice(@PathVariable(name = "storeId") String storeId) {
         log.debug("storeId: {}", storeId);
         ArrayList<StoreNotice> selectStoreNoticeList = service.selectStoreNotice(storeId);
         return selectStoreNoticeList;
@@ -80,9 +77,7 @@ public class StoreNoticeController {
      * @param noticeNum
      */
     @GetMapping("ReadStoreNotice/{noticeNum}")
-    public ArrayList<StoreNotice> readStoreNotice(@PathVariable("noticeNum") int noticeNum)
-    {
-        // TODO : 글 번호 (noticeNum) 받아와야함
+    public ArrayList<StoreNotice> readStoreNotice(@PathVariable int noticeNum) {
         log.debug("글번호: {}", noticeNum);
         ArrayList<StoreNotice> storeNotice = service.readStoreNotice(noticeNum);
         return storeNotice;

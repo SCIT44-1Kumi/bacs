@@ -1,0 +1,10 @@
+package net.softsociety.bacs.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("{storeId}/admin/kiosk")
+public class KioskController {
+
+}
