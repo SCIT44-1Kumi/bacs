@@ -22,6 +22,11 @@
     </select>
 
     <select id="salesWeek" parameterType="SaleTodayDTO" resultType="int">
-        select sum(TOTALPRICE) from BACS_ORDER where trunc(ORDERDATE) between trunc(ORDERDATE)-7 and trunc(ORDERDATE)-1 and STOREID = #{storeId} order by trunc(ORDERDATE)
+        SELECT SUM(totalPrice) AS weeklyTotalPrice
+        FROM BACS_ORDER
+        WHERE trunc(ORDERDATE) between trunc(sysdate-7) and trunc(sysdate-1)
+        and STOREID = #{storeId}
+        order by ORDERNUM desc
     </select>
+
 </mapper>

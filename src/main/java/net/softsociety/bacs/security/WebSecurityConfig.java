@@ -1,27 +1,43 @@
 package net.softsociety.bacs.security;
 
-import javax.sql.DataSource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import javax.sql.DataSource;
 
 /**
  * Security 설정
  */
 @Configuration
+@EnableWebSecurity
+@RequiredArgsConstructor
 public class WebSecurityConfig {
     @Autowired
     private DataSource dataSource;
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
+
+
 
     // 설정
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests()
+
+        http.httpBasic().disable()
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests()
                 .antMatchers("/", "/image/**", "/css/**", "/js/**", "/member/join", "/member/checkid",
                         "/thymeleaf", "/error", "/**")
                 .permitAll() // 설정한 리소스의 접근을 인증절차 없이 허용
@@ -35,8 +51,8 @@ public class WebSecurityConfig {
                 .passwordParameter("memberpw") // 로그인폼의 비밀번호 입력란의 name
                 .and().logout().logoutUrl("/member/logout") // 로그아웃 처리 URL
                 .logoutSuccessUrl("/").permitAll() // 로그아웃시에 이동할 경로
-                .and().cors().and().httpBasic();
-
+                .and().cors().and().httpBasic()
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
@@ -46,10 +62,10 @@ public class WebSecurityConfig {
         auth.jdbcAuthentication().dataSource(dataSource)
                 // 인증 (로그인)
                 .usersByUsernameQuery("select memberid username, memberpw password, enabled "
-                        + "from spring5_member " + "where memberid = ?")
+                        + "from BACS_USER " + "where memberid = ?")
                 // 권한
                 .authoritiesByUsernameQuery("select memberid username, rolename role_name "
-                        + "from spring5_member " + "where memberid = ?");
+                        + "from BACS_USER " + "where memberid = ?");
     }
 
     // 단방향 비밀번호 암호화
@@ -57,4 +73,6 @@ public class WebSecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
+
+
 }
