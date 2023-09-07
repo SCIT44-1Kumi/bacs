@@ -45,9 +45,7 @@ public class CategoryServiceImpl implements CategoryService
      * @param data
      */
     @Override
-    public ArrayList<BacsMenu> selectCategory(SelectCategoryDTO data) {
+    public ArrayList<BacsCategory> selectCategory(SelectCategoryDTO data) {
         return dao.selectCategory(data);
     }
-
-
 }

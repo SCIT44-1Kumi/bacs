@@ -23,8 +23,8 @@
     </update>
 
     <!-- 카테고리 리스트 -->
-    <select id="selectCategory" parameterType="SelectCategoryDTO" resultType="BacsMenu">
-        select * from BACS_MENU where categoryNum = #{categoryNum} and storeId = #{storeId}
+    <select id="selectCategory" parameterType="SelectCategoryDTO" resultType="BacsCategory">
+        select * from BACS_CATEGORY where storeId = #{storeId}
     </select>
 
 </mapper>

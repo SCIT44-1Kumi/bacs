@@ -23,5 +23,5 @@ public interface CategoryDAO
     int updateCategory(UpdateCategoryDTO data);
 
     //카테고리별 메뉴 리스트
-    ArrayList<BacsMenu> selectCategory(SelectCategoryDTO data);
+    ArrayList<BacsCategory> selectCategory(SelectCategoryDTO data);
 }

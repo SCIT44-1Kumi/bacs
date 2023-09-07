@@ -139,7 +139,7 @@ public class NLPServiceImpl implements NLPService {
     }
 
     @Override
-    public List<String> getPlainResults(String text) {
+    public List<String> getNounList(String text) {
 
         //분석할 문장에 대해 정제(쓸데없는 특수문자 제거)
         String replace_text = text.replace("[^가-힣a-zA-Z0-9", " ");
