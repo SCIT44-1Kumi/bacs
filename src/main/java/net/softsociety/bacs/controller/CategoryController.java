@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("category")
+@RequestMapping("{storeId}/admin/category")
 @Slf4j
 public class CategoryController {
 
@@ -27,8 +27,8 @@ public class CategoryController {
      * @param data
      */
     @PostMapping("create")
-    public boolean createCategory(@RequestBody CreateCategoryDTO data)
-    {
+    public boolean createCategory(@PathVariable(name = "storeId") String storeId, @RequestBody CreateCategoryDTO data) {
+        data.setStoreId(storeId);
         log.debug("category {}",data);
         return service.createCategory(data);
     }
@@ -39,9 +39,9 @@ public class CategoryController {
      * @param data
      */
     @PostMapping("delete")
-    public int deleteCategory(@RequestBody DeleteCategoryDTO data)
-    {
+    public int deleteCategory(@PathVariable(name = "storeId") String storeId, @RequestBody DeleteCategoryDTO data) {
         // TODO : 접속자 아이디와 글 쓴 사람 아이디 비교 (로그인 상태가 아니거나 다르면 false)
+        data.setStoreId(storeId);
         log.debug("DTO: {}", data);
         return service.deleteCategory(data);
     }
@@ -52,9 +52,9 @@ public class CategoryController {
      * @param data
      */
     @PostMapping("update")
-    public int updateCategory(@RequestBody UpdateCategoryDTO data)
-    {
+    public int updateCategory(@PathVariable(name = "storeId") String storeId, @RequestBody UpdateCategoryDTO data) {
         // TODO : 접속자 아이디와 글 쓴 사람 아이디 비교 (로그인 상태가 아니거나 다르면 false)
+        data.setStoreId(storeId);
         return service.updateCategory(data);
     }
 
@@ -64,10 +64,9 @@ public class CategoryController {
      *
      * @param data
      */
-    @PostMapping("selectCategory")
-    public ArrayList<BacsMenu> selectCategoryList (@RequestBody SelectCategoryDTO data)
-    {
-        // TODO : storeID 받아와야함
+    @PostMapping("getCategories")
+    public ArrayList<BacsCategory> selectCategoryList (@PathVariable(name = "storeId") String storeId, @RequestBody SelectCategoryDTO data) {
+        data.setStoreId(storeId);
         return service.selectCategory(data);
     }
 }

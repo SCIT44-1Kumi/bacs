@@ -1,21 +1,31 @@
 import { SetStateAction, useState } from "react";
 // @ts-ignore
 import * as speech from "react-speech-kit";
+import axios from "axios";
 
 function Speech() {
 	const [value, setValue] = useState("결과");
 
 	const { listen, listening, stop } = speech.useSpeechRecognition({
-		onResult: (result: SetStateAction<string>) => {
+		onResult: async (result: SetStateAction<string>) => {
 			setValue(result);
-		}
+			await axios.post("/nlp/test1", {
+				text: result,
+			});
+		},
 	});
 	const onClickRecord = async () => {
 		listen();
-		setTimeout(() => {
-			stop();
-		},  8000);
-	}
+		setTimeout(async () => {
+			await stop();
+		}, 8000);
+	};
+	const reqValue = async (text: string) => {
+		console.log(value);
+		return await axios.post("/nlp/test1", {
+			text,
+		});
+	};
 
 	return (
 		<div>
@@ -23,9 +33,7 @@ function Speech() {
 
 			<div>{value}</div>
 
-			<button onClick={onClickRecord}>
-				🎤speech
-			</button>
+			<button onClick={onClickRecord}>🎤speech</button>
 
 			{listening && <div>음성인식 중</div>}
 		</div>

@@ -1,22 +1,18 @@
 package net.softsociety.bacs.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import net.softsociety.bacs.service.NLPService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("nlp")
+@Slf4j
 public class NLPController {
-
-    private Logger log = Logger.getLogger(String.valueOf(this.getClass()));
 
     @Autowired
     private NLPService service;
@@ -39,8 +35,16 @@ public class NLPController {
         return rMap;
     }
 
-    @GetMapping("test1")
+    @PostMapping("test1")
     public List<String> test1(@RequestBody String text) {
-        return service.getPlainResults(text);
+        log.debug("----text: {}", text);
+        return service.getNounList(text);
+    }
+
+    @GetMapping("test2")
+    public String test2(@PathVariable(name = "storeId") String storeId) {
+
+        // 8888/bacs/starbucks/test2
+        return storeId;
     }
 }
