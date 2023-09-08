@@ -92,4 +92,14 @@
           , optionPrice = #{optionPrice}
         where menuNum = #{menuNum} and optionNum = #{optionNum}
     </update>
+
+    <!-- 카테고리별 메뉴 리스트 -->
+    <select id="selectmenuList" parameterType="BacsMenu" resultType="BacsMenu">
+        select * from BACS_MENU where CATEGORYNUM = #{categoryNum} and STOREID = #{storeId}
+    </select>
+
+    <!-- 등록된 모든 메뉴 리스트 -->
+    <select id="menuList" parameterType="String" resultType="BacsMenu">
+        select * from BACS_MENU where STOREID = #{storeId}
+    </select>
 </mapper>

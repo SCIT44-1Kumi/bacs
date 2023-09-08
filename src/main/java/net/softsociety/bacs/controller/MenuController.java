@@ -9,6 +9,8 @@ import net.softsociety.bacs.domain.dto.menu.InsertMenuDTO;
 import net.softsociety.bacs.domain.vo.BacsCategory;
 import net.softsociety.bacs.domain.vo.BacsMenu;
 import net.softsociety.bacs.domain.vo.BacsMenuOption;
+
+import net.softsociety.bacs.domain.dto.menu.InsertMenuDTO;
 import net.softsociety.bacs.service.CategoryService;
 import net.softsociety.bacs.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 
 @RestController
@@ -95,4 +98,37 @@ public class MenuController
         return menuService.updateMenuOption(data);
     }
 
+    /**
+     * 카테고리별 메뉴 리스트 - 카테고리를 클릭하면 카테고리에 등록된 메뉴만 보여줌
+     * 카테고리를 눌렀을 때 카테고리 번호 받아와야함 (categoryNum)
+     * @param storeId
+     * @param data
+     * @return selectMenuList
+     */
+    @PostMapping("selectMenuList")
+    public ArrayList<BacsMenu> selectMenuList(@PathVariable(name = "storeId") String storeId, @RequestBody Map<String, Integer> data)
+    {
+
+        int categoryNum = data.get("categoryNum");
+        log.debug("categoryNum: {}", categoryNum);
+        BacsMenu bacsMenu = new BacsMenu();
+        bacsMenu.setCategoryNum(categoryNum);
+        bacsMenu.setStoreId(storeId);
+
+        ArrayList<BacsMenu> selectMenuList = menuService.selectMenuList(bacsMenu);
+        return selectMenuList;
+    }
+
+    /**
+     * 등록되어있는 메뉴 목록을 불러옴 (메뉴 수정 등)
+     * @param storeId
+     * @return menuList
+     */
+    @PostMapping("menuList")
+    public ArrayList<BacsMenu> menuList (@PathVariable(name = "storeId") String storeId)
+    {
+        log.debug("storeId: {}", storeId);
+       ArrayList<BacsMenu> menuList = menuService.menuList(storeId);
+       return menuList;
+    }
 }

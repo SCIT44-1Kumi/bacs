@@ -16,7 +16,7 @@ public class BacsMenu {
   private String menuImg;
   private String menuDesc;
   private String storeId;
-  private String categoryNum;
+  private int categoryNum;
 
 
 }

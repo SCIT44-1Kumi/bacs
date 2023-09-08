@@ -38,7 +38,7 @@ public class WebSecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/image/**", "/css/**", "/js/**", "/member/join", "/member/checkid",
+                .antMatchers("/**", "/image/**", "/css/**", "/js/**", "/member/join", "/member/checkid",
                         "/thymeleaf", "/error", "/**")
                 .permitAll() // 설정한 리소스의 접근을 인증절차 없이 허용
                 .antMatchers("/admin", "/admin/members", "/admin/reply", "/admin/board") // 설정한 리소스의 접근을
