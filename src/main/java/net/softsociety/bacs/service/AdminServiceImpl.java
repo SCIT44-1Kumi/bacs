@@ -34,4 +34,11 @@ public class AdminServiceImpl implements AdminService {
         int n = dao.blockStore(userId);
         return n != 0;
     }
+
+    @Override
+    public boolean rebockStore(Map<String, String> userId) {
+        int n = dao.rebockStore(userId);
+        return n != 0;
+
+    }
 }

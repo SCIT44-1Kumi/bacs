@@ -11,4 +11,6 @@ public interface AdminService {
     boolean deleteStore(Map<String, String> storeId);
 
     boolean blockStore(Map<String, String> userId);
+
+    boolean rebockStore(Map<String, String> userId);
 }

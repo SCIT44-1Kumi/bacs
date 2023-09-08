@@ -40,6 +40,12 @@ public class BacsAdminController {
         return adminService.blockStore(userId);
     }
 
+    // 매장 차단해제 /store/rebock
+    @PostMapping("store/rebock")
+    public boolean rebockStore(@RequestBody Map<String, String > userId) {
+        return adminService.rebockStore(userId);
+    }
+
 
 
     /**

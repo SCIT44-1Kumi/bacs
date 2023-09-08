@@ -15,4 +15,6 @@ public interface AdminDAO {
     int deleteStore(Map<String, String> storeId);
 
     int blockStore(Map<String, String> userId);
+
+    int rebockStore(Map<String, String> userId);
 }

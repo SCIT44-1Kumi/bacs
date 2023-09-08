@@ -15,4 +15,8 @@
     <update id="blockStore" parameterType="string">
         update BACS_USER set ENABLED = 0 where USERID = #{userId}
     </update>
+
+    <update id="rebockStore" parameterType="string">
+        update BACS_USER set ENABLED = 1 where USERID = #{userId}
+    </update>
 </mapper>
