@@ -1,6 +1,8 @@
 package net.softsociety.bacs.dao;
 
 
+import net.softsociety.bacs.domain.dto.admin.BlockStoreDTO;
+import net.softsociety.bacs.domain.dto.admin.DeleteStoreDTO;
 import net.softsociety.bacs.domain.vo.BacsStore;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -12,9 +14,9 @@ public interface AdminDAO {
 
     ArrayList<BacsStore> getStoreList();
 
-    int deleteStore(Map<String, String> storeId);
+    int deleteStore(DeleteStoreDTO storeId);
 
-    int blockStore(Map<String, String> userId);
+    int blockStore(BlockStoreDTO userId);
 
-    int rebockStore(Map<String, String> userId);
+    int rebockStore(BlockStoreDTO userId);
 }

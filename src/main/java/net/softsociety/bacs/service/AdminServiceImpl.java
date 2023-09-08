@@ -2,6 +2,8 @@ package net.softsociety.bacs.service;
 
 import lombok.extern.slf4j.Slf4j;
 import net.softsociety.bacs.dao.AdminDAO;
+import net.softsociety.bacs.domain.dto.admin.BlockStoreDTO;
+import net.softsociety.bacs.domain.dto.admin.DeleteStoreDTO;
 import net.softsociety.bacs.domain.vo.BacsStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,19 +26,19 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public boolean deleteStore(Map<String, String> storeId) {
+    public boolean deleteStore(DeleteStoreDTO storeId) {
         int n = dao.deleteStore(storeId);
         return n != 0;
     }
 
     @Override
-    public boolean blockStore(Map<String, String> userId) {
+    public boolean blockStore(BlockStoreDTO userId) {
         int n = dao.blockStore(userId);
         return n != 0;
     }
 
     @Override
-    public boolean rebockStore(Map<String, String> userId) {
+    public boolean rebockStore(BlockStoreDTO userId) {
         int n = dao.rebockStore(userId);
         return n != 0;
 

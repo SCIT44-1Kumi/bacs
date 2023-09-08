@@ -1,5 +1,7 @@
 package net.softsociety.bacs.service;
 
+import net.softsociety.bacs.domain.dto.admin.BlockStoreDTO;
+import net.softsociety.bacs.domain.dto.admin.DeleteStoreDTO;
 import net.softsociety.bacs.domain.vo.BacsStore;
 
 import java.util.ArrayList;
@@ -8,9 +10,9 @@ import java.util.Map;
 public interface AdminService {
     ArrayList<BacsStore> getStoreList();
 
-    boolean deleteStore(Map<String, String> storeId);
+    boolean deleteStore(DeleteStoreDTO storeId);
 
-    boolean blockStore(Map<String, String> userId);
+    boolean blockStore(BlockStoreDTO userId);
 
-    boolean rebockStore(Map<String, String> userId);
+    boolean rebockStore(BlockStoreDTO userId);
 }
