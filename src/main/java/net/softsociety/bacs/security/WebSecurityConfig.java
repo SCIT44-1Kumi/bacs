@@ -1,6 +1,5 @@
 package net.softsociety.bacs.security;
 
-import com.zaxxer.hikari.HikariDataSource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import javax.sql.DataSource;
+
 /**
  * Security 설정
  */
@@ -21,9 +22,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig {
+    @Autowired
+    private DataSource dataSource;
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
 
-    private final JwtTokenProvider jwtTokenProvider;
-    private final HikariDataSource dataSource;
 
 
     // 설정
@@ -34,7 +37,6 @@ public class WebSecurityConfig {
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/", "/image/**", "/css/**", "/js/**", "/member/join", "/member/checkid",
                         "/thymeleaf", "/error", "/**")
@@ -49,7 +51,8 @@ public class WebSecurityConfig {
                 .passwordParameter("memberpw") // 로그인폼의 비밀번호 입력란의 name
                 .and().logout().logoutUrl("/member/logout") // 로그아웃 처리 URL
                 .logoutSuccessUrl("/").permitAll() // 로그아웃시에 이동할 경로
-                .and().cors().and().httpBasic();
+                .and().cors().and().httpBasic()
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
