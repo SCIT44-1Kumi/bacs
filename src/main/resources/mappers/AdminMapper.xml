@@ -11,4 +11,8 @@
     <delete id="deleteStore" parameterType="string">
         delete from BACS_STORE where STOREID = #{storeId}
     </delete>
+
+    <update id="blockStore" parameterType="string">
+        update BACS_USER set ENABLED = 0 where USERID = #{userId}
+    </update>
 </mapper>

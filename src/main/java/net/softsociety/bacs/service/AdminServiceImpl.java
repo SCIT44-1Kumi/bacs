@@ -28,4 +28,10 @@ public class AdminServiceImpl implements AdminService {
         int n = dao.deleteStore(storeId);
         return n != 0;
     }
+
+    @Override
+    public boolean blockStore(Map<String, String> userId) {
+        int n = dao.blockStore(userId);
+        return n != 0;
+    }
 }

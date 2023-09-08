@@ -22,18 +22,23 @@ public class BacsAdminController {
     @Autowired
     AdminService adminService;
 
-    // TODO: 매장 조회 /store/list
+    // 매장 조회 /store/list
     @GetMapping("store/list")
     public ArrayList<BacsStore> getStoreList() {
         return adminService.getStoreList();
     }
 
-    // TODO: 매장삭제 /store/delete
+    // 매장 삭제 /store/delete
     @PostMapping("store/delete")
     public boolean deleteStore(@RequestBody Map<String, String> storeId) {
         return adminService.deleteStore(storeId);
     }
-    // TODO: 매장차단 /store/block
+
+    // 매장(회원)차단 /store/block
+    @PostMapping("store/block")
+    public boolean blockStore(@RequestBody Map<String, String> userId) {
+        return adminService.blockStore(userId);
+    }
 
 
 

@@ -13,4 +13,6 @@ public interface AdminDAO {
     ArrayList<BacsStore> getStoreList();
 
     int deleteStore(Map<String, String> storeId);
+
+    int blockStore(Map<String, String> userId);
 }

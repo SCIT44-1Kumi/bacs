@@ -9,4 +9,6 @@ public interface AdminService {
     ArrayList<BacsStore> getStoreList();
 
     boolean deleteStore(Map<String, String> storeId);
+
+    boolean blockStore(Map<String, String> userId);
 }
