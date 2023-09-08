@@ -3,7 +3,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="net.softsociety.bacs.dao.AdminDAO">
+
     <select id="getStoreList" resultType="BacsStore">
         select * from BACS_STORE
     </select>
+
+    <delete id="deleteStore" parameterType="string">
+        delete from BACS_STORE where STOREID = #{storeId}
+    </delete>
 </mapper>

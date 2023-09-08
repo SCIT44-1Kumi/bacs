@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 @RestController
 @Slf4j
@@ -26,7 +27,12 @@ public class BacsAdminController {
     public ArrayList<BacsStore> getStoreList() {
         return adminService.getStoreList();
     }
+
     // TODO: 매장삭제 /store/delete
+    @PostMapping("store/delete")
+    public boolean deleteStore(@RequestBody Map<String, String> storeId) {
+        return adminService.deleteStore(storeId);
+    }
     // TODO: 매장차단 /store/block
 
 

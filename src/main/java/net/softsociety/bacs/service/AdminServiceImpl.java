@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -20,5 +21,11 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public ArrayList<BacsStore> getStoreList() {
         return dao.getStoreList();
+    }
+
+    @Override
+    public boolean deleteStore(Map<String, String> storeId) {
+        int n = dao.deleteStore(storeId);
+        return n != 0;
     }
 }
