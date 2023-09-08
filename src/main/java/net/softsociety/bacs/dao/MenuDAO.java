@@ -28,4 +28,10 @@ public interface MenuDAO
 
     //메뉴 옵션 수정
     public int updateMenuOption(BacsMenuOption data);
+
+    //카테고리별 메뉴 리스트
+    ArrayList<BacsMenu> selectmenuList(BacsMenu bacsMenu);
+
+    //등록된 메뉴 리스트
+    ArrayList<BacsMenu> menuList(String storeId);
 }

@@ -27,8 +27,7 @@ public class MenuServiceImpl implements MenuService {
      */
     @Override
     public boolean createMenu(BacsMenu menu, ArrayList<BacsMenuOption> options) {
-        menu.setStoreId("scitcafe");
-        menu.setCategoryNum(String.valueOf(1)); // TODO: 매개변수 타입 변경
+        menu.setCategoryNum(1); // TODO: 매개변수 타입 변경
         log.debug("=======메뉴=======: {}", menu);
         int n = dao.createMenu(menu);
         log.debug("=======메뉴=======: {}, {}", n, menu);
@@ -74,5 +73,26 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public int updateMenuOption(BacsMenuOption data) {
         return dao.updateMenuOption(data);
+    }
+
+
+    /**
+     * 카테고리별 메뉴 리스트
+     * @param bacsMenu
+     * @return
+     */
+    @Override
+    public ArrayList<BacsMenu> selectMenuList(BacsMenu bacsMenu) {
+        return dao.selectmenuList(bacsMenu);
+    }
+
+    /**
+     * 등록된 메뉴 리스트
+     * @param storeId
+     * @return
+     */
+    @Override
+    public ArrayList<BacsMenu> menuList(String storeId) {
+        return dao.menuList(storeId);
     }
 }
