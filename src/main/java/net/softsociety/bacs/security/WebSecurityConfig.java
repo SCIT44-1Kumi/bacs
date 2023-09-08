@@ -11,7 +11,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.sql.DataSource;
 
@@ -24,8 +23,6 @@ import javax.sql.DataSource;
 public class WebSecurityConfig {
     @Autowired
     private DataSource dataSource;
-    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
 
 
 
@@ -51,8 +48,7 @@ public class WebSecurityConfig {
                 .passwordParameter("memberpw") // 로그인폼의 비밀번호 입력란의 name
                 .and().logout().logoutUrl("/member/logout") // 로그아웃 처리 URL
                 .logoutSuccessUrl("/").permitAll() // 로그아웃시에 이동할 경로
-                .and().cors().and().httpBasic()
-                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
+                .and().cors().and().httpBasic();
         return http.build();
     }
 
