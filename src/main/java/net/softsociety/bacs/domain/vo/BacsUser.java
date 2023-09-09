@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "BACS_USER")
 @Builder
 @Entity
 public class BacsUser implements UserDetails {
@@ -26,15 +27,19 @@ public class BacsUser implements UserDetails {
   @Column(updatable = false, unique = true, nullable = false)
   private String userId;
 
-  @Column(nullable = true)
+  @Column(nullable = false)
   private String userPw;
+  @Column(nullable = false)
   private String email;
+  @Column(nullable = false)
   private String phone;
 
   @ElementCollection(fetch = FetchType.EAGER)
   @Builder.Default
   private List<String> rolename = new ArrayList<>();
-  private String enabled;
+
+  @Column(nullable = false, updatable = true )
+  private int enabled;
   private String createdAt;
 
   @Override
