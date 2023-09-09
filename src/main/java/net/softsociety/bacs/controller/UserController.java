@@ -1,14 +1,21 @@
 package net.softsociety.bacs.controller;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.softsociety.bacs.domain.dto.MemberLoginRequestDTO;
+import net.softsociety.bacs.domain.dto.TokenInfo;
 import net.softsociety.bacs.domain.vo.BacsUser;
 import net.softsociety.bacs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 // @Controller + @ResponseBody
 @RestController
 @Slf4j
+@RequiredArgsConstructor
 @RequestMapping("member")
 public class UserController {
 
@@ -27,7 +34,14 @@ public class UserController {
         return "redirect:/";
     }
     // TODO: 로그인 (JWT방식으로 공부 후 개발)
-
+    @PostMapping("/login")
+    public TokenInfo login(@RequestBody MemberLoginRequestDTO memberLoginRequestDto) {
+        log.debug("{}", memberLoginRequestDto);
+        String userId = memberLoginRequestDto.getUserId();
+        String userPw = memberLoginRequestDto.getUserPw();
+        TokenInfo tokenInfo = service.login(userId, userPw);
+        return tokenInfo;
+    }
     // TODO: 회원탈퇴
     // TODO: 프로필 업데이트
 

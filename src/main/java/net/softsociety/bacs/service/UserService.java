@@ -1,17 +1,14 @@
 package net.softsociety.bacs.service;
 
-import net.softsociety.bacs.domain.vo.BacsUser;
 import net.softsociety.bacs.domain.dto.SaleTodayDTO;
+import net.softsociety.bacs.domain.dto.TokenInfo;
 import net.softsociety.bacs.domain.vo.BacsUser;
-
-import java.util.ArrayList;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface UserService {
-//    public boolean createUser(BacsUser newUser);
 
-    ArrayList<BacsUser> getUserList();
-
-    int login(BacsUser user);
+    @Transactional
+    TokenInfo login(String userId, String userPw);
 
     int join(BacsUser user);
 
