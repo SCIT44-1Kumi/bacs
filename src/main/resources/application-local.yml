@@ -1,0 +1,24 @@
+# http://localhost:8888/bacs
+#?? ????
+server:
+  port: 8888
+#Context Path
+  servlet.context-path: /bacs
+#Logback ??. ??? ???? ?? ?? ??
+
+#error>warn>info>debug>trace
+logging:
+  level:
+    root: debug
+
+# ??? ?? ??
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521/xe
+    username: hr
+    password: hr
+  profiles:
+    include:
+      # jwtToken
+      - secret
