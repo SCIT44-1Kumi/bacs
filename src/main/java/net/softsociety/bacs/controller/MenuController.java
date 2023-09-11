@@ -35,12 +35,7 @@ public class MenuController
     @PostMapping("create")
     public boolean createMenu(@PathVariable(name = "storeId") String storeId, @RequestBody InsertMenuDTO data){
         log.debug("========dto======: {}", data);
-        SelectCategoryDTO selectCategoryDTO = new SelectCategoryDTO();
-        selectCategoryDTO.setStoreId(storeId);
-        ArrayList<BacsCategory> categoryList = categoryService.selectCategory(selectCategoryDTO);
-        BacsMenu menu = data.getMenu();
-        ArrayList<BacsMenuOption> options = data.getOptions();
-        return menuService.createMenu(menu, options);
+        return menuService.createMenu(data);
     }
 
     /**

@@ -2,6 +2,7 @@ package net.softsociety.bacs.service;
 
 import net.softsociety.bacs.domain.dto.menu.DeleteMenuDTO;
 import net.softsociety.bacs.domain.dto.menu.DeleteMenuOptionDTO;
+import net.softsociety.bacs.domain.dto.menu.InsertMenuDTO;
 import net.softsociety.bacs.domain.vo.BacsMenu;
 import net.softsociety.bacs.domain.vo.BacsMenuOption;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 
 public interface MenuService {
 
-    boolean createMenu(BacsMenu menu, ArrayList<BacsMenuOption> options);
+    boolean createMenu(InsertMenuDTO data);
 
     //메뉴 삭제
     public int deleteMenu(DeleteMenuDTO data);

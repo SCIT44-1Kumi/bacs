@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 @Data
 public class InsertMenuDTO {
-    private BacsCategory category;
+    private int categoryNum;
     private BacsMenu menu;
     private ArrayList<BacsMenuOption> options;
 }

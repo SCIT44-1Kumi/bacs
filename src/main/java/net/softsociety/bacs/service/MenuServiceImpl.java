@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.softsociety.bacs.dao.MenuDAO;
 import net.softsociety.bacs.domain.dto.menu.DeleteMenuDTO;
 import net.softsociety.bacs.domain.dto.menu.DeleteMenuOptionDTO;
+import net.softsociety.bacs.domain.dto.menu.InsertMenuDTO;
 import net.softsociety.bacs.domain.vo.BacsMenu;
 import net.softsociety.bacs.domain.vo.BacsMenuOption;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +22,14 @@ public class MenuServiceImpl implements MenuService {
     private MenuDAO dao;
 
     /**
-     * @param menu 생성할 메뉴객체
-     * @param options 메뉴와 함션 생성할 메뉴 옵션 배열
+     * @param data 생성할 메뉴객체, 메뉴와 함션 생성할 메뉴 옵션 배열
      * @return boolean
      */
     @Override
-    public boolean createMenu(BacsMenu menu, ArrayList<BacsMenuOption> options) {
-        menu.setCategoryNum(1); // TODO: 매개변수 타입 변경
-        log.debug("=======메뉴=======: {}", menu);
+    public boolean createMenu(InsertMenuDTO data) {
+        BacsMenu menu = data.getMenu();
+        ArrayList<BacsMenuOption> options = data.getOptions();
+        menu.setCategoryNum(data.getCategoryNum());
         int n = dao.createMenu(menu);
         log.debug("=======메뉴=======: {}, {}", n, menu);
         for(BacsMenuOption option : options) {
