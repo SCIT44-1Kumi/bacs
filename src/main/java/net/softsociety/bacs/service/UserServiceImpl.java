@@ -5,9 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 import net.softsociety.bacs.dao.UserDAO;
 import net.softsociety.bacs.domain.dto.SaleTodayDTO;
 import net.softsociety.bacs.domain.dto.TokenInfo;
-import net.softsociety.bacs.domain.repository.BacsUserRepository;
+
 import net.softsociety.bacs.domain.vo.BacsUser;
-import net.softsociety.bacs.security.JwtTokenProvider;
+
+import net.softsociety.bacs.user.exception.AuthenticationErrorCode;
+import net.softsociety.bacs.user.exception.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -24,10 +26,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserDAO dao;
 
-
-    private final BacsUserRepository memberRepository;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
-    private final JwtTokenProvider jwtTokenProvider;
 
 
     @Override
@@ -41,8 +40,16 @@ public class UserServiceImpl implements UserService {
         // authenticate 매서드가 실행될 때 CustomUserDetailsService 에서 만든 loadUserByUsername 메서드가 실행
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 
+        // Optional<T> -> .orElseThrow(...) => 논널값 or 예외 => 이후 로직은 널이 아님을 보장.
+//        BacsUser user = dao.getUser("")
+//                .orElseThrow(AuthenticationErrorCode.ID_PW_MISMATCHED::defaultException);
+
         // 3. 인증 정보를 기반으로 JWT 토큰 생성
-        TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
+        TokenInfo tokenInfo = TokenInfo.builder()
+                .grantType("")
+                .accessToken("")
+                .refreshToken("")
+                .build();
 
         return tokenInfo;
     }
