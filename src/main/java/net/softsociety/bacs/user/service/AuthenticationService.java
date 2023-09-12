@@ -1,7 +1,7 @@
 package net.softsociety.bacs.user.service;
 
 import lombok.RequiredArgsConstructor;
-import net.softsociety.bacs.dao.UserDAO;
+import net.softsociety.bacs.user.dao.UserDAO;
 import net.softsociety.bacs.domain.vo.BacsUser;
 import net.softsociety.bacs.user.controller.dto.LoginRequestDto;
 import net.softsociety.bacs.user.exception.AuthenticationErrorCode;

@@ -2,7 +2,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="net.softsociety.bacs.dao.MenuDAO">
+<mapper namespace="net.softsociety.bacs.menu.dao.MenuDAO">
     <!-- 메뉴 추가 -->
     <insert id="createMenu" parameterType="BacsMenu">
         <selectKey resultType="int" keyProperty="menuNum" order="BEFORE">

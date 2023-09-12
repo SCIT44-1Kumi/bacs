@@ -4,14 +4,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.softsociety.bacs.domain.dto.TokenInfo;
 import net.softsociety.bacs.domain.vo.BacsUser;
-import net.softsociety.bacs.service.UserService;
+import net.softsociety.bacs.user.service.UserService;
 import net.softsociety.bacs.user.controller.dto.LoginRequestDto;
 import net.softsociety.bacs.user.controller.dto.LoginResponseDto;
 import net.softsociety.bacs.user.service.AuthenticationService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
