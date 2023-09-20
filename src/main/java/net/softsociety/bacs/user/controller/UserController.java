@@ -3,6 +3,7 @@ package net.softsociety.bacs.user.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.softsociety.bacs.domain.dto.TokenInfo;
+import net.softsociety.bacs.user.controller.dto.JoinUserDTO;
 import net.softsociety.bacs.domain.vo.BacsUser;
 import net.softsociety.bacs.user.service.UserService;
 import net.softsociety.bacs.user.controller.dto.LoginRequestDto;
@@ -24,15 +25,15 @@ public class UserController {
     private final AuthenticationService authenticationService;
 
     /**
-주     * 회원 목록 가져오기 하면서 확인 필요
+     * 주     * 회원 목록 가져오기 하면서 확인 필요
+     *
      * @return list
      */
 
     @PostMapping("join")
-    public String join(BacsUser user){
-        log.debug("{}",user);
-        service.join(user);
-        return "redirect:/";
+    public BacsUser join(@RequestBody @Valid JoinUserDTO dto){
+        log.debug("----dto----- {}",dto);
+        return service.join(dto);
     }
     // TODO: 로그인 (JWT방식으로 공부 후 개발)
 

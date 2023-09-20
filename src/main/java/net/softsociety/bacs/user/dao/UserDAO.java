@@ -2,9 +2,6 @@ package net.softsociety.bacs.user.dao;
 
 import net.softsociety.bacs.domain.dto.SaleTodayDTO;
 import net.softsociety.bacs.domain.vo.BacsUser;
-import net.softsociety.bacs.domain.vo.BacsUser;
-import net.softsociety.bacs.domain.dto.SaleTodayDTO;
-import net.softsociety.bacs.domain.vo.BacsUser;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.ArrayList;

@@ -2,18 +2,21 @@ package net.softsociety.bacs.user.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.softsociety.bacs.user.dao.UserDAO;
-import net.softsociety.bacs.domain.dto.SaleTodayDTO;
+import net.softsociety.bacs.user.Role;
+import net.softsociety.bacs.user.controller.dto.JoinUserDTO;
 import net.softsociety.bacs.domain.dto.TokenInfo;
 
 import net.softsociety.bacs.domain.vo.BacsUser;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import net.softsociety.bacs.user.entity.BacsUserRepository;
+import net.softsociety.bacs.user.exception.AuthenticationErrorCode;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -21,14 +24,16 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    UserDAO dao;
+//    private final UserDAO dao;
+
+    private final BacsUserRepository bacsUserRepository;
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
+    private final PasswordEncoder passwordEncoder;
+
 
     @Override
-    @Transactional
     public TokenInfo login(String userId, String userPw) {
         // 1. Login ID/PW 를 기반으로 Authentication 객체 생성
         // 이때 authentication 는 인증 여부를 확인하는 authenticated 값이 false
@@ -54,17 +59,31 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public int join(BacsUser user) {
-        return dao.join(user);
+    public BacsUser join(JoinUserDTO dto) {
+        Optional<BacsUser> user = bacsUserRepository.findByUserId(dto.userId());
+        if (user.isPresent()){
+            throw AuthenticationErrorCode.USER_NULL.defaultException();
+        }
+        BacsUser newUser = BacsUser.builder()
+                .userId(dto.userId())
+                .userPw(passwordEncoder.encode(dto.userPw()))
+                .phone(dto.phone())
+                .email(dto.email())
+                .rolename(Role.ROLE_USER)
+                .enabled(true)
+                .build();
+        log.debug("------newUser : {}", newUser);
+        return bacsUserRepository.save(newUser);
+
     }
 
-    @Override
-    public int saleToday(SaleTodayDTO data){
-        return dao.saleToday(data);
-    }
-
-    @Override
-    public int salesWeek(SaleTodayDTO data){
-        return dao.salesWeek(data);
-    }
+//    @Override
+//    public int saleToday(SaleTodayDTO data){
+//        return dao.saleToday(data);
+//    }
+//
+//    @Override
+//    public int salesWeek(SaleTodayDTO data){
+//        return dao.salesWeek(data);
+//    }
 }
