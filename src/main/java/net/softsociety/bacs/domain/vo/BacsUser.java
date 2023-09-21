@@ -2,6 +2,7 @@ package net.softsociety.bacs.domain.vo;
 
 
 import lombok.*;
+import net.softsociety.bacs.domain.entity.CoreEntity;
 import net.softsociety.bacs.user.Role;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
@@ -21,11 +22,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
-public class BacsUser {
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+public class BacsUser extends CoreEntity {
 
   @Column(updatable = false, nullable = false)
   private String userId;
@@ -45,9 +42,5 @@ public class BacsUser {
 
   @Column(nullable = false)
   private boolean enabled;
-
-  @CreatedDate
-  @Column(updatable = false, nullable = false)
-  private LocalDateTime createdAt;
 
 }
