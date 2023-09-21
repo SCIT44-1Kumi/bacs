@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { makeLocaleProps } from "@/utils/i18n";
 import { GetServerSidePropsContext } from "next";
 import { useTranslation } from "next-i18next";
