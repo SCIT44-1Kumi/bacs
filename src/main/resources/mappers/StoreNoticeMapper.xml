@@ -2,7 +2,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="net.softsociety.bacs.dao.StoreNoticeDAO">
+<mapper namespace="net.softsociety.bacs.store.dao.StoreNoticeDAO">
 
     <!-- 매장 공지 등록 -->
     <insert id="createStoreNotice" parameterType="CreateStoreNoticeDTO">

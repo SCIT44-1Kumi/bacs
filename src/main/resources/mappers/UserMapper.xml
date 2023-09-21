@@ -2,7 +2,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="net.softsociety.bacs.dao.UserDAO">
+<mapper namespace="net.softsociety.bacs.user.dao.UserDAO">
+    <select id="getUser" resultType="BacsUser">
+        SELECT  *
+        FROM    BACS_USER
+        WHERE   userid=#{userId}
+    </select>
+
     <select id="getUserList" resultType="BacsUser">
         select * from BACS_USER
     </select>
@@ -22,6 +28,11 @@
     </select>
 
     <select id="salesWeek" parameterType="SaleTodayDTO" resultType="int">
-        select sum(TOTALPRICE) from BACS_ORDER where trunc(ORDERDATE) between trunc(ORDERDATE)-7 and trunc(ORDERDATE)-1 and STOREID = #{storeId} order by trunc(ORDERDATE)
+        SELECT SUM(totalPrice) AS weeklyTotalPrice
+        FROM BACS_ORDER
+        WHERE trunc(ORDERDATE) between trunc(sysdate-7) and trunc(sysdate-1)
+        and STOREID = #{storeId}
+        order by ORDERNUM desc
     </select>
+
 </mapper>

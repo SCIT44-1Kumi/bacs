@@ -4,5 +4,7 @@
   "home.products": "제품소개",
   "home.installation": "설치현황",
   "home.signup": "회원가입",
-  "home.login": "로그인"
+  "home.login": "로그인",
+  "login.findAccount": "아이디/비밀번호 찾기",
+  "login.logo": "매장관리, 키오스크 한번에 BAC!"
 }

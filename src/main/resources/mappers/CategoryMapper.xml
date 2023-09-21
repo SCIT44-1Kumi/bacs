@@ -2,7 +2,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="net.softsociety.bacs.dao.CategoryDAO">
+<mapper namespace="net.softsociety.bacs.category.dao.CategoryDAO">
     <!-- 카테고리 추가 -->
     <insert id="createCategory" parameterType="CreateCategoryDTO">
         insert into bacs_Category (categoryNum, categoryName, storeId)
@@ -23,8 +23,8 @@
     </update>
 
     <!-- 카테고리 리스트 -->
-    <select id="selectCategory" parameterType="SelectCategoryDTO" resultType="BacsMenu">
-        select * from BACS_MENU where categoryNum = #{categoryNum} and storeId = #{storeId}
+    <select id="selectCategory" parameterType="SelectCategoryDTO" resultType="BacsCategory">
+        select * from BACS_CATEGORY where storeId = #{storeId}
     </select>
 
 </mapper>

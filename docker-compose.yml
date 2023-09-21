@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  common_standalone_redis7_bacs:
+    image: redis:7.0
+    ports:
+      - 6379:6379
+    volumes:
+      - sticky_volume_common_redis:/redis/data
+      - ./config/redis.conf:/usr/local/conf/redis.conf
+    # 컨테이너에 docker label을 이용해서 메타데이터 추가
+    labels:
+      - "name=redis"
+      - "mode=standalone"
+    # 컨테이너 종료 시 재시작 여부 설정
+    restart: on-failure
+    #    command: redis-server /usr/local/conf/redis.conf
+
+volumes:
+  sticky_volume_common_redis:
