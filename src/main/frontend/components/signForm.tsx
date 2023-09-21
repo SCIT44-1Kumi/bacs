@@ -32,7 +32,7 @@ const SignForm = ({ isSignUp, register }: SignFormProps) => {
 							<div>CONFIRM PASSWORD</div>
 							<input
 								type="password"
-								{...register("confirmPw", { required: false })}
+								{...register("confirmPw", { required: false })} // name="confirmPw" id="confirmPw"
 								className={`bg-gray-100 rounded-md`}
 							/>
 						</div>
@@ -40,7 +40,7 @@ const SignForm = ({ isSignUp, register }: SignFormProps) => {
 							<div>Phone</div>
 							<input
 								type="text"
-								{...register("phone", { required: false })}
+								{...register("phone", { required: false })} // name="phone" id="phone"
 								className={`bg-gray-100 rounded-md`}
 							/>
 						</div>

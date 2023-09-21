@@ -21,13 +21,9 @@ const Login = () => {
 		console.log(data);
 		const { userId, userPw, confirmPw, phone, email } = data;
 		if (confirmPw) {
-			await axios.post("/member/join", {
-				data,
-			});
+			await axios.post("/member/join", data);
 		} else {
-			await axios.post(`/member/temp-login`, {
-				data,
-			});
+			await axios.post(`/member/temp-login`, data);
 		}
 		return;
 	};
@@ -41,6 +37,7 @@ const Login = () => {
 				onSubmit={handleSubmit(onSubmit)}
 				className={`grid grid-cols-1 place-items-center gap-4`}>
 				<SignForm isSignUp={isSignUp} register={register} />
+
 				<div className={`grid grid-cols-1 place-items-center w-full`}>
 					<div className={`flex justify-between w-1/2`}>
 						<input

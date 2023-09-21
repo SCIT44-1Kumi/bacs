@@ -54,7 +54,9 @@ public class UserController {
             @RequestBody @Valid LoginRequestDto body,
             HttpServletResponse response
     ) {
+        log.debug("------dto {}", body);
         String accessToken = authenticationService.login(body, response);
+        log.debug("------accessToken {}", accessToken);
 
         return LoginResponseDto.builder()
                 .token(accessToken) // access token

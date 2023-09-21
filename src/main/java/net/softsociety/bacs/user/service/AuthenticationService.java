@@ -1,6 +1,7 @@
 package net.softsociety.bacs.user.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import net.softsociety.bacs.user.dao.UserDAO;
 import net.softsociety.bacs.domain.vo.BacsUser;
 import net.softsociety.bacs.user.controller.dto.LoginRequestDto;
@@ -21,6 +22,7 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public final class AuthenticationService
         implements LoginUseCase {
 
@@ -41,6 +43,8 @@ public final class AuthenticationService
                 .orElseThrow(AuthenticationErrorCode.ID_PW_MISMATCHED::defaultException);
 
         // 비밀번호 검증
+        log.debug("----------loginPw {}", userPw);
+        log.debug("----------userPw {}", user.getUserPw());
         boolean matches = passwordEncoder.matches(
                 userPw,
                 user.getUserPw()

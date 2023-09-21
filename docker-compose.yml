@@ -1,19 +1,6 @@
 version: "3"
 
 services:
-  oracle:
-    image: jaspeen/oracle-xe-11g:latest
-    container_name: oracle-bacs
-    volumes:
-      - ~/docker/data:/u01/app/oracle jaspeen/oracle-xe-11g
-    ports:
-      - "1521:1521"
-    build:
-      context: ./oracle/
-      dockerfile: Dockerfile
-    environment:
-      - ORACLE_ALLOW_REMOTE=true
-    restart: on-failure
   common_standalone_redis7_bacs:
     image: redis:7.0
     ports:

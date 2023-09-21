@@ -50,8 +50,4 @@ public class BacsUser {
   @Column(updatable = false, nullable = false)
   private LocalDateTime createdAt;
 
-  public void encodePassword(PasswordEncoder passwordEncoder){
-    this.userPw = passwordEncoder.encode(userPw);
-  }
-
 }
