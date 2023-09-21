@@ -9,7 +9,7 @@ function Speech() {
 	const { listen, listening, stop } = speech.useSpeechRecognition({
 		onResult: async (result: SetStateAction<string>) => {
 			setValue(result);
-			await axios.post("/nlp/test1", {
+			await axios.post("/api/nlp/test1", {
 				text: result,
 			});
 		},
@@ -22,7 +22,7 @@ function Speech() {
 	};
 	const reqValue = async (text: string) => {
 		console.log(value);
-		return await axios.post("/nlp/test1", {
+		return await axios.post("/api/nlp/test1", {
 			text,
 		});
 	};

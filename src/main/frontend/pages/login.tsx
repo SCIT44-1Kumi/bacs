@@ -21,9 +21,9 @@ const Login = () => {
 		console.log(data);
 		const { userId, userPw, confirmPw, phone, email } = data;
 		if (confirmPw) {
-			await axios.post("/member/join", data);
+			await axios.post("/api/member/join", data);
 		} else {
-			await axios.post(`/member/temp-login`, data);
+			await axios.post(`/api/member/temp-login`, data);
 		}
 		return;
 	};
