@@ -1,21 +1,28 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const AdminNavBar = () => {
+	const router = useRouter();
+	const storeId = router.asPath.split("/")[1];
+	console.log(storeId);
 	return (
 		<div className={`flex justify-between mx-6`}>
 			<div>
 				<span>B A C S</span>
 				<span>환영합니다!</span>
 			</div>
-			<div className={`grid grid-cols-3`}>
+			<div className={`grid grid-cols-4 place-items-center`}>
 				<div>
-					<Link href={`{storeId}/admin/info`}>홍보페이지 관리</Link>
+					<Link href={`/${storeId}/admin/chart`}>매출조회/통계</Link>
 				</div>
 				<div>
-					<Link href={`{storeId}/admin/kiosk`}>키오스크 관리</Link>
+					<Link href={`/${storeId}/admin/info`}>홍보페이지 관리</Link>
 				</div>
 				<div>
-					<Link href={`{storeId}/admin/menu`}>메뉴 관리</Link>
+					<Link href={`/${storeId}/admin/kiosk`}>키오스크 관리</Link>
+				</div>
+				<div>
+					<Link href={`/${storeId}/admin/menu`}>메뉴 관리</Link>
 				</div>
 			</div>
 		</div>

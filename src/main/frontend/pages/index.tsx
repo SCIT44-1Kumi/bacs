@@ -4,6 +4,9 @@ import { useTranslation } from "next-i18next";
 import MainNavBar from "@/components/main/mainNavBar";
 import MainImg from "@/components/main/MainImg";
 import MainFooter from "@/components/main/MainFooter";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 export interface IUser {
 	userId: string;
@@ -17,6 +20,7 @@ export interface IUser {
 
 const Home = () => {
 	const { t } = useTranslation();
+
 	return (
 		<div>
 			<MainNavBar />
