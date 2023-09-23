@@ -2,10 +2,9 @@ package net.softsociety.bacs.user.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.softsociety.bacs.user.dao.UserDAO;
-import net.softsociety.bacs.domain.vo.BacsUser;
 import net.softsociety.bacs.user.controller.dto.LoginRequestDto;
-import net.softsociety.bacs.user.entity.BacsUserRepository;
+import net.softsociety.bacs.user.entity.User;
+import net.softsociety.bacs.user.entity.UserRepository;
 import net.softsociety.bacs.user.exception.AuthenticationErrorCode;
 import net.softsociety.bacs.user.redis.entity.UserRefreshToken;
 import net.softsociety.bacs.user.redis.repository.RefreshTokenRepository;
@@ -27,7 +26,7 @@ public final class AuthenticationService
         implements LoginUseCase {
 
     // DAOs
-    private final BacsUserRepository userRepository;
+    private final UserRepository userRepository;
     private final RefreshTokenRepository refreshTokenRepository;
 
     // Utilities
@@ -38,7 +37,7 @@ public final class AuthenticationService
     @Override
     public TokenPair login(String userId, String userPw) {
         // 회원 존재하는지 확인
-        BacsUser user = userRepository
+        User user = userRepository
                 .findByUserId(userId)
                 .orElseThrow(AuthenticationErrorCode.ID_PW_MISMATCHED::defaultException);
 
@@ -94,7 +93,7 @@ public final class AuthenticationService
         return tokenPair.accessToken();
     }
 
-    private String generateAccessToken(BacsUser user) {
+    private String generateAccessToken(User user) {
         Map<String, String> claimsMap = new HashMap<>();
 
         // TODO 보통 우선순위

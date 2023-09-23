@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.softsociety.bacs.domain.dto.TokenInfo;
 import net.softsociety.bacs.user.controller.dto.JoinUserDTO;
-import net.softsociety.bacs.domain.vo.BacsUser;
+import net.softsociety.bacs.user.entity.User;
 import net.softsociety.bacs.user.service.UserService;
 import net.softsociety.bacs.user.controller.dto.LoginRequestDto;
 import net.softsociety.bacs.user.controller.dto.LoginResponseDto;
@@ -31,7 +31,7 @@ public class UserController {
      */
 
     @PostMapping("join")
-    public BacsUser join(@RequestBody @Valid JoinUserDTO dto){
+    public User join(@RequestBody @Valid JoinUserDTO dto){
         log.debug("----dto----- {}",dto);
         return service.join(dto);
     }

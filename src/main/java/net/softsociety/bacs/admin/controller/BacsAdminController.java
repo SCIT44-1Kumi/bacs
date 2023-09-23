@@ -54,16 +54,16 @@ public class BacsAdminController {
      * @param data
      * @return data
      */
-    @PostMapping("saleToday")
-    public int saleToday(@RequestBody SaleTodayDTO data) {
-       return service.saleToday(data);
-
-    }
-
-    // TODO: 통계 조회 개발중
-     
-    @PostMapping("salesWeek")
-    public int salesWeek(@RequestBody SaleTodayDTO data){
-        return service.salesWeek(data);
-    }
+//    @PostMapping("saleToday")
+//    public int saleToday(@RequestBody SaleTodayDTO data) {
+//       return service.saleToday(data);
+//
+//    }
+//
+//    // TODO: 통계 조회 개발중
+//
+//    @PostMapping("salesWeek")
+//    public int salesWeek(@RequestBody SaleTodayDTO data){
+//        return service.salesWeek(data);
+//    }
 }

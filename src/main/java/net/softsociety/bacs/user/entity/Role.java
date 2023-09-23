@@ -1,4 +1,4 @@
-package net.softsociety.bacs.user;
+package net.softsociety.bacs.user.entity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
