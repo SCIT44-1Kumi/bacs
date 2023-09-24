@@ -2,18 +2,10 @@ package net.softsociety.bacs.domain.vo;
 
 
 import lombok.*;
-import net.softsociety.bacs.domain.entity.CoreEntity;
 import net.softsociety.bacs.user.Role;
-import org.hibernate.annotations.ColumnDefault;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.Collection;
 
 @Entity
 @Table(name = "BACS_USER")
@@ -22,7 +14,11 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
-public class BacsUser extends CoreEntity {
+public class BacsUser{
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
 
   @Column(updatable = false, nullable = false)
   private String userId;

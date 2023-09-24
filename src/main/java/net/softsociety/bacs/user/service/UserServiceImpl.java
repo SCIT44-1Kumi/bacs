@@ -2,13 +2,13 @@ package net.softsociety.bacs.user.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.softsociety.bacs.user.entity.Role;
-import net.softsociety.bacs.user.controller.dto.JoinUserDTO;
 import net.softsociety.bacs.domain.dto.TokenInfo;
-
 import net.softsociety.bacs.domain.vo.BacsUser;
-import net.softsociety.bacs.user.entity.User;
-import net.softsociety.bacs.user.entity.UserRepository;
+import net.softsociety.bacs.user.Role;
+import net.softsociety.bacs.user.controller.dto.JoinUserDTO;
+import net.softsociety.bacs.user.controller.dto.SalesDTO;
+import net.softsociety.bacs.user.entity.BacsOrderRepository;
+import net.softsociety.bacs.user.entity.BacsUserRepository;
 import net.softsociety.bacs.user.exception.AuthenticationErrorCode;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -25,9 +25,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-//    private final UserDAO dao;
 
-    private final UserRepository userRepository;
+
+    private final BacsUserRepository bacsUserRepository;
+
+    private final BacsOrderRepository bacsOrderRepository;
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
@@ -60,12 +62,12 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User join(JoinUserDTO dto) {
-        Optional<User> user = userRepository.findByUserId(dto.userId());
+    public BacsUser join(JoinUserDTO dto) {
+        Optional<BacsUser> user = bacsUserRepository.findByUserId(dto.userId());
         if (user.isPresent()){
             throw AuthenticationErrorCode.USER_NULL.defaultException();
         }
-        User newUser = User.builder()
+        BacsUser newUser = BacsUser.builder()
                 .userId(dto.userId())
                 .userPw(passwordEncoder.encode(dto.userPw()))
                 .phone(dto.phone())
@@ -74,17 +76,21 @@ public class UserServiceImpl implements UserService {
                 .enabled(true)
                 .build();
         log.debug("------newUser : {}", newUser);
-        return userRepository.save(newUser);
+        return bacsUserRepository.save(newUser);
 
     }
 
-//    @Override
-//    public int saleToday(SaleTodayDTO data){
-//        return dao.saleToday(data);
-//    }
-//
-//    @Override
-//    public int salesWeek(SaleTodayDTO data){
-//        return dao.salesWeek(data);
-//    }
+   @Override
+    public Optional<Integer> saleToday(SalesDTO dto){
+        SalesDTO.builder()
+                .storeId("heonpig")
+                .build();
+        return saleToday(dto);
+   }
+
+
+  //  @Override
+   // public int salesWeek(SaleTodayDTO data){
+     //   return dao.salesWeek(data);
+    //}
 }

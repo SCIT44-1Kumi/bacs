@@ -22,7 +22,7 @@
     </insert>
 
     <select id="saleToday" parameterType="SaleTodayDTO" resultType="int">
-        SELECT SUM(totalPrice) AS daily_total_price
+        SELECT SUM(TOTALPRICE) AS daily_total_price
         FROM BACS_ORDER
         WHERE TRUNC(orderDate) = TRUNC(SYSDATE) and STOREID = #{storeId}
     </select>

@@ -13,8 +13,11 @@ import javax.validation.constraints.Pattern;
 // implements Serializable
 // all args constructor
 // ...
+
 @Builder
 public record LoginRequestDto(
+
+
         @NotBlank // NotNull, NotEmpty, NotBlank(prevents null, "", " ", ... every white space)
         @Pattern(
                 regexp = "[a-zA-Z0-9]{3,30}", // ValidationConstants.USER_ID
@@ -24,6 +27,15 @@ public record LoginRequestDto(
 
         @NotBlank // NotNull, NotEmpty, NotBlank(prevents null, "", " ", ... every white space)
         // ...
-        String userPw
+        String userPw,
+
+
+        @NotBlank
+        String Email,
+
+
+        @NotBlank
+        String Phone
 ) {
+
 }
