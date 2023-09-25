@@ -1,50 +1,49 @@
 package net.softsociety.bacs.admin.controller;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.softsociety.bacs.domain.dto.SaleTodayDTO;
-import net.softsociety.bacs.domain.dto.admin.BlockStoreDTO;
-import net.softsociety.bacs.domain.dto.admin.DeleteStoreDTO;
-import net.softsociety.bacs.domain.vo.BacsStore;
+import net.softsociety.bacs.admin.dto.BlockStoreDTO;
+import net.softsociety.bacs.admin.dto.DeleteStoreDTO;
 import net.softsociety.bacs.admin.service.AdminService;
+import net.softsociety.bacs.store.entity.Store;
 import net.softsociety.bacs.user.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @Slf4j
 @RequestMapping("admin")
+@RequiredArgsConstructor
 public class BacsAdminController {
 
-    @Autowired
-    UserService service;
+    private final UserService service;
 
-    @Autowired
-    AdminService adminService;
+    private final AdminService adminService;
 
     // 매장 조회 /store/list
     @GetMapping("store/list")
-    public ArrayList<BacsStore> getStoreList() {
+    public List<Store> getStoreList() {
         return adminService.getStoreList();
     }
 
     // 매장 삭제 /store/delete
     @PostMapping("store/delete")
-    public boolean deleteStore(@RequestBody DeleteStoreDTO storeId) {
-        return adminService.deleteStore(storeId);
+    public void deleteStore(@RequestBody @Valid DeleteStoreDTO storeId) {
+        adminService.deleteStore(storeId);
     }
 
     // 매장(회원)차단 /store/block
     @PostMapping("store/block")
-    public boolean blockStore(@RequestBody BlockStoreDTO userId) {
-        return adminService.blockStore(userId);
+    public void blockStore(@RequestBody BlockStoreDTO dto) {
+        adminService.blockStore(dto);
     }
 
     // 매장 차단해제 /store/rebock
     @PostMapping("store/rebock")
-    public boolean rebockStore(@RequestBody BlockStoreDTO userId) {
-        return adminService.rebockStore(userId);
+    public void rebockStore(@RequestBody BlockStoreDTO dto) {
+        adminService.rebockStore(dto);
     }
 
 
