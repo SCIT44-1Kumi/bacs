@@ -3,10 +3,9 @@ package net.softsociety.bacs.user.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.softsociety.bacs.user.entity.Role;
-import net.softsociety.bacs.user.controller.dto.JoinUserDTO;
-import net.softsociety.bacs.domain.dto.TokenInfo;
+import net.softsociety.bacs.user.dto.JoinUserDTO;
+import net.softsociety.bacs.user.dto.TokenInfo;
 
-import net.softsociety.bacs.domain.vo.BacsUser;
 import net.softsociety.bacs.user.entity.User;
 import net.softsociety.bacs.user.entity.UserRepository;
 import net.softsociety.bacs.user.exception.AuthenticationErrorCode;

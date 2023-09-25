@@ -1,6 +1,6 @@
 package net.softsociety.bacs.user.service;
 
-import net.softsociety.bacs.user.controller.dto.LoginRequestDto;
+import net.softsociety.bacs.user.dto.LoginRequestDto;
 import net.softsociety.bacs.user.service.data.TokenPair;
 
 import javax.servlet.http.HttpServletResponse;

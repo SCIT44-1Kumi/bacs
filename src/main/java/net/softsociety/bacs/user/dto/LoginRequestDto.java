@@ -1,4 +1,4 @@
-package net.softsociety.bacs.user.controller.dto;
+package net.softsociety.bacs.user.dto;
 
 // record -> entity(VO) X, DTO (O)
 

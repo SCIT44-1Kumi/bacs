@@ -1,4 +1,4 @@
-package net.softsociety.bacs.user.controller.dto;
+package net.softsociety.bacs.user.dto;
 
 import lombok.Builder;
 

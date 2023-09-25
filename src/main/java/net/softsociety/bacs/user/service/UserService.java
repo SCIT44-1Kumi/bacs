@@ -1,7 +1,7 @@
 package net.softsociety.bacs.user.service;
 
-import net.softsociety.bacs.domain.dto.TokenInfo;
-import net.softsociety.bacs.user.controller.dto.JoinUserDTO;
+import net.softsociety.bacs.user.dto.TokenInfo;
+import net.softsociety.bacs.user.dto.JoinUserDTO;
 import net.softsociety.bacs.user.entity.User;
 import org.springframework.transaction.annotation.Transactional;
 

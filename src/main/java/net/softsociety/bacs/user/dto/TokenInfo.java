@@ -1,4 +1,4 @@
-package net.softsociety.bacs.domain.dto;
+package net.softsociety.bacs.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -2,12 +2,12 @@ package net.softsociety.bacs.user.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.softsociety.bacs.domain.dto.TokenInfo;
-import net.softsociety.bacs.user.controller.dto.JoinUserDTO;
+import net.softsociety.bacs.user.dto.TokenInfo;
+import net.softsociety.bacs.user.dto.JoinUserDTO;
 import net.softsociety.bacs.user.entity.User;
 import net.softsociety.bacs.user.service.UserService;
-import net.softsociety.bacs.user.controller.dto.LoginRequestDto;
-import net.softsociety.bacs.user.controller.dto.LoginResponseDto;
+import net.softsociety.bacs.user.dto.LoginRequestDto;
+import net.softsociety.bacs.user.dto.LoginResponseDto;
 import net.softsociety.bacs.user.service.AuthenticationService;
 import org.springframework.web.bind.annotation.*;
 
