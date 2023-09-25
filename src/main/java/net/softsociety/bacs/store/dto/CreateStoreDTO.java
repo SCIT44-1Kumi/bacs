@@ -7,6 +7,8 @@ import javax.validation.constraints.NotBlank;
 @Builder
 public record CreateStoreDTO(
         @NotBlank
+        String userId,
+        @NotBlank
         String storeId,
         @NotBlank
         String storeName,

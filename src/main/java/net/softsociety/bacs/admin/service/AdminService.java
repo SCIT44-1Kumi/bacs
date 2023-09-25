@@ -1,18 +1,17 @@
 package net.softsociety.bacs.admin.service;
 
-import net.softsociety.bacs.domain.dto.admin.BlockStoreDTO;
-import net.softsociety.bacs.domain.dto.admin.DeleteStoreDTO;
-import net.softsociety.bacs.domain.vo.BacsStore;
+import net.softsociety.bacs.admin.dto.BlockStoreDTO;
+import net.softsociety.bacs.admin.dto.DeleteStoreDTO;
+import net.softsociety.bacs.store.entity.Store;
 
-import java.util.ArrayList;
-import java.util.Map;
+import java.util.List;
 
 public interface AdminService {
-    ArrayList<BacsStore> getStoreList();
+    List<Store> getStoreList();
 
-    boolean deleteStore(DeleteStoreDTO storeId);
+    void deleteStore(DeleteStoreDTO storeId);
 
-    boolean blockStore(BlockStoreDTO userId);
+    void blockStore(BlockStoreDTO dto);
 
-    boolean rebockStore(BlockStoreDTO userId);
+    void rebockStore(BlockStoreDTO dto);
 }

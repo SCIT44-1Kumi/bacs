@@ -2,22 +2,17 @@ package net.softsociety.bacs.user.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.softsociety.bacs.domain.dto.TokenInfo;
-import net.softsociety.bacs.domain.vo.BacsUser;
-import net.softsociety.bacs.user.controller.dto.JoinUserDTO;
-import net.softsociety.bacs.user.controller.dto.LoginRequestDto;
-import net.softsociety.bacs.user.controller.dto.LoginResponseDto;
-import net.softsociety.bacs.user.controller.dto.SalesDTO;
-import net.softsociety.bacs.user.service.AuthenticationService;
+import net.softsociety.bacs.user.dto.TokenInfo;
+import net.softsociety.bacs.user.dto.JoinUserDTO;
+import net.softsociety.bacs.user.entity.User;
 import net.softsociety.bacs.user.service.UserService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import net.softsociety.bacs.user.dto.LoginRequestDto;
+import net.softsociety.bacs.user.dto.LoginResponseDto;
+import net.softsociety.bacs.user.service.AuthenticationService;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.Optional;
 
 // @Controller + @ResponseBody
 @RestController
@@ -36,7 +31,7 @@ public class UserController {
      */
 
     @PostMapping("join")
-    public BacsUser join(@RequestBody @Valid JoinUserDTO dto){
+    public User join(@RequestBody @Valid JoinUserDTO dto){
         log.debug("----dto----- {}",dto);
         return service.join(dto);
     }
@@ -67,10 +62,5 @@ public class UserController {
                 .token(accessToken) // access token
                 .requires2Fa(false)
                 .build();
-    }
-
-    @PostMapping("TodayTotal")
-    public Optional<Integer> todayTotal(@RequestBody @Valid SalesDTO dto){
-        return service.saleToday(dto);
     }
 }
