@@ -1,8 +1,8 @@
 package net.softsociety.bacs.nlp.controller;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.softsociety.bacs.nlp.service.NLPService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -12,10 +12,10 @@ import java.util.Map;
 @RestController
 @RequestMapping("nlp")
 @Slf4j
+@RequiredArgsConstructor
 public class NLPController {
 
-    @Autowired
-    private NLPService service;
+    private final NLPService service;
 
     @GetMapping("test")
     public Map<String, Integer> analysis(@RequestBody String text) throws Exception {
