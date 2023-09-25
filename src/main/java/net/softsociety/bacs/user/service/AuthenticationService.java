@@ -2,7 +2,7 @@ package net.softsociety.bacs.user.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.softsociety.bacs.user.controller.dto.LoginRequestDto;
+import net.softsociety.bacs.user.dto.LoginRequestDto;
 import net.softsociety.bacs.user.entity.User;
 import net.softsociety.bacs.user.entity.UserRepository;
 import net.softsociety.bacs.user.exception.AuthenticationErrorCode;
