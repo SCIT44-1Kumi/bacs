@@ -1,16 +1,20 @@
-package net.softsociety.bacs.store.controller;
+package net.softsociety.bacs.storeNotice.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import net.softsociety.bacs.domain.dto.storeNotice.CreateStoreNoticeDTO;
-import net.softsociety.bacs.domain.dto.storeNotice.DeleteStoreNoticeDTO;
-import net.softsociety.bacs.domain.dto.storeNotice.UpdateStoreNoticeDTO;
-import net.softsociety.bacs.domain.vo.StoreNotice;
-import net.softsociety.bacs.store.service.StoreNoticeService;
+import net.softsociety.bacs.storeNotice.dto.CreateStoreNoticeDTO;
+import net.softsociety.bacs.storeNotice.dto.DeleteStoreNoticeDTO;
+import net.softsociety.bacs.storeNotice.dto.UpdateStoreNoticeDTO;
+import net.softsociety.bacs.storeNotice.entity.StoreNotice;
+import net.softsociety.bacs.storeNotice.service.StoreNoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import java.util.ArrayList;
+
+import java.util.List;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 
 @RestController
@@ -27,9 +31,8 @@ public class StoreNoticeController {
      * @return
      */
     @PostMapping("createStoreNotice")
-    public boolean createStoreNotice(@PathVariable(name = "storeId") String storeId, @RequestBody CreateStoreNoticeDTO data) {
-        data.setStoreId(storeId);
-        return service.createStoreNotice(data);
+    public void createStoreNotice(@PathVariable(name = "storeId") String storeId, @RequestBody @Valid CreateStoreNoticeDTO data) {
+        service.createStoreNotice(storeId, data);
     }
 
 
@@ -39,10 +42,9 @@ public class StoreNoticeController {
      * @param data
      */
     @PostMapping("deleteStoreNotice")
-    public int deleteStoreNotice(@PathVariable(name = "storeId") String storeId, @RequestBody DeleteStoreNoticeDTO data) {
+    public void deleteStoreNotice(@PathVariable(name = "storeId") String storeId, @RequestBody DeleteStoreNoticeDTO data) {
         // TODO : 접속자 아이디와 글 쓴 사람 아이디 비교 (로그인 상태가 아니거나 다르면 false)
-        data.setStoreId(storeId);
-        return service.deleteStoreNotice(data);
+        service.deleteStoreNotice(storeId, data);
     }
 
 
@@ -52,10 +54,9 @@ public class StoreNoticeController {
      * @param data
      */
     @PostMapping("updateStoreNotice")
-    public int updateStoreNotice(@PathVariable(name = "storeId") String storeId, @RequestBody UpdateStoreNoticeDTO data) {
+    public void updateStoreNotice(@PathVariable(name = "storeId") String storeId, @RequestBody @Valid UpdateStoreNoticeDTO data) {
         // TODO : 접속자 아이디와 글 쓴 사람 아이디 비교 (로그인 상태가 아니거나 다르면 false)
-        data.setStoreId(storeId);
-        return service.updateStoreNotice(data);
+        service.updateStoreNotice(storeId, data);
     }
 
     /**
@@ -64,10 +65,9 @@ public class StoreNoticeController {
      * @param storeId
      */
     @GetMapping("SelectStoreNotice")
-    public ArrayList<StoreNotice> selectStoreNotice(@PathVariable(name = "storeId") String storeId) {
+    public List<StoreNotice> selectStoreNotice(@PathVariable(name = "storeId") String storeId) {
         log.debug("storeId: {}", storeId);
-        ArrayList<StoreNotice> selectStoreNoticeList = service.selectStoreNotice(storeId);
-        return selectStoreNoticeList;
+        return service.selectStoreNotice(storeId);
     }
 
     /**
@@ -77,10 +77,9 @@ public class StoreNoticeController {
      * @param noticeNum
      */
     @GetMapping("ReadStoreNotice/{noticeNum}")
-    public ArrayList<StoreNotice> readStoreNotice(@PathVariable int noticeNum) {
+    public StoreNotice readStoreNotice(@PathVariable(name = "storeId") String storeId, @PathVariable int noticeNum) {
         log.debug("글번호: {}", noticeNum);
-        ArrayList<StoreNotice> storeNotice = service.readStoreNotice(noticeNum);
-        return storeNotice;
+        return service.readStoreNotice(noticeNum);
     }
 
 
