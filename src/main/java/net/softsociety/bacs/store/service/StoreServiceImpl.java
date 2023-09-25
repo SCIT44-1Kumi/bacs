@@ -7,6 +7,9 @@ import net.softsociety.bacs.store.dto.CreateStoreDTO;
 import net.softsociety.bacs.store.entity.Store;
 import net.softsociety.bacs.store.entity.StoreRepository;
 import net.softsociety.bacs.store.exception.StoreErrorCode;
+import net.softsociety.bacs.user.entity.User;
+import net.softsociety.bacs.user.entity.UserRepository;
+import net.softsociety.bacs.user.exception.AuthenticationErrorCode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,9 +20,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class StoreServiceImpl implements StoreService {
 
     private final StoreRepository storeRepository;
+    private final UserRepository userRepository;
 
     @Override
-    public Store createStore(CreateStoreDTO createStoreDTO) {
+    public void createStore(CreateStoreDTO createStoreDTO) {
 
         // 존재하는 매장인지 확인
         if(storeRepository.findByStoreId(createStoreDTO.storeId()).isPresent()){
@@ -35,6 +39,10 @@ public class StoreServiceImpl implements StoreService {
                 .crNum(createStoreDTO.crNum())
                 .build();
         // db에 저장
-        return storeRepository.save(newStore);
+        User user = userRepository.findByUserId(createStoreDTO.userId())
+                .orElseThrow(AuthenticationErrorCode.USER_NULL::defaultException);
+
+        storeRepository.save(newStore);
+        user.addStore(newStore);
     }
 }

@@ -7,5 +7,5 @@ import net.softsociety.bacs.store.entity.Store;
 import java.util.Optional;
 
 public interface StoreService {
-    Store createStore(CreateStoreDTO createStoreDTO);
+    void createStore(CreateStoreDTO createStoreDTO);
 }
