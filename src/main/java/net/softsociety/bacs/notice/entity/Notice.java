@@ -18,25 +18,26 @@ import javax.persistence.*;
 public class Notice {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "NOTICEID_SEQ")
+    @Column(name = "NOTICEID")
     private Long id;
 
-    @Column(nullable = false, name = "noticeNum")
+    @Column(nullable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BACS_NOTICE_SEQ")
     private int noticeNum;
 
-    @Column(nullable = false, name = "noticeTitle")
+    @Column(nullable = false)
     private String noticeTitle;
 
-    @Column(nullable = false, name = "noticeContents")
+    @Column(nullable = false)
     private String noticeContents;
 
-    @Column(nullable = false, name = "noticeViews")
+    @Column(nullable = false)
     @ColumnDefault("0")
     private int noticeViews;
 
     @CreatedDate
-    @Column(nullable = false, name = "createdAt")
+    @Column(nullable = false)
     private String createdAt;
 
     @ManyToOne

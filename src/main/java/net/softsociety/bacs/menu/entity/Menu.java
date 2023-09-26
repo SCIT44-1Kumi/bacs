@@ -57,6 +57,10 @@ public class Menu {
         this.menuOptions.add(menuOption);
     }
 
+    public void removeMenuOption(MenuOption menuOption) {
+        this.menuOptions.remove(menuOption);
+    }
+
     public void update(
             String menuName,
             long menuPrice,

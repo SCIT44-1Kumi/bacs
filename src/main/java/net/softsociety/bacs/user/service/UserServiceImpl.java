@@ -60,13 +60,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User join(JoinUserDTO dto) {
-        Optional<User> user = userRepository.findByUserId(dto.userId());
-        if (user.isPresent()){
-            throw AuthenticationErrorCode.USER_NULL.defaultException();
+        if (userRepository.findByUserId(dto.userId()).isPresent()){
+            throw AuthenticationErrorCode.USER_CONFLICT.defaultException();
         }
+        String newPw = passwordEncoder.encode(dto.userPw());
+        log.debug("--------newPw {}", newPw);
         User newUser = User.builder()
                 .userId(dto.userId())
-                .userPw(passwordEncoder.encode(dto.userPw()))
+                .userPw(newPw)
                 .phone(dto.phone())
                 .email(dto.email())
                 .rolename(Role.ROLE_USER)

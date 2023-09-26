@@ -36,7 +36,7 @@ spring:
         format_sql: true
 
 
-# MyBatis
-mybatis:
-  type-aliases-package: net.softsociety.bacs.domain
-  mapper-locations: mappers/**/*.xml
+## MyBatis
+#mybatis:
+#  type-aliases-package: net.softsociety.bacs.domain
+#  mapper-locations: mappers/**/*.xml

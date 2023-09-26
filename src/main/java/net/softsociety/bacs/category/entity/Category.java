@@ -21,26 +21,29 @@ import java.util.List;
 public class Category {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "CATEGORYID_SEQ")
+    @Column(name = "CATEGORYID")
     private Long id;
 
-    @Column(unique = true, name = "categoryNum")
+    @Column(unique = true)
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int categoryNum;
 
-    @Column(nullable = false, name = "categoryName")
+    @Column(nullable = false)
     private String categoryName;
 
     @ManyToOne()
     @JoinColumn(name = "store_id")
     private Store store;
 
-    @OneToMany(mappedBy = "category")
-    private List<Menu> menus = new ArrayList<>();
-
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "category")
+    private List<Menu> menus = new ArrayList<>();
+
+
 
 
     public void update(String categoryName) {

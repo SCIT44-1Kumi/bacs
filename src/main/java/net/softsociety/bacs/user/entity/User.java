@@ -4,7 +4,6 @@ package net.softsociety.bacs.user.entity;
 import lombok.*;
 import net.softsociety.bacs.notice.entity.Notice;
 import net.softsociety.bacs.store.entity.Store;
-import net.softsociety.bacs.storeNotice.entity.StoreNotice;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -23,37 +22,38 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "USERID_SEQ")
+    @Column(name = "USERID")
     private Long id;
 
-    @Column(updatable = false, unique = true, name = "userId")
+    @Column(updatable = false, unique = true)
     private String userId;
 
-    @Column(nullable = false, name = "userPw")
+    @Column(nullable = false)
     private String userPw;
 
-    @Column(nullable = false, name = "email")
+    @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false, name = "phone")
+    @Column(nullable = false)
     private String phone;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, name = "rolename")
+    @Column(nullable = false)
     private Role rolename;
 
-    @Column(nullable = false, name = "enabled")
+    @Column(nullable = false)
     private boolean enabled;
+
+    @CreatedDate
+    @Column(nullable = false)
+    private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "user")
     private List<Store> stores = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
     private List<Notice> notices = new ArrayList<>();
-
-    @CreatedDate
-    @Column(nullable = false, name = "createdAt")
-    private LocalDateTime createdAt;
 
     // 회원에 매장 추가
     public void addStore(Store store) {

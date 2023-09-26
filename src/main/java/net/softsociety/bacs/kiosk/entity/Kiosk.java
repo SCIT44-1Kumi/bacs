@@ -15,17 +15,24 @@ import javax.persistence.*;
 @EntityListeners(AuditingEntityListener.class)
 public class Kiosk {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "KIOSKID_SEQ")
+    @Column(name = "KIOSKID")
     private Long id;
 
-    @Column(unique = true, name = "kioskNum")
+    @Column(unique = true)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BACS_KIOSK_SEQ")
     private int kioskNum;
 
-    @Column(nullable = false, name = "storeCode")
+    @Column(nullable = false)
     private String storeCode;
 
     @ManyToOne
     @JoinColumn(name = "store_id")
     private Store store;
+
+    public void update(
+            String storeCode
+    ) {
+        this.storeCode = storeCode;
+    }
 }

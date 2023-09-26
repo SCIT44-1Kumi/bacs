@@ -19,25 +19,26 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 public class StoreNotice {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "STORE_NOTICE_NOTICEID_SEQ")
+    @Column(name = "NOTICEID")
     private Long id;
 
-    @Column(unique = true, name = "noticeNum")
+    @Column(unique = true)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "STORE_NOTICE_SEQ")
     private int noticeNum;
 
-    @Column(nullable = false, name = "noticeTitle")
+    @Column(nullable = false)
     private String noticeTitle;
 
-    @Column(nullable = false, name = "noticeContents")
+    @Column(nullable = false)
     private String noticeContents;
 
-    @Column(nullable = false, name = "noticeViews")
+    @Column(nullable = false)
     @ColumnDefault("0")
     private int noticeViews;
 
     @CreatedDate
-    @Column(nullable = false, name = "createdAt")
+    @Column(nullable = false)
     private LocalDateTime createdAt;
 
     @ManyToOne

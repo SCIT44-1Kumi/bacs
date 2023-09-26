@@ -5,6 +5,7 @@ import lombok.*;
 import net.softsociety.bacs.category.entity.Category;
 import net.softsociety.bacs.kiosk.entity.Kiosk;
 import net.softsociety.bacs.menu.entity.Menu;
+import net.softsociety.bacs.order.entity.Order;
 import net.softsociety.bacs.storeNotice.entity.StoreNotice;
 import net.softsociety.bacs.user.entity.User;
 import org.springframework.data.annotation.CreatedDate;
@@ -24,23 +25,28 @@ import java.util.List;
 @EntityListeners(AuditingEntityListener.class)
 public class Store {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "STOREID_SEQ")
+    @Column(name = "STOREID")
     private Long id;
 
-    @Column(updatable = false, unique = true, name = "storeId")
+    @Column(updatable = false, unique = true)
     private String storeId;
 
-    @Column(nullable = false, name = "storeName")
+    @Column(nullable = false)
     private String storeName;
 
-    @Column(nullable = false, name = "storeAddress")
+    @Column(nullable = false)
     private String storeAddress;
 
-    @Column(nullable = false, name = "crNum")
+    @Column(nullable = false)
     private String crNum;
 
-    @Column(nullable = false, name = "storePhone")
+    @Column(nullable = false)
     private String storePhone;
+
+    @CreatedDate
+    @Column(nullable = false)
+    private LocalDateTime createdAt;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -55,10 +61,8 @@ public class Store {
     @OneToMany(mappedBy = "store")
     private List<Kiosk> kiosks = new ArrayList<>();
 
-
-    @CreatedDate
-    @Column(nullable = false, name = "createdAt")
-    private LocalDateTime createdAt;
+    @OneToMany(mappedBy = "store")
+    private List<Order> orders = new ArrayList<>();
 
     public void addStoreNotices(StoreNotice storeNotice) {
         this.storeNotices.add(storeNotice);
@@ -73,6 +77,13 @@ public class Store {
     }
     public void removeKiosk(Kiosk kiosk) {
         this.kiosks.remove(kiosk);
+    }
+
+    public void addOrder(Order order) {
+        this.orders.add(order);
+    }
+    public void removeOrder(Order order) {
+        this.orders.remove(order);
     }
 
     public void update(String storeName, String storeAddress, String crNum, String storePhone) {
