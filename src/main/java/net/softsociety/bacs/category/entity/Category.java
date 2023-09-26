@@ -21,8 +21,8 @@ import java.util.List;
 public class Category {
 
     @Id
+    @Column(name = "CATEGORY_NO")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "CATEGORYID_SEQ")
-    @Column(name = "CATEGORYID")
     private Long id;
 
     @Column(unique = true)
@@ -37,7 +37,7 @@ public class Category {
     private LocalDateTime createdAt;
 
     @ManyToOne()
-    @JoinColumn(name = "storeid")
+    @JoinColumn(name = "store_no")
     private Store store;
 
     @OneToMany(mappedBy = "category")

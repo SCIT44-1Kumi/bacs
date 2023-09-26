@@ -25,8 +25,8 @@ import java.util.List;
 @EntityListeners(AuditingEntityListener.class)
 public class Store {
     @Id
+    @Column(name = "store_no")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "STOREID_SEQ")
-    @Column(name = "STOREID")
     private Long id;
 
     @Column(updatable = false, unique = true)
@@ -49,7 +49,7 @@ public class Store {
     private LocalDateTime createdAt;
 
     @ManyToOne
-    @JoinColumn(name = "userid")
+    @JoinColumn(name = "user_no")
     private User user;
 
     @OneToMany(mappedBy = "store")

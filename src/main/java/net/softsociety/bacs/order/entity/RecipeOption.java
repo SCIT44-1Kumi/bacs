@@ -17,8 +17,8 @@ import javax.persistence.*;
 public class RecipeOption {
 
     @Id
+    @Column(name = "RO_NO")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "ROID_SEQ")
-    @Column(name = "ROID")
     private Long id;
 
     @Column(unique = true)
@@ -29,10 +29,10 @@ public class RecipeOption {
     private String roAmount;
 
     @ManyToOne
-    @JoinColumn(name = "recipeid")
+    @JoinColumn(name = "recipe_no")
     private OrderRecipe orderRecipe;
 
     @ManyToOne
-    @JoinColumn(name = "optionid")
+    @JoinColumn(name = "option_no")
     private MenuOption option;
 }

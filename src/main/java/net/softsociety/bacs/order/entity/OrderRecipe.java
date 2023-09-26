@@ -19,8 +19,8 @@ import java.util.List;
 public class OrderRecipe {
 
     @Id
+    @Column(name = "RECIPE_NO")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "RECIPEID_SEQ")
-    @Column(name = "RECIPEID")
     private Long id;
 
     @Column(nullable = false)
@@ -36,11 +36,11 @@ public class OrderRecipe {
     private int recipePrice;
 
     @ManyToOne
-    @JoinColumn(name = "menuid")
+    @JoinColumn(name = "menu_no")
     private Menu menu;
 
     @ManyToOne
-    @JoinColumn(name = "orderid")
+    @JoinColumn(name = "order_no")
     private Order order;
 
     @OneToMany(mappedBy = "orderRecipe")

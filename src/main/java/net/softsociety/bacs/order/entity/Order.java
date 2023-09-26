@@ -21,8 +21,8 @@ import java.util.List;
 public class Order {
 
     @Id
+    @Column(name = "order_no")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "ORDERID_SEQ")
-    @Column(name = "ORDERID")
     private Long id;
 
     @Column(updatable = false,unique = true)
@@ -42,7 +42,7 @@ public class Order {
     private LocalDateTime orderDate;
 
     @ManyToOne
-    @JoinColumn(name = "storeid")
+    @JoinColumn(name = "store_no")
     private Store store;
 
     @OneToMany(mappedBy = "menu")

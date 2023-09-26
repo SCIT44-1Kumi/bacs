@@ -18,8 +18,8 @@ import javax.persistence.*;
 public class Notice {
 
     @Id
+    @Column(name = "NOTICE_NO")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "NOTICEID_SEQ")
-    @Column(name = "NOTICEID")
     private Long id;
 
     @Column(nullable = false)
@@ -41,7 +41,7 @@ public class Notice {
     private String createdAt;
 
     @ManyToOne
-    @JoinColumn(name = "userid")
+    @JoinColumn(name = "user_no")
     private User user;
 
     public void update(

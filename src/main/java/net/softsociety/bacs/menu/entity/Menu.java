@@ -21,8 +21,8 @@ import java.util.List;
 public class Menu {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "MENUID_SEQ")
     @Column(name = "MENUID")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "MENUID_SEQ")
     private Long id;
 
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BACS_MENU_SEQ")

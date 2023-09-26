@@ -15,8 +15,8 @@ import javax.persistence.*;
 @EntityListeners(AuditingEntityListener.class)
 public class Kiosk {
     @Id
+    @Column(name = "KIOSK_NO")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "KIOSKID_SEQ")
-    @Column(name = "KIOSKID")
     private Long id;
 
     @Column(unique = true)
@@ -27,7 +27,7 @@ public class Kiosk {
     private String storeCode;
 
     @ManyToOne
-    @JoinColumn(name = "storeid")
+    @JoinColumn(name = "store_no")
     private Store store;
 
     public void update(

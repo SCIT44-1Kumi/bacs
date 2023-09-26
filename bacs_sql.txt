@@ -1,7 +1,7 @@
 -- BACS SQL 모음
 -- 회원
 CREATE TABLE BACS_USER (
-    USERID number PRIMARY KEY ,
+    USER_NO number PRIMARY KEY ,
     USER_ID VARCHAR2(30) unique , -- 회원 아이디
     USER_PW VARCHAR2(256) NOT NULL , -- 회원 비밀번호
     EMAIL VARCHAR2(256) NOT NULL , -- 회원 이메일
@@ -12,18 +12,18 @@ CREATE TABLE BACS_USER (
 );
 -- 매장정보
 CREATE TABLE BACS_STORE (
-    STOREID number primary key ,
+    STORE_NO number primary key ,
     STORE_ID VARCHAR2(30) unique , -- 매장 아이디(url에 사용할 이름)
     STORE_NAME VARCHAR2(100) NOT NULL , -- 매장 이름
     STORE_ADDRESS VARCHAR2(300) DEFAULT '' , -- 매장 주소
     CR_NUM VARCHAR2(20) NOT NULL , -- 사업자등록번호
     STORE_PHONE VARCHAR2(20) DEFAULT '' , -- 매장 번호
     CREATED_AT DATE DEFAULT SYSDATE , -- 매장 가입날짜
-    USERID number NOT NULL -- 회원 아이디 외래키
+    USER_NO number NOT NULL -- 회원 아이디 외래키
 );
 -- 매장 홈페이지
 CREATE TABLE BACS_HOMEPAGE (
-    HOMEPAGEID number primary key ,
+    HOMEPAGE_NO number primary key ,
     HOMEPAGE_NUM NUMBER unique , -- 홈페이지 번호
     TEMPLATE_NUM NUMBER NOT NULL , -- 홈페이지 템플릿 번호
     BANNER_IMG VARCHAR2(1000) DEFAULT '' , -- 배경 사진(추후 컬럼 추가 가능)
@@ -31,171 +31,171 @@ CREATE TABLE BACS_HOMEPAGE (
     STORE_INTRO2 VARCHAR2(1000) DEFAULT '' , -- 가게 설명문2
     STORE_INTRO3 VARCHAR2(1000) DEFAULT '' , -- 가게 설명문3(추후 컬럼 추가/통폐합 가능)
     OPERATING_HOURS VARCHAR2(200) DEFAULT '' , -- 매장 운영시간(ex.월-금 10:00 ~ 22:00)
-    STOREID number NOT NULL -- 매장 아이디 외래키
+    STORE_NO number NOT NULL -- 매장 아이디 외래키
 );
 
 -- 키오스크 페이지
 CREATE TABLE BACS_KIOSK (
-    KIOSKID number primary key ,
+    KIOSK_NO number primary key ,
     KIOSK_NUM NUMBER unique , -- 키오스크 페이지 번호
     STORE_CODE NUMBER NOT NULL , -- 업종 번호
-    STOREID number NOT NULL -- 매장 아이디 외래키
+    STORE_NO number NOT NULL -- 매장 아이디 외래키
 );
 
 -- 메뉴 카테고리
 CREATE TABLE BACS_CATEGORY (
-    CATEGORYID number primary key ,
+    CATEGORY_NO number primary key ,
     CATEGORY_NUM number unique ,
     CATEGORY_NAME VARCHAR2(30) NOT NULL ,
-    STOREID number NOT NULL
+    STORE_NO number NOT NULL
 );
 
 -- 메뉴
 CREATE TABLE BACS_MENU (
-    MENUID number primary key ,
+    MENU_NO number primary key ,
     MENU_NUM NUMBER unique , -- 메뉴번호
     MENU_NAME VARCHAR2(100) NOT NULL , -- 메뉴 이름
     MENU_PRICE NUMBER NOT NULL , -- 메뉴 가격
     MENU_IMG VARCHAR2(1000) DEFAULT '' , -- 메뉴 이미지
     MENU_DESC VARCHAR2(100) DEFAULT '' , -- 메뉴 설명
-    STOREID number NOT NULL , -- 매장 아이디 외래키
-    CATEGORYID NUMBER DEFAULT 0  -- 메뉴 카테고리 번호 외래키
+    STORE_NO number NOT NULL , -- 매장 아이디 외래키
+    CATEGORY_NO NUMBER DEFAULT 0  -- 메뉴 카테고리 번호 외래키
 );
 
 -- 메뉴옵션
 CREATE TABLE BACS_MENU_OPTION (
-    OPTIONID number primary key ,
+    OPTION_NO number primary key ,
     OPTION_NUM NUMBER unique , -- 메뉴 옵션 번호
     OPTION_NAME VARCHAR2(30) NOT NULL , -- 옵션 카테고리 이름 (ex.온도)
     OPTION_VALUE VARCHAR2(100) NOT NULL , -- 옵션 값 (ex.핫, 아이스, 샷 추가 ...)
     OPTION_PRICE NUMBER NOT NULL , -- 옵션 가격(추가금)
-    MENUID NUMBER NOT NULL -- 메뉴 번호 외래키
+    MENU_NO NUMBER NOT NULL -- 메뉴 번호 외래키
 );
 
 -- 주문
 CREATE TABLE BACS_ORDER (
-    ORDERID number primary key ,
+    ORDER_NO number primary key ,
     ORDER_NUM NUMBER unique , -- 주문번호
     ORDER_DATE DATE DEFAULT SYSDATE , -- 주문 날짜 TIMESTAMP로 변경고려
     TOTAL_PRICE NUMBER DEFAULT 0, -- 주문 총 금액
     TO_GO NUMBER(1) DEFAULT 0 CHECK(TO_GO IN (0, 1) ), -- 포장 여부
     CANCELLED NUMBER DEFAULT 0, -- 0이면 주문완료, 1이면 주문취소
-    STOREID number NOT NULL -- 매장 아이디 외래키
+    STORE_NO number NOT NULL -- 매장 아이디 외래키
 );
 
 -- 주문상품
 CREATE TABLE BACS_ORDER_RECIPE (
-    RECIPEID number primary key ,
+    RECIPE_NO number primary key ,
     RECIPE_NUM NUMBER unique , -- 주문 내역 번호
     MENU_AMOUNT NUMBER DEFAULT 1 , -- 메뉴 수량
     RECIPE_PRICE NUMBER DEFAULT 0 , -- 옵션 포함 메뉴 총 금액
-    MENUID NUMBER NOT NULL , -- 메뉴 번호 외래키
-    ORDERID NUMBER NOT NULL  -- 주문번호 외래키
+    MENU_NO NUMBER NOT NULL , -- 메뉴 번호 외래키
+    ORDER_NO NUMBER NOT NULL  -- 주문번호 외래키
 );
 
 -- 옵션정보
 CREATE TABLE BACS_RECIPE_OPTION (
-    ROID number primary key ,
+    RO_NO number primary key ,
     RO_NUM NUMBER unique , -- 주문한 메뉴 옵션정보 번호
     RO_AMOUNT NUMBER DEFAULT 1 , -- 옵션 수량
-    RECIPEID NUMBER NOT NULL , -- 주문 상품 번호 외래키
-    OPTIONID NUMBER NOT NULL  -- 메뉴 옵션 번호 외래키
+    RECIPE_NO NUMBER NOT NULL , -- 주문 상품 번호 외래키
+    OPTION_NO NUMBER NOT NULL  -- 메뉴 옵션 번호 외래키
 );
 
 -- BACS 공지사항
 CREATE TABLE BACS_NOTICE (
-    NOTICEID number primary key ,
+    NOTICE_NO number primary key ,
     NOTICE_NUM NUMBER unique , -- 공지사항 번호
     NOTICE_TITLE VARCHAR2(100) NOT NULL , -- 공지사항 제목
     NOTICE_CONTENTS VARCHAR2(2000) NOT NULL , -- 공지사항 내용
     NOTICE_VIEWS NUMBER DEFAULT 0 , -- 조회수
     CREATED_AT DATE DEFAULT SYSDATE , -- 게시 날짜
-    USERID number NOT NULL  -- 회원 외래키
+    USER_NO number NOT NULL  -- 회원 외래키
 
 );
 
 -- 매장 공지사항
 CREATE TABLE STORE_NOTICE (
-    NOTICEID number primary key ,
+    NOTICE_NO number primary key ,
     NOTICE_NUM NUMBER unique , -- 매장 공지사항 번호
     NOTICE_TITLE VARCHAR2(100) NOT NULL , -- 매장 공지사항 제목
     NOTICE_CONTENTS VARCHAR2(2000) NOT NULL , -- 매장 공지사항 내용
     NOTICE_VIEWS NUMBER DEFAULT 0 , -- 조회수
     CREATED_AT DATE DEFAULT SYSDATE , -- 게시날짜
-    STOREID number NOT NULL  -- 매장 아이디 외래키
+    STORE_NO number NOT NULL  -- 매장 아이디 외래키
 );
 
 alter table bacs_store
     add CONSTRAINT USER_ID_STORE_FK
-        FOREIGN KEY (USERID)
-            REFERENCES BACS_USER(USERID);-- 회원 아이디 외래키
+        FOREIGN KEY (USER_NO)
+            REFERENCES BACS_USER(USER_NO);-- 회원 아이디 외래키
 
 alter table bacs_homepage
     add CONSTRAINT STORE_ID_HOMEPAGE_FK
-        FOREIGN KEY (STOREID)
-            REFERENCES BACS_STORE(STOREID); -- 매장 아이디 외래키
+        FOREIGN KEY (STORE_NO)
+            REFERENCES BACS_STORE(STORE_NO); -- 매장 아이디 외래키
 
 
 alter table bacs_kiosk
     add CONSTRAINT STORE_ID_KIOSK_FK
-        FOREIGN KEY (STOREID)
-            REFERENCES BACS_STORE(STOREID); -- 매장 아이디 외래키
+        FOREIGN KEY (STORE_NO)
+            REFERENCES BACS_STORE(STORE_NO); -- 매장 아이디 외래키
 
 alter table bacs_category
     add CONSTRAINT STORE_ID_CATEGORY_FK
-        FOREIGN KEY (STOREID)
-            REFERENCES BACS_STORE(STOREID);
+        FOREIGN KEY (STORE_NO)
+            REFERENCES BACS_STORE(STORE_NO);
 
 alter table bacs_menu
     add CONSTRAINT STORE_ID_MENU_FK
-        FOREIGN KEY (STOREID)
-            REFERENCES BACS_STORE(STOREID); -- 매장 아이디 외래키
+        FOREIGN KEY (STORE_NO)
+            REFERENCES BACS_STORE(STORE_NO); -- 매장 아이디 외래키
 
 alter table bacs_menu
     add CONSTRAINT CATEGORY_NUM_MENU_FK
-        FOREIGN KEY (CATEGORYID)
-            REFERENCES BACS_CATEGORY(CATEGORYID); -- 카테고리 번호
+        FOREIGN KEY (CATEGORY_NO)
+            REFERENCES BACS_CATEGORY(CATEGORY_NO); -- 카테고리 번호
 
 alter table bacs_menu_option
     add CONSTRAINT MENU_NUM_OPTION_FK
-        FOREIGN KEY (MENUID)
-            REFERENCES BACS_MENU(MENUID) -- 메뉴 번호 외래키
+        FOREIGN KEY (MENU_NO)
+            REFERENCES BACS_MENU(MENU_NO) -- 메뉴 번호 외래키
 ; --메뉴 값 삭제시 옵션 값도 같이 삭제
 
 alter table BACS_ORDER
     add CONSTRAINT STORE_ID_ORDER_FK
-        FOREIGN KEY (STOREID)
-            REFERENCES BACS_STORE(STOREID); -- 매장 아이디 외래키
+        FOREIGN KEY (STORE_NO)
+            REFERENCES BACS_STORE(STORE_NO); -- 매장 아이디 외래키
 
 alter table BACS_ORDER_RECIPE
     add CONSTRAINT MENU_NUM_RECIPE_FK
-        FOREIGN KEY (MENUID)
-            REFERENCES BACS_MENU(MENUID); -- 메뉴 번호 외래키
+        FOREIGN KEY (MENU_NO)
+            REFERENCES BACS_MENU(MENU_NO); -- 메뉴 번호 외래키
 
 alter table BACS_ORDER_RECIPE
     add CONSTRAINT ORDER_NUM_RECIPE_FK
-        FOREIGN KEY (ORDERID)
-            REFERENCES BACS_ORDER(ORDERID); -- 주문 번호 외래키
+        FOREIGN KEY (ORDER_NO)
+            REFERENCES BACS_ORDER(ORDER_NO); -- 주문 번호 외래키
 
 alter table BACS_RECIPE_OPTION
     add CONSTRAINT RECIPE_NUM_OPTION_FK
-        FOREIGN KEY (RECIPEID)
-            REFERENCES BACS_ORDER_RECIPE(RECIPEID); -- 주문 내역 외래키
+        FOREIGN KEY (RECIPE_NO)
+            REFERENCES BACS_ORDER_RECIPE(RECIPE_NO); -- 주문 내역 외래키
 
 alter table BACS_RECIPE_OPTION
     add CONSTRAINT OPTION_NUM_OPTION_FK
-        FOREIGN KEY (OPTIONID)
-            REFERENCES BACS_MENU_OPTION(OPTIONID); -- 메뉴 옵션 외래키
+        FOREIGN KEY (OPTION_NO)
+            REFERENCES BACS_MENU_OPTION(OPTION_NO); -- 메뉴 옵션 외래키
 
 alter table BACS_NOTICE
     add CONSTRAINT USER_ID_NOTICE_FK
-        FOREIGN KEY (USERID)
-            REFERENCES BACS_USER(USERID); -- 회원 외래키
+        FOREIGN KEY (USER_NO)
+            REFERENCES BACS_USER(USER_NO); -- 회원 외래키
 
 alter table STORE_NOTICE
     add CONSTRAINT STORE_ID_NOTICE_FK
-        FOREIGN KEY (STOREID)
-            REFERENCES BACS_STORE(STOREID); -- 매장 아이디 외래키
+        FOREIGN KEY (STORE_NO)
+            REFERENCES BACS_STORE(STORE_NO); -- 매장 아이디 외래키
 
 
 
@@ -222,18 +222,18 @@ CREATE SEQUENCE BACS_NOTICE_SEQ;
 CREATE SEQUENCE STORE_NOTICE_SEQ;
 
 
-create sequence USERID_SEQ;
-create sequence STOREID_SEQ;
-create sequence HOMEPAGEID_SEQ;
-create sequence KIOSKID_SEQ;
-create sequence CATEGORYID_SEQ;
-create sequence MENUID_SEQ;
-create sequence OPTIONID_SEQ;
-create sequence ORDERID_SEQ;
-create sequence RECIPEID_SEQ;
-create sequence ROID_SEQ;
-create sequence NOTICEID_SEQ;
-create sequence STORE_NOTICE_NOTICEID_SEQ;
+create sequence USER_NO_SEQ;
+create sequence STORE_NO_SEQ;
+create sequence HOMEPAGE_NO_SEQ;
+create sequence KIOSK_NO_SEQ;
+create sequence CATEGORY_NO_SEQ;
+create sequence MENU_NO_SEQ;
+create sequence OPTION_NO_SEQ;
+create sequence ORDER_NO_SEQ;
+create sequence RECIPE_NO_SEQ;
+create sequence RO_NO_SEQ;
+create sequence NOTICE_NO_SEQ;
+create sequence STORE_NOTICE_NOTICE_NO_SEQ;
 
 
 

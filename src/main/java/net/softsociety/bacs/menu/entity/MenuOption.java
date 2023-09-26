@@ -19,7 +19,7 @@ public class MenuOption {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "OPTIONID_SEQ")
-    @Column(name = "OPTIONID")
+    @Column(name = "OPTION_NO")
     private Long id;
 
     @Column(unique = true)
@@ -36,7 +36,7 @@ public class MenuOption {
     private long optionPrice;
 
     @ManyToOne
-    @JoinColumn(name = "menuid")
+    @JoinColumn(name = "menu_no")
     private Menu menu;
 
     @OneToMany(mappedBy = "option")

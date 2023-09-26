@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 public class StoreNotice {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "STORE_NOTICE_NOTICEID_SEQ")
-    @Column(name = "NOTICEID")
+    @Column(name = "NOTICE_NO")
     private Long id;
 
     @Column(unique = true)
@@ -42,7 +42,7 @@ public class StoreNotice {
     private LocalDateTime createdAt;
 
     @ManyToOne
-    @JoinColumn(name = "store_id")
+    @JoinColumn(name = "store_NO")
     private Store store;
 
     public void update(
