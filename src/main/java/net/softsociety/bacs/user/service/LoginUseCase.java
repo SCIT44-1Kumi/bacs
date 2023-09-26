@@ -9,4 +9,6 @@ public interface LoginUseCase {
     // Entity <-> DTO 변환을 컨트롤러 vs 서비스
     TokenPair login(String userId, String userPw); // 도메인, 범용적 타입 I/O
     String login(LoginRequestDto dto, HttpServletResponse response);
+
+
 }

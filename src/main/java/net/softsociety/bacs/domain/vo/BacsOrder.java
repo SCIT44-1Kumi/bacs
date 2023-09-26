@@ -1,19 +1,38 @@
 package net.softsociety.bacs.domain.vo;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-@Data
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BacsOrder {
+@Table(name = "BACS_ORDER")
+@Builder
+@Entity
+@EntityListeners(AuditingEntityListener.class)
+public class BacsOrder{
 
-  private String orderNum;
-  private String orderDate;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY) // 이 부분 추가
+  private Long orderId;
+
+  @Column(updatable = false, nullable = false)
   private String totalPrice;
+
+  @CreatedDate
+  @Column(updatable = false, nullable = false)
+  private LocalDateTime orderDate;
+
+  @Column(updatable = false, nullable = false)
   private String toGo;
+
+  @Column(updatable = false, nullable = false)
   private String storeId;
 
 
