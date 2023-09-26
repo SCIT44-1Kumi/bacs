@@ -1,0 +1,4 @@
+app:
+  jwt:
+    secret: ${jwt.secret:ZmE7ZGZqYXNkaWZmbmZhc2RiZmFkZmFzc3NzY3NzZnNhZGZhc2RmZmZpYXNkbmY7YXNka2ZhO3NkaXZhMGZzYWRmYXNkZjA5c2RmLT1kZmFzZGYtMGRmYXNkMGZhZmRhc2RmOXZuNHViYXNnCg==}
+    expire-in: 1_800_000 # [ms]
