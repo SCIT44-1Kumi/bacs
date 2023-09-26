@@ -4,7 +4,6 @@ package net.softsociety.bacs.store.entity;
 import lombok.*;
 import net.softsociety.bacs.category.entity.Category;
 import net.softsociety.bacs.kiosk.entity.Kiosk;
-import net.softsociety.bacs.menu.entity.Menu;
 import net.softsociety.bacs.storeNotice.entity.StoreNotice;
 import net.softsociety.bacs.user.entity.User;
 import org.springframework.data.annotation.CreatedDate;

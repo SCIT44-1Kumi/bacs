@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface BacsOrderRepository extends JpaRepository<BacsOrder, Long> {
 
-    @Query(value = "SELECT SUM(TOTAL_PRICE) AS daily_total_price FROM BACS_ORDER WHERE TRUNC(ORDER_DATE) = TRUNC(SYSDATE) and STORE_ID = :storeId", nativeQuery = true)
+    @Query(value = "SELECT SUM(TOTAL_PRICE) AS daily_total_price FROM BACS_ORDER WHERE TRUNC(ORDER_DATE) = TRUNC(SYSDATE) and STORE_ID = %:storeId%", nativeQuery = true)
     Optional<Integer> saleToday(@Param("storeId") String storeID);
 
 }

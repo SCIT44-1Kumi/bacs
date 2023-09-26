@@ -84,7 +84,7 @@ CREATE TABLE BACS_ORDER (
 );
 
 -- 주문상품
-CREATE TABLE BACS_ORDER_RECIPE (
+CREATE TABLE BACS_ORDER_RECIPE (o
     recipeNum NUMBER PRIMARY KEY , -- 주문 내역 번호
     menuAmount NUMBER DEFAULT 1 , -- 메뉴 수량
     recipePrice NUMBER DEFAULT 0 , -- 옵션 포함 메뉴 총 금액

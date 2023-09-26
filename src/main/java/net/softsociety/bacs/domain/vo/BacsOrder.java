@@ -11,17 +11,12 @@ import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @Table(name = "BACS_ORDER")
 @Builder
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class BacsOrder{
-
-  //bacsorder.builder()
-              //.totalprice
-  //        .build()
-
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY) // 이 부분 추가
