@@ -26,7 +26,7 @@ import java.util.List;
 public class Store {
     @Id
     @Column(name = "store_no")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "STOREID_SEQ")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "STORE_NO_SEQ")
     private Long id;
 
     @Column(updatable = false, unique = true)

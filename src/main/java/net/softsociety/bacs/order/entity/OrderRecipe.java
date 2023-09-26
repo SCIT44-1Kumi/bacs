@@ -20,7 +20,7 @@ public class OrderRecipe {
 
     @Id
     @Column(name = "RECIPE_NO")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "RECIPEID_SEQ")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "RECIPE_NO_SEQ")
     private Long id;
 
     @Column(nullable = false)

@@ -42,13 +42,14 @@ public class CategoryServiceImpl implements CategoryService
         // 카테고리 객체 생성
         Category category = Category.builder()
                 .categoryName(dto.categoryName())
+                .store(store)
                 .build();
-
-        // DB에 카테고리 등록
-        categoryRepository.save(category);
 
         // 매장에 카테고리 등록
         store.addCategory(category);
+
+        // DB에 카테고리 등록
+        categoryRepository.save(category);
         storeRepository.save(store);
      return true;
     }
