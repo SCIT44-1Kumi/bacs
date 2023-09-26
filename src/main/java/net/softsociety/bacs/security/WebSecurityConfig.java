@@ -30,8 +30,6 @@ public class WebSecurityConfig {
     @Autowired
     private DataSource dataSource;
 
-
-
     // 설정
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

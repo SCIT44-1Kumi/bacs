@@ -1,12 +1,12 @@
 package net.softsociety.bacs.notice.service;
 
 
-import net.softsociety.bacs.domain.dto.notice.CreateNoticeDTO;
-import net.softsociety.bacs.domain.dto.DeleteNoticeDTO;
-import net.softsociety.bacs.domain.dto.EditNoticeDTO;
-import net.softsociety.bacs.domain.vo.BacsNotice;
+import net.softsociety.bacs.notice.dto.CreateNoticeDTO;
+import net.softsociety.bacs.notice.dto.DeleteNoticeDTO;
+import net.softsociety.bacs.notice.dto.EditNoticeDTO;
+import net.softsociety.bacs.notice.entity.Notice;
 
-import java.util.ArrayList;
+import java.util.List;
 
 
 public interface NoticeService {
@@ -17,7 +17,7 @@ public interface NoticeService {
      * @return
      * 공지사항 생성
      */
-    int create(CreateNoticeDTO data);
+    void create(CreateNoticeDTO data);
 
     /**
      * 공지사항 생성
@@ -25,16 +25,16 @@ public interface NoticeService {
      * @return
      */
 
-    int edit(EditNoticeDTO data);
+    void edit(EditNoticeDTO data);
 
     /**
      * 공지사항 삭제
      * @param data
      * @return
      */
-    int delete(DeleteNoticeDTO data);
+    void delete(DeleteNoticeDTO data);
 
-    ArrayList<BacsNotice> read();
+    List<Notice> read();
 
-    ArrayList<BacsNotice> readOne(int noticeNum);
+    Notice readOne(int noticeNum);
 }

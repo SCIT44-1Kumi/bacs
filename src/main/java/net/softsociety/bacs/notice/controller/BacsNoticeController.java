@@ -1,34 +1,34 @@
 package net.softsociety.bacs.notice.controller;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.softsociety.bacs.domain.dto.notice.CreateNoticeDTO;
-import net.softsociety.bacs.domain.dto.DeleteNoticeDTO;
-import net.softsociety.bacs.domain.dto.EditNoticeDTO;
-import net.softsociety.bacs.domain.vo.BacsNotice;
+import net.softsociety.bacs.notice.dto.CreateNoticeDTO;
+import net.softsociety.bacs.notice.dto.DeleteNoticeDTO;
+import net.softsociety.bacs.notice.dto.EditNoticeDTO;
+import net.softsociety.bacs.notice.entity.Notice;
 import net.softsociety.bacs.notice.service.NoticeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import javax.validation.Valid;
+import java.util.List;
 
 
 @RestController
 @Slf4j
 @RequestMapping("notice")
+@RequiredArgsConstructor
 public class BacsNoticeController {
 
-    @Autowired
-    NoticeService service;
+    private final NoticeService service;
 
     /**
      * 전체 공지 생성
      * @param data
      */
     @PostMapping("create")
-    public void create(@RequestBody CreateNoticeDTO data){
-
-        log.debug("{}",data);
-        service.create(data);
+    public void create(@RequestBody @Valid CreateNoticeDTO dto){
+        log.debug("{}",dto);
+        service.create(dto);
     }
 
     /**
@@ -36,9 +36,9 @@ public class BacsNoticeController {
      * @param data
      */
     @PostMapping("delete")
-    public void delete(@RequestBody DeleteNoticeDTO data){
-        log.debug("{}",data);
-        service.delete(data);
+    public void delete(@RequestBody @Valid DeleteNoticeDTO dto){
+        log.debug("{}",dto);
+        service.delete(dto);
     }
 
     /**
@@ -46,7 +46,7 @@ public class BacsNoticeController {
      * @param data
      */
     @PostMapping("edit")
-    public void edit(@RequestBody EditNoticeDTO data){
+    public void edit(@RequestBody @Valid EditNoticeDTO data){
         log.debug("{}", data);
         service.edit(data);
     }
@@ -57,9 +57,8 @@ public class BacsNoticeController {
      */
 
     @GetMapping("read")
-    public ArrayList<BacsNotice> read(){
-
-        ArrayList<BacsNotice> result = service.read();
+    public List<Notice> read(){
+        List<Notice> result = service.read();
         log.debug("** result: {}", result);
         return result;
     }
@@ -70,10 +69,9 @@ public class BacsNoticeController {
      * @return
      */
     @GetMapping("readone/{noticeNum}")
-    public ArrayList<BacsNotice> readOne(@PathVariable("noticeNum") int noticeNum) {
+    public Notice readOne(@PathVariable("noticeNum") int noticeNum) {
         log.debug("{}", noticeNum);
-        ArrayList<BacsNotice> notice = service.readOne(noticeNum);
-        return notice;
+        return service.readOne(noticeNum);
     }
 
     // TODO: 회원 차단:수정상한테 넘어감

@@ -1,32 +1,31 @@
 package net.softsociety.bacs.menu.service;
 
-import net.softsociety.bacs.domain.dto.menu.DeleteMenuDTO;
-import net.softsociety.bacs.domain.dto.menu.DeleteMenuOptionDTO;
-import net.softsociety.bacs.domain.dto.menu.InsertMenuDTO;
+import net.softsociety.bacs.menu.dto.*;
 import net.softsociety.bacs.domain.vo.BacsMenu;
 import net.softsociety.bacs.domain.vo.BacsMenuOption;
+import net.softsociety.bacs.menu.entity.Menu;
+import net.softsociety.bacs.menu.entity.MenuOption;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface MenuService {
 
-    boolean createMenu(InsertMenuDTO data);
+    void createMenu(String storeId, InsertMenuDTO data);
 
     //메뉴 삭제
-    public int deleteMenu(DeleteMenuDTO data);
+    public void deleteMenu(String storeId, DeleteMenuDTO data);
 
     //메뉴 옵션 삭제
-    public int deleteMenuOption(DeleteMenuOptionDTO data);
+    public void deleteMenuOption(DeleteMenuOptionDTO data);
 
     //메뉴 수정
-    public int updateMenu(BacsMenu data);
+    public void updateMenu(String storeId,  UpdateMenuDTO data);
 
     //메뉴 옵션 수정
-    public int updateMenuOption(BacsMenuOption data);
+    public void updateMenuOption(UpdateMenuOptionDTO dto);
 
     //카테고리별 메뉴 리스트
-    ArrayList<BacsMenu> selectMenuList(BacsMenu bacsMenu);
-
-    //등록된 메뉴 리스트
-    ArrayList<BacsMenu> menuList(String storeId);
+    List<Menu> selectMenuList(String storeId, GetMenusDTO dto);
 }
