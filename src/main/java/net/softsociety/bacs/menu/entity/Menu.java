@@ -21,33 +21,34 @@ import java.util.List;
 public class Menu {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "MENUID_SEQ")
+    @Column(name = "MENUID")
     private Long id;
 
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BACS_MENU_SEQ")
-    @Column(unique = true, name = "menuNum")
+    @Column(unique = true)
     private int menuNum;
 
-    @Column(nullable = false, name = "menuName")
+    @Column(nullable = false)
     private String menuName;
 
-    @Column(nullable = false, name = "menuPrice")
+    @Column(nullable = false)
     private long menuPrice;
 
-    @Column(name = "menuImg")
+    @Column
     @ColumnDefault("")
     private String menuImg;
 
-    @Column(name = "menuDesc")
+    @Column
     @ColumnDefault("")
     private String menuDesc;
 
     @CreatedDate
-    @Column(nullable = false, name = "createdAt")
+    @Column(nullable = false)
     private LocalDateTime createdAt;
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "categoryid")
     private Category category;
 
     @OneToMany(mappedBy = "menu")

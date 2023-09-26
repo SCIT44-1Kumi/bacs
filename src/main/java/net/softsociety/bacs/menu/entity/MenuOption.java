@@ -36,7 +36,7 @@ public class MenuOption {
     private long optionPrice;
 
     @ManyToOne
-    @JoinColumn(name = "menu_id")
+    @JoinColumn(name = "menuid")
     private Menu menu;
 
     @OneToMany(mappedBy = "option")

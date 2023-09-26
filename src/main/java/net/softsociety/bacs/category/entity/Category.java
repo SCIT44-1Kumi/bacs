@@ -26,25 +26,22 @@ public class Category {
     private Long id;
 
     @Column(unique = true)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BACS_CATEGORY_SEQ")
     private int categoryNum;
 
     @Column(nullable = false)
     private String categoryName;
 
-    @ManyToOne()
-    @JoinColumn(name = "store_id")
-    private Store store;
-
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
+    @ManyToOne()
+    @JoinColumn(name = "storeid")
+    private Store store;
+
     @OneToMany(mappedBy = "category")
     private List<Menu> menus = new ArrayList<>();
-
-
-
 
     public void update(String categoryName) {
         this.categoryName = categoryName;

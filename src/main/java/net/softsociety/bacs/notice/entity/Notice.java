@@ -41,7 +41,7 @@ public class Notice {
     private String createdAt;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userid")
     private User user;
 
     public void update(

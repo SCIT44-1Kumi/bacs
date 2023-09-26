@@ -29,10 +29,10 @@ public class RecipeOption {
     private String roAmount;
 
     @ManyToOne
-    @JoinColumn(name = "recipe_id")
+    @JoinColumn(name = "recipeid")
     private OrderRecipe orderRecipe;
 
     @ManyToOne
-    @JoinColumn(name = "option_id")
+    @JoinColumn(name = "optionid")
     private MenuOption option;
 }

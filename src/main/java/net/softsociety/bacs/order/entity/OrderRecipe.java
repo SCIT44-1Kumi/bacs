@@ -36,11 +36,11 @@ public class OrderRecipe {
     private int recipePrice;
 
     @ManyToOne
-    @JoinColumn(name = "menu_id")
+    @JoinColumn(name = "menuid")
     private Menu menu;
 
     @ManyToOne
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "orderid")
     private Order order;
 
     @OneToMany(mappedBy = "orderRecipe")

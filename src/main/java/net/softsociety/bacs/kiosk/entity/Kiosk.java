@@ -27,7 +27,7 @@ public class Kiosk {
     private String storeCode;
 
     @ManyToOne
-    @JoinColumn(name = "store_id")
+    @JoinColumn(name = "storeid")
     private Store store;
 
     public void update(

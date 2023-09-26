@@ -42,7 +42,7 @@ public class Order {
     private LocalDateTime orderDate;
 
     @ManyToOne
-    @JoinColumn(name = "store_id")
+    @JoinColumn(name = "storeid")
     private Store store;
 
     @OneToMany(mappedBy = "menu")

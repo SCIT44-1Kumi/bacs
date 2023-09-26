@@ -49,7 +49,7 @@ public class Store {
     private LocalDateTime createdAt;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userid")
     private User user;
 
     @OneToMany(mappedBy = "store")
