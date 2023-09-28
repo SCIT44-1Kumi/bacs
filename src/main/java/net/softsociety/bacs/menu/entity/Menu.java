@@ -33,7 +33,7 @@ public class Menu {
     private String menuName;
 
     @Column(nullable = false)
-    private long menuPrice;
+    private int menuPrice;
 
     @Column
     @ColumnDefault("")
@@ -48,11 +48,15 @@ public class Menu {
     private LocalDateTime createdAt;
 
     @ManyToOne
-    @JoinColumn(name = "categoryid")
+    @JoinColumn(name = "category_no")
     private Category category;
 
     @OneToMany(mappedBy = "menu")
     private List<MenuOption> menuOptions = new ArrayList<>();
+
+    public void addMenuOptions(List<MenuOption> options) {
+        this.menuOptions = options;
+    }
 
     public void addMenuOption(MenuOption menuOption) {
         this.menuOptions.add(menuOption);
@@ -64,7 +68,7 @@ public class Menu {
 
     public void update(
             String menuName,
-            long menuPrice,
+            int menuPrice,
             String menuImg,
             String menuDesc,
             Category category_id

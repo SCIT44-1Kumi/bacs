@@ -2,12 +2,6 @@ package net.softsociety.bacs.menu.dto;
 
 import lombok.Builder;
 
-
-
-
-import net.softsociety.bacs.menu.entity.Menu;
-import net.softsociety.bacs.menu.entity.MenuOption;
-
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 
@@ -16,9 +10,15 @@ public record InsertMenuDTO(
         @NotBlank
         int categoryNum,
         @NotBlank
-        Menu menu,
+        String menuName,
         @NotBlank
-        ArrayList<MenuOption> options
+        int menuPrice,
+
+        String menuImg,
+
+        String menuDesc,
+        @NotBlank
+        ArrayList<InsertMenuOptionDTO> options
 ) {}
 
 

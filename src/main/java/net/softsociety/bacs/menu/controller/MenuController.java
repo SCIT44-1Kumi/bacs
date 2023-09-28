@@ -4,19 +4,13 @@ package net.softsociety.bacs.menu.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.softsociety.bacs.menu.dto.*;
-
-
-
-import net.softsociety.bacs.category.service.CategoryService;
 import net.softsociety.bacs.menu.entity.Menu;
 import net.softsociety.bacs.menu.service.MenuService;
 
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
 @RestController
@@ -27,8 +21,6 @@ public class MenuController
 {
 
     private final MenuService menuService;
-
-    private final CategoryService categoryService;
 
     @PostMapping("create")
     public void createMenu(@PathVariable(name = "storeId") String storeId, @RequestBody @Valid InsertMenuDTO data){

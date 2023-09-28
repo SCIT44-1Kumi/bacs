@@ -42,25 +42,27 @@ public class MenuServiceImpl implements MenuService {
         Category category = categoryRepository.findByCategoryNumAndStore(data.categoryNum(), store)
                 .orElseThrow(CategoryErrorCode.CATEGORY_NULL::defaultException);
 
-        Menu menu = menuRepository.save(data.menu());
+        Menu menu = Menu.builder()
+                .menuName(data.menuName())
+                .menuPrice(data.menuPrice())
+                .menuImg(data.menuImg())
+                .menuDesc(data.menuDesc())
+                .category(category)
+                .build();
+
+        List<MenuOption> options = data.options().parallelStream()
+                .map(optionDto -> MenuOption.builder()
+                        .optionName(optionDto.optionName())
+                        .optionPrice(optionDto.optionPrice())
+                        .optionValue(optionDto.optionValue())
+                        .menu(menu)
+                        .build())
+                .toList();
+
+        menuOptionRepository.saveAll(options);
+        menu.addMenuOptions(options);
+        menuRepository.save(menu);
         category.addMenu(menu);
-        List<MenuOption> newOptions = menuOptionRepository.saveAll(data.options());
-        for(MenuOption option : newOptions) {
-            menu.addMenuOption(option);
-        }
-//
-//
-//        ArrayList<MenuOption> options = data.options();
-//
-////        menu.setCategoryNum(data.categoryNum());
-////        int n = dao.createMenu(menu);
-//        log.debug("=======메뉴=======: {}, {}", n, menu);
-//        for(BacsMenuOption option : options) {
-//            option.setMenuNum(menu.getMenuNum());
-//            log.debug("{}", option);
-//        }
-//        int m = dao.createOptions(options);
-//        return n != 0;
     }
 
     /**

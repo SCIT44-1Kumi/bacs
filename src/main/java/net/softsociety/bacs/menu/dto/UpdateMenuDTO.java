@@ -12,7 +12,7 @@ public record UpdateMenuDTO(
         @NotBlank
         String menuName,
         @NotBlank
-        long menuPrice,
+        int menuPrice,
         @NotBlank
         String menuImg,
         @NotBlank

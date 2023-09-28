@@ -42,6 +42,10 @@ public class MenuOption {
     @OneToMany(mappedBy = "option")
     private List<RecipeOption> recipeOptions;
 
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+
     public void addRecipeOption(RecipeOption recipeOption) {
         this.recipeOptions.add(recipeOption);
     }
