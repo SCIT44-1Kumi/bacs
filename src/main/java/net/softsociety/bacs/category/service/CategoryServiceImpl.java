@@ -45,11 +45,11 @@ public class CategoryServiceImpl implements CategoryService
                 .store(store)
                 .build();
 
-        // 매장에 카테고리 등록
-        store.addCategory(category);
 
         // DB에 카테고리 등록
         categoryRepository.save(category);
+        // 매장에 카테고리 등록
+        store.addCategory(category);
         storeRepository.save(store);
      return true;
     }
