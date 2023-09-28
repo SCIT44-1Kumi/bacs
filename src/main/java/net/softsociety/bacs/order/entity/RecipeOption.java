@@ -26,13 +26,21 @@ public class RecipeOption {
 
     @Column(nullable = false)
     @ColumnDefault("1")
-    private String roAmount;
+    private int roAmount;
+
+    @Column(nullable = false)
+    @ColumnDefault("0")
+    private int roPrice;
+
+    @ManyToOne
+    @JoinColumn(name = "option_no")
+    private MenuOption option;
 
     @ManyToOne
     @JoinColumn(name = "recipe_no")
     private OrderRecipe orderRecipe;
 
-    @ManyToOne
-    @JoinColumn(name = "option_no")
-    private MenuOption option;
+    public void setOrderRecipe(OrderRecipe orderRecipe) {
+        this.orderRecipe = orderRecipe;
+    }
 }

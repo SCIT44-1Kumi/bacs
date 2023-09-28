@@ -30,7 +30,6 @@ public class Order {
     private String orderNum;
 
     @Column(updatable = false,nullable = false)
-    @ColumnDefault("0")
     private long totalPrice;
 
     @Column(updatable = false, nullable = false)
@@ -45,6 +44,7 @@ public class Order {
     @JoinColumn(name = "store_no")
     private Store store;
 
+    @Builder.Default
     @OneToMany(mappedBy = "menu")
     private List<OrderRecipe> orderRecipes = new ArrayList<>();
 
@@ -53,5 +53,15 @@ public class Order {
     }
     public void removeOrderRecipes(OrderRecipe orderRecipe) {
         this.orderRecipes.remove(orderRecipe);
+    }
+
+    public void setTotalPrice(List<OrderRecipe> orderRecipes) {
+        // stream() 사용
+        // List.stream() : 스트림객체
+        //  .mapToInt(클래스::클래스 내부 함수) : IntStream 객체 상태, 리스트로부터 int값을 반환해 새로운 List<int>를 반환
+        //  .sum() : 위 IntStream으로부터 받은 int들을 전부 더한 값을 return
+        this.totalPrice = this.orderRecipes.stream()
+                .mapToInt(OrderRecipe::getRecipePrice)
+                .sum();
     }
 }

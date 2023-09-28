@@ -33,7 +33,7 @@ public class MenuOption {
     private String optionValue;
 
     @Column(nullable = false)
-    private long optionPrice;
+    private int optionPrice;
 
     @ManyToOne
     @JoinColumn(name = "menu_no")
@@ -52,7 +52,7 @@ public class MenuOption {
     public void update(
             String optionName,
             String optionValue,
-            long optionPrice,
+            int optionPrice,
             Menu menu_id
     ) {
         this.optionName = optionName;

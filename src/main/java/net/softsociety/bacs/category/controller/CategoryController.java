@@ -6,9 +6,7 @@ import net.softsociety.bacs.category.dto.CreateCategoryDTO;
 import net.softsociety.bacs.category.dto.UpdateCategoryDTO;
 import net.softsociety.bacs.category.dto.DeleteCategoryDTO;
 import net.softsociety.bacs.category.entity.Category;
-import net.softsociety.bacs.domain.vo.BacsCategory;
 import net.softsociety.bacs.category.service.CategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

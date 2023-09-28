@@ -14,7 +14,7 @@ public record UpdateMenuOptionDTO(
         @NotBlank
         String optionValue,
         @NotBlank
-        long optionPrice,
+        int optionPrice,
         @NotBlank
         Menu menu_id
 ) {}
