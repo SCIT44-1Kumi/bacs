@@ -23,10 +23,6 @@ public class StoreNotice {
     @Column(name = "NOTICE_NO")
     private Long id;
 
-    @Column(unique = true)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "STORE_NOTICE_SEQ")
-    private int noticeNum;
-
     @Column(nullable = false)
     private String noticeTitle;
 

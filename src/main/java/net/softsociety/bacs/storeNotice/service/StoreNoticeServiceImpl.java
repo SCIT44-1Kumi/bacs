@@ -14,7 +14,6 @@ import net.softsociety.bacs.storeNotice.exception.StoreNoticeErrorCode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -52,7 +51,7 @@ public class StoreNoticeServiceImpl implements StoreNoticeService
      */
     @Override
     public void updateStoreNotice(String storeId, UpdateStoreNoticeDTO data) {
-        StoreNotice storeNotice = storeNoticeRepository.findByNoticeNum(data.noticeNum())
+        StoreNotice storeNotice = storeNoticeRepository.findById(data.noticeNo())
                 .orElseThrow(StoreNoticeErrorCode.STORE_NOTICE_NULL::defaultException);
 
         Store store = storeRepository.findByStoreId(storeId)
@@ -69,7 +68,7 @@ public class StoreNoticeServiceImpl implements StoreNoticeService
      */
     @Override
     public void deleteStoreNotice(String storeId, DeleteStoreNoticeDTO data) {
-        StoreNotice storeNotice = storeNoticeRepository.findByNoticeNum(data.noticeNum())
+        StoreNotice storeNotice = storeNoticeRepository.findById(data.noticeNo())
                 .orElseThrow(StoreNoticeErrorCode.STORE_NOTICE_NULL::defaultException);
 
         Store store = storeRepository.findByStoreId(storeId)
@@ -97,8 +96,8 @@ public class StoreNoticeServiceImpl implements StoreNoticeService
      * @param noticeNum
      */
     @Override
-    public StoreNotice readStoreNotice(int noticeNum) {
-        return storeNoticeRepository.findByNoticeNum(noticeNum)
+    public StoreNotice readStoreNotice(long noticeNo) {
+        return storeNoticeRepository.findById(noticeNo)
                 .orElseThrow(StoreNoticeErrorCode.STORE_NOTICE_NULL::defaultException);
     }
 

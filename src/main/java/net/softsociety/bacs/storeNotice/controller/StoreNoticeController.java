@@ -74,12 +74,12 @@ public class StoreNoticeController {
      * 매장 공지 읽기
      * storeNum 받아와서 공지 읽기
      *
-     * @param noticeNum
+     * @param noticeNo
      */
     @GetMapping("ReadStoreNotice/{noticeNum}")
-    public StoreNotice readStoreNotice(@PathVariable(name = "storeId") String storeId, @PathVariable int noticeNum) {
-        log.debug("글번호: {}", noticeNum);
-        return service.readStoreNotice(noticeNum);
+    public StoreNotice readStoreNotice(@PathVariable(name = "storeId") String storeId, @PathVariable long noticeNo) {
+        log.debug("글번호: {}", noticeNo);
+        return service.readStoreNotice(noticeNo);
     }
 
 

@@ -4,7 +4,7 @@ package net.softsociety.bacs.menu.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.softsociety.bacs.menu.dto.*;
-import net.softsociety.bacs.menu.entity.Menu;
+import net.softsociety.bacs.menu.entity.menu.Menu;
 import net.softsociety.bacs.menu.service.MenuService;
 
 import org.springframework.web.bind.annotation.*;

@@ -8,5 +8,5 @@ import javax.validation.constraints.NotBlank;
 @Builder
 public record DeleteStoreNoticeDTO(
         @NotBlank
-        int noticeNum
+        long noticeNo
 ) {}

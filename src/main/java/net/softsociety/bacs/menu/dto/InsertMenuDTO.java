@@ -3,21 +3,22 @@ package net.softsociety.bacs.menu.dto;
 import lombok.Builder;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 
 @Builder
 public record InsertMenuDTO(
-        @NotBlank
-        int categoryNum,
+        @NotNull
+        long categoryNo,
         @NotBlank
         String menuName,
-        @NotBlank
+        @NotNull
         int menuPrice,
 
         String menuImg,
 
         String menuDesc,
-        @NotBlank
+        @NotNull
         ArrayList<InsertMenuOptionDTO> options
 ) {}
 

@@ -8,5 +8,5 @@ import javax.validation.constraints.NotBlank;
 @Builder
 public record DeleteCategoryDTO(
         @NotBlank
-        int categoryNum
+        long categoryNo
 ) {}

@@ -19,11 +19,8 @@ public class Homepage {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "HOMEPAGE_NO_SEQ")
     @Column(name = "HOMEPAGE_NO")
     private Long id;
-    @Column(unique = true)
-    private String homepageNum;
 
     @Column(nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BACS_HOMEPAGE_SEQ")
     private String templateNum;
 
     @Column(nullable = false)

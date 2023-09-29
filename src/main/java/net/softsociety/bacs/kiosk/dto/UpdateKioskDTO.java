@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 @Builder
 public record UpdateKioskDTO(
         @NotBlank
-        int kioskNum,
+        long kioskNo,
         @NotBlank
         String storeCode
 ) {

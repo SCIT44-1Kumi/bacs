@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 @Builder
 public record DeleteMenuOptionDTO(
         @NotBlank
-        int optionNum,
+        long optionNo,
         @NotBlank
-        int menuNum
+        long menuNo
 ) {}

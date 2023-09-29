@@ -36,5 +36,5 @@ public interface NoticeService {
 
     List<Notice> read();
 
-    Notice readOne(int noticeNum);
+    Notice readOne(long noticeNo);
 }

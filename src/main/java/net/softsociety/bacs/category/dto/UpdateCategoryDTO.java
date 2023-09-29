@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 @Builder
 public record UpdateCategoryDTO(
         @NotBlank
-        int categoryNum,
+        long categoryNo,
         @NotBlank
         String categoryName
 ) {}

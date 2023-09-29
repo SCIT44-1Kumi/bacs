@@ -1,7 +1,7 @@
 package net.softsociety.bacs.category.entity;
 
 import lombok.*;
-import net.softsociety.bacs.menu.entity.Menu;
+import net.softsociety.bacs.menu.entity.menu.Menu;
 import net.softsociety.bacs.store.entity.Store;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -23,10 +23,6 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "CATEGORY_NO_SEQ")
     private Long id;
 
-    @Column(unique = true)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BACS_CATEGORY_SEQ")
-    private int categoryNum;
-
     @Column(nullable = false)
     private String categoryName;
 
@@ -34,6 +30,7 @@ public class Category {
     @JoinColumn(name = "store_no")
     private Store store;
 
+    @Builder.Default
     @OneToMany(mappedBy = "category")
     private List<Menu> menus = new ArrayList<>();
 

@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 @Builder
 public record UpdateMenuDTO(
         @NotBlank
-        int menuNum,
+        long menuNo,
         @NotBlank
         String menuName,
         @NotBlank
@@ -18,6 +18,6 @@ public record UpdateMenuDTO(
         @NotBlank
         String menuDesc,
         @NotBlank
-        Category category_id
+        Category category
 ) {
 }

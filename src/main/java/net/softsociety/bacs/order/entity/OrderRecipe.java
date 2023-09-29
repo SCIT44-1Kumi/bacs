@@ -1,7 +1,7 @@
 package net.softsociety.bacs.order.entity;
 
 import lombok.*;
-import net.softsociety.bacs.menu.entity.Menu;
+import net.softsociety.bacs.menu.entity.menu.Menu;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -22,10 +22,6 @@ public class OrderRecipe {
     @Column(name = "RECIPE_NO")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "RECIPE_NO_SEQ")
     private Long id;
-
-    @Column(nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BACS_ORDER_RECIPE_SEQ")
-    private long recipeNum;
 
     @Column(nullable = false)
     @ColumnDefault("1")

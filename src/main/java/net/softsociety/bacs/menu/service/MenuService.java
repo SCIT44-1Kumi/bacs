@@ -3,7 +3,7 @@ package net.softsociety.bacs.menu.service;
 import net.softsociety.bacs.menu.dto.*;
 
 
-import net.softsociety.bacs.menu.entity.Menu;
+import net.softsociety.bacs.menu.entity.menu.Menu;
 
 
 

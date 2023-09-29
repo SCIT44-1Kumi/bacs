@@ -1,7 +1,6 @@
 package net.softsociety.bacs.order.dto;
 
 import lombok.Builder;
-import net.softsociety.bacs.menu.entity.MenuOption;
 
 import javax.validation.constraints.NotBlank;
 

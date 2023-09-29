@@ -8,5 +8,5 @@ import javax.validation.constraints.NotBlank;
 @Builder
 public record DeleteMenuDTO(
         @NotBlank
-        int menuNum
+        long menuNo
 ) {}

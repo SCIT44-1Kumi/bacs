@@ -25,10 +25,6 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "ORDER_NO_SEQ")
     private Long id;
 
-    @Column(updatable = false,unique = true)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BACS_ORDER_SEQ")
-    private String orderNum;
-
     @Column(updatable = false,nullable = false)
     private long totalPrice;
 

@@ -22,5 +22,5 @@ public interface StoreNoticeService {
     public List<StoreNotice> selectStoreNotice(String storeId);
 
     //매장 공지 읽기
-    public StoreNotice readStoreNotice(int noticeNum);
+    public StoreNotice readStoreNotice(long noticeNo);
 }

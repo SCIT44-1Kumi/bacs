@@ -10,5 +10,5 @@ public record DeleteNoticeDTO(
         @NotBlank
         String userId,
         @NotBlank
-        int noticeNum
+        long noticeNo
 ) {}

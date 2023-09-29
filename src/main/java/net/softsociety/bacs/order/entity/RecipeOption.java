@@ -1,7 +1,7 @@
 package net.softsociety.bacs.order.entity;
 
 import lombok.*;
-import net.softsociety.bacs.menu.entity.MenuOption;
+import net.softsociety.bacs.menu.entity.menuOption.MenuOption;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -20,9 +20,6 @@ public class RecipeOption {
     @Column(name = "RO_NO")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "RO_NO_SEQ")
     private Long id;
-
-    @Column(unique = true)
-    private String roNum;
 
     @Column(nullable = false)
     @ColumnDefault("1")

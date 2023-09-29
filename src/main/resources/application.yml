@@ -27,6 +27,7 @@ spring:
     password: ${db.password:hr}
 
   jpa:
+    database: oracle
     open-in-view: true
     hibernate:
       ddl-auto: none
@@ -34,6 +35,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
+        order_inserts: true
+        order_updates: true
     database-platform: org.hibernate.dialect.Oracle12cDialect
 
 

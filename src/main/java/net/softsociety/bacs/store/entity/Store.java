@@ -4,7 +4,6 @@ package net.softsociety.bacs.store.entity;
 import lombok.*;
 import net.softsociety.bacs.category.entity.Category;
 import net.softsociety.bacs.kiosk.entity.Kiosk;
-import net.softsociety.bacs.menu.entity.Menu;
 import net.softsociety.bacs.order.entity.Order;
 import net.softsociety.bacs.storeNotice.entity.StoreNotice;
 import net.softsociety.bacs.user.entity.User;
@@ -52,15 +51,19 @@ public class Store {
     @JoinColumn(name = "user_no")
     private User user;
 
+    @Builder.Default
     @OneToMany(mappedBy = "store")
     private List<Category> categories = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "store")
     private List<StoreNotice> storeNotices = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "store")
     private List<Kiosk> kiosks = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "store")
     private List<Order> orders = new ArrayList<>();
 

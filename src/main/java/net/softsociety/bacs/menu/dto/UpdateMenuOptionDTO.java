@@ -1,14 +1,14 @@
 package net.softsociety.bacs.menu.dto;
 
 import lombok.Builder;
-import net.softsociety.bacs.menu.entity.Menu;
+import net.softsociety.bacs.menu.entity.menu.Menu;
 
 import javax.validation.constraints.NotBlank;
 
 @Builder
 public record UpdateMenuOptionDTO(
         @NotBlank
-        int optionNum,
+        long optionNo,
         @NotBlank
         String optionName,
         @NotBlank
@@ -16,5 +16,5 @@ public record UpdateMenuOptionDTO(
         @NotBlank
         int optionPrice,
         @NotBlank
-        Menu menu_id
+        Menu menu
 ) {}

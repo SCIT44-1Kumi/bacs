@@ -3,6 +3,7 @@ package net.softsociety.bacs.menu.dto;
 import lombok.Builder;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Builder
 public record InsertMenuOptionDTO(
@@ -10,7 +11,7 @@ public record InsertMenuOptionDTO(
         String optionName,
         @NotBlank
         String optionValue,
-        @NotBlank
+        @NotNull
         int optionPrice
 ) {
 }
