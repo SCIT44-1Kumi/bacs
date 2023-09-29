@@ -76,8 +76,8 @@ public class StoreNoticeController {
      *
      * @param noticeNo
      */
-    @GetMapping("ReadStoreNotice/{noticeNum}")
-    public StoreNotice readStoreNotice(@PathVariable(name = "storeId") String storeId, @PathVariable long noticeNo) {
+    @GetMapping("ReadStoreNotice/{noticeNo}")
+    public StoreNotice readStoreNotice(@PathVariable(name = "storeId") String storeId, @PathVariable(name = "noticeNo") long noticeNo) {
         log.debug("글번호: {}", noticeNo);
         return service.readStoreNotice(noticeNo);
     }

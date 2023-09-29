@@ -2,7 +2,6 @@ package net.softsociety.bacs.storeNotice.entity;
 
 import lombok.*;
 import net.softsociety.bacs.store.entity.Store;
-import net.softsociety.bacs.user.entity.User;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;

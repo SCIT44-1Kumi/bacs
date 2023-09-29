@@ -55,15 +55,12 @@ public class MenuServiceImpl implements MenuService {
         category.addMenu(menu);
 
         List<MenuOption> options = data.options().stream()
-            .map(optionDto -> {
-                MenuOption option = MenuOption.builder()
-                        .optionName(optionDto.optionName())
-                        .optionValue(optionDto.optionValue())
-                        .optionPrice(optionDto.optionPrice())
-                        .menu(menu)
-                        .build();
-                return option;
-            })
+            .map(optionDto -> MenuOption.builder()
+                    .optionName(optionDto.optionName())
+                    .optionValue(optionDto.optionValue())
+                    .optionPrice(optionDto.optionPrice())
+                    .menu(menu)
+                    .build())
             .collect(Collectors.toList());
         log.debug("---------options: {}", options);
         menuOptionRepository.saveAll(options);

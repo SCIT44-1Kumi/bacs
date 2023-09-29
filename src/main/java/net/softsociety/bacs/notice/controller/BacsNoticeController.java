@@ -23,7 +23,7 @@ public class BacsNoticeController {
 
     /**
      * 전체 공지 생성
-     * @param data
+     * @param dto
      */
     @PostMapping("create")
     public void create(@RequestBody @Valid CreateNoticeDTO dto){
@@ -33,7 +33,7 @@ public class BacsNoticeController {
 
     /**
      * 공지 삭제
-     * @param data
+     * @param dto
      */
     @PostMapping("delete")
     public void delete(@RequestBody @Valid DeleteNoticeDTO dto){

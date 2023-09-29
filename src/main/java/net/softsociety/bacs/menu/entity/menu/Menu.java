@@ -3,7 +3,6 @@ package net.softsociety.bacs.menu.entity.menu;
 import lombok.*;
 import net.softsociety.bacs.category.entity.Category;
 import net.softsociety.bacs.menu.entity.menuOption.MenuOption;
-import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;

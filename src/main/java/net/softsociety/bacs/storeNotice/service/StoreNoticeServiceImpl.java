@@ -93,7 +93,7 @@ public class StoreNoticeServiceImpl implements StoreNoticeService
 
     /**
      * 매장 공지 읽기
-     * @param noticeNum
+     * @param noticeNo
      */
     @Override
     public StoreNotice readStoreNotice(long noticeNo) {
