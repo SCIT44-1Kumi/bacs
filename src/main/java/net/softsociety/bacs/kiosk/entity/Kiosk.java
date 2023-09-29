@@ -20,14 +20,14 @@ public class Kiosk {
     private Long id;
 
     @Column(nullable = false)
-    private String storeCode;
+    private int storeCode;
 
     @ManyToOne
     @JoinColumn(name = "store_no")
     private Store store;
 
     public void update(
-            String storeCode
+            int storeCode
     ) {
         this.storeCode = storeCode;
     }

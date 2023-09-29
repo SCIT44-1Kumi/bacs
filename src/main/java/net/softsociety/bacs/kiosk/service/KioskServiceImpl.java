@@ -31,6 +31,7 @@ public class KioskServiceImpl implements KioskService {
 
         Kiosk kiosk = Kiosk.builder()
                 .storeCode(dto.storeCode())
+                .store(store)
                 .build();
         kioskRepository.save(kiosk);
         store.addKiosk(kiosk);
