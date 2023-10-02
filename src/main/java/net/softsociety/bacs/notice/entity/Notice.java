@@ -19,7 +19,7 @@ public class Notice {
 
     @Id
     @Column(name = "NOTICE_NO")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "NOTICE_NO_SEQ")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "NOTICEID_SEQ")
     private Long id;
 
     @Column(nullable = false)

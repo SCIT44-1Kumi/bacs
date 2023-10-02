@@ -19,8 +19,8 @@ import java.util.List;
 public class Menu {
 
     @Id
-    @Column(name = "MENU_NO")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "MENU_NO_SEQ")
+    @Column(name = "MENUID")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "MENUID_SEQ")
     private Long id;
 
     @Column(nullable = false)

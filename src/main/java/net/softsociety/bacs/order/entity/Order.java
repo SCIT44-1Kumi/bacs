@@ -22,7 +22,7 @@ public class Order {
 
     @Id
     @Column(name = "order_no")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "ORDER_NO_SEQ")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "ORDERID_SEQ")
     private Long id;
 
     @Column(updatable = false,nullable = false)

@@ -20,7 +20,7 @@ public class Category {
 
     @Id
     @Column(name = "CATEGORY_NO")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "CATEGORY_NO_SEQ")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "CATEGORYID_SEQ")
     private Long id;
 
     @Column(nullable = false)

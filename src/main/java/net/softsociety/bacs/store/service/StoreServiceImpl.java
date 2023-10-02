@@ -29,10 +29,6 @@ public class StoreServiceImpl implements StoreService {
             throw StoreErrorCode.STORE_CONFLICT.defaultException();
         }
 
-        User user = userRepository.findByUserId(createStoreDTO.userId())
-                .orElseThrow(AuthenticationErrorCode.USER_NULL::defaultException);
-
-
         // 매장 객체 생성
         Store newStore = Store.builder()
                 .storeId(createStoreDTO.storeId())
@@ -40,12 +36,13 @@ public class StoreServiceImpl implements StoreService {
                 .storePhone(createStoreDTO.storePhone())
                 .storeAddress(createStoreDTO.storeAddress())
                 .crNum(createStoreDTO.crNum())
-                .user(user)
                 .build();
         // db에 저장
+        User user = userRepository.findByUserId(createStoreDTO.userId())
+                .orElseThrow(AuthenticationErrorCode.USER_NULL::defaultException);
 
-        user.addStore(newStore);
         storeRepository.save(newStore);
+        user.addStore(newStore);
     }
 
     // TODO: 매장 삭제
