@@ -37,11 +37,14 @@ public class MenuServiceImpl implements MenuService {
      */
     @Override
     public void createMenu(String storeId, InsertMenuDTO data) {
+        // 매장 확인
         Store store = storeRepository.findByStoreId(storeId)
                 .orElseThrow(StoreErrorCode.STORE_NULL::defaultException);
+        // 카테고리 확인
         Category category = categoryRepository.findByIdAndStore(data.categoryNo(), store)
                 .orElseThrow(CategoryErrorCode.CATEGORY_NULL::defaultException);
 
+        //메뉴 객체 생성
         Menu menu = Menu.builder()
                 .menuName(data.menuName())
                 .menuPrice(data.menuPrice())
@@ -50,21 +53,27 @@ public class MenuServiceImpl implements MenuService {
                 .category(category)
                 .build();
 
+        // DB 저장
         menuRepository.save(menu);
         log.debug("------menu: {}", menu.getId());
-        category.addMenu(menu);
+        category.addMenu(menu); // 카테고리에 메뉴객체 추가
 
+        // 메뉴 옵션 객체를 리스트로 생성
+        // stream()사용해서 개별작업
         List<MenuOption> options = data.options().stream()
+                // 메뉴 옵션객체를 반복적으로 생성.
             .map(optionDto -> MenuOption.builder()
                     .optionName(optionDto.optionName())
                     .optionValue(optionDto.optionValue())
                     .optionPrice(optionDto.optionPrice())
                     .menu(menu)
                     .build())
+                // 만들어진 메뉴 객체를 모아서 List<MenuOption>으로 만들어줌
             .collect(Collectors.toList());
         log.debug("---------options: {}", options);
+        // 리스트를 통째로 넘겨서 DB에 저장
         menuOptionRepository.saveAll(options);
-        menu.addMenuOptions(options);
+        menu.addMenuOptions(options); // 메뉴에 메뉴 옵션 저장.
     }
 
     /**

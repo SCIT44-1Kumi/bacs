@@ -14,9 +14,7 @@ public record InsertMenuDTO(
         String menuName,
         @NotNull
         int menuPrice,
-
         String menuImg,
-
         String menuDesc,
         @NotNull
         ArrayList<InsertMenuOptionDTO> options
