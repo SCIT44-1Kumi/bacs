@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 public class StoreNotice {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "STORE_NOTICE_NOTICEID_SEQ")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "STORE_NOTICE_NOTICE_NO_SEQ")
     @Column(name = "NOTICE_NO")
     private Long id;
 
@@ -42,7 +42,7 @@ public class StoreNotice {
     private LocalDateTime createdAt;
 
     @ManyToOne
-    @JoinColumn(name = "store_NO")
+    @JoinColumn(name = "store_no")
     private Store store;
 
     public void update(

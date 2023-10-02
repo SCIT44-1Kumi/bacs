@@ -18,7 +18,7 @@ public class RecipeOption {
 
     @Id
     @Column(name = "RO_NO")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "ROID_SEQ")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "RO_NO_SEQ")
     private Long id;
 
     @Column(unique = true)

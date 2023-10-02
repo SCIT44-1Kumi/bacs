@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class Kiosk {
     @Id
     @Column(name = "KIOSK_NO")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "KIOSKID_SEQ")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "KIOSK_NO_SEQ")
     private Long id;
 
     @Column(unique = true)
