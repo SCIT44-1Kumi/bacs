@@ -14,7 +14,6 @@ public interface NoticeService {
     /**
      * 
      * @param data
-     * @return
      * 공지사항 생성
      */
     void create(CreateNoticeDTO data);
@@ -22,7 +21,6 @@ public interface NoticeService {
     /**
      * 공지사항 생성
      * @param data
-     * @return
      */
 
     void edit(EditNoticeDTO data);
@@ -30,11 +28,10 @@ public interface NoticeService {
     /**
      * 공지사항 삭제
      * @param data
-     * @return
      */
     void delete(DeleteNoticeDTO data);
 
     List<Notice> read();
 
-    Notice readOne(int noticeNum);
+    Notice readOne(long noticeNo);
 }

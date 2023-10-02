@@ -19,19 +19,15 @@ public class Kiosk {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "KIOSK_NO_SEQ")
     private Long id;
 
-    @Column(unique = true)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BACS_KIOSK_SEQ")
-    private int kioskNum;
-
     @Column(nullable = false)
-    private String storeCode;
+    private int storeCode;
 
     @ManyToOne
     @JoinColumn(name = "store_no")
     private Store store;
 
     public void update(
-            String storeCode
+            int storeCode
     ) {
         this.storeCode = storeCode;
     }

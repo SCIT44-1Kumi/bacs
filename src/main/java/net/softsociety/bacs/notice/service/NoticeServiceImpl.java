@@ -43,7 +43,7 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     public void delete(DeleteNoticeDTO data) {
-        Notice notice = noticeRepository.findByNoticeNum(data.noticeNum())
+        Notice notice = noticeRepository.findById(data.noticeNo())
                 .orElseThrow(NoticeErrorCode.NOTICE_NULL::defaultException);
 
         User user = userRepository.findByUserId(data.userId())
@@ -61,15 +61,15 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     public void edit(EditNoticeDTO data) {
-        Notice notice = noticeRepository.findByNoticeNum(data.noticeNum())
+        Notice notice = noticeRepository.findById(data.noticeNo())
                 .orElseThrow(NoticeErrorCode.NOTICE_NULL::defaultException);
 
         notice.update(data.noticeTitle(), data.noticeContents());
     }
 
     @Override
-    public Notice readOne(int noticeNum){
-        return noticeRepository.findByNoticeNum(noticeNum)
+    public Notice readOne(long noticeNo){
+        return noticeRepository.findById(noticeNo)
                 .orElseThrow(NoticeErrorCode.NOTICE_NULL::defaultException);
     }
 

@@ -1,13 +1,11 @@
-package net.softsociety.bacs.menu.entity;
+package net.softsociety.bacs.menu.entity.menu;
 
 import lombok.*;
 import net.softsociety.bacs.category.entity.Category;
-import org.hibernate.annotations.ColumnDefault;
-import org.springframework.data.annotation.CreatedDate;
+import net.softsociety.bacs.menu.entity.menuOption.MenuOption;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,34 +23,31 @@ public class Menu {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "MENU_NO_SEQ")
     private Long id;
 
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BACS_MENU_SEQ")
-    @Column(unique = true)
-    private int menuNum;
-
     @Column(nullable = false)
     private String menuName;
 
     @Column(nullable = false)
-    private long menuPrice;
+    private int menuPrice;
 
     @Column
-    @ColumnDefault("")
-    private String menuImg;
+    @Builder.Default
+    private String menuImg = "";
 
     @Column
-    @ColumnDefault("")
-    private String menuDesc;
-
-    @CreatedDate
-    @Column(nullable = false)
-    private LocalDateTime createdAt;
+    @Builder.Default
+    private String menuDesc = "";
 
     @ManyToOne
-    @JoinColumn(name = "categoryid")
+    @JoinColumn(name = "category_no")
     private Category category;
 
+    @Builder.Default
     @OneToMany(mappedBy = "menu")
     private List<MenuOption> menuOptions = new ArrayList<>();
+
+    public void addMenuOptions(List<MenuOption> options) {
+        this.menuOptions = options;
+    }
 
     public void addMenuOption(MenuOption menuOption) {
         this.menuOptions.add(menuOption);
@@ -64,7 +59,7 @@ public class Menu {
 
     public void update(
             String menuName,
-            long menuPrice,
+            int menuPrice,
             String menuImg,
             String menuDesc,
             Category category_id

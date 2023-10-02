@@ -1,7 +1,7 @@
 package net.softsociety.bacs.order.entity;
 
 import lombok.*;
-import net.softsociety.bacs.menu.entity.MenuOption;
+import net.softsociety.bacs.menu.entity.menuOption.MenuOption;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -21,18 +21,23 @@ public class RecipeOption {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "RO_NO_SEQ")
     private Long id;
 
-    @Column(unique = true)
-    private String roNum;
-
     @Column(nullable = false)
     @ColumnDefault("1")
-    private String roAmount;
+    private int roAmount;
+
+    @Column(nullable = false)
+    @ColumnDefault("0")
+    private int roPrice;
+
+    @ManyToOne
+    @JoinColumn(name = "option_no")
+    private MenuOption option;
 
     @ManyToOne
     @JoinColumn(name = "recipe_no")
     private OrderRecipe orderRecipe;
 
-    @ManyToOne
-    @JoinColumn(name = "option_no")
-    private MenuOption option;
+    public void setOrderRecipe(OrderRecipe orderRecipe) {
+        this.orderRecipe = orderRecipe;
+    }
 }

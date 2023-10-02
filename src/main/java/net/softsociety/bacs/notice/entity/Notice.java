@@ -23,10 +23,6 @@ public class Notice {
     private Long id;
 
     @Column(nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BACS_NOTICE_SEQ")
-    private int noticeNum;
-
-    @Column(nullable = false)
     private String noticeTitle;
 
     @Column(nullable = false)

@@ -2,7 +2,6 @@ package net.softsociety.bacs.store.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.softsociety.bacs.domain.vo.BacsStore;
 import net.softsociety.bacs.store.dto.CreateStoreDTO;
 import net.softsociety.bacs.store.entity.Store;
 import net.softsociety.bacs.store.entity.StoreRepository;
@@ -48,4 +47,8 @@ public class StoreServiceImpl implements StoreService {
         user.addStore(newStore);
         storeRepository.save(newStore);
     }
+
+    // TODO: 매장 삭제
+    // TODO: 매장 조회
+    // TODO: 매장 업데이트
 }

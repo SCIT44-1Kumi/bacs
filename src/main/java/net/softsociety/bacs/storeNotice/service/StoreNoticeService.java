@@ -10,17 +10,17 @@ import java.util.List;
 public interface StoreNoticeService {
 
     //매장 공지 작성
-    public void createStoreNotice(String storeId, CreateStoreNoticeDTO data);
+    void createStoreNotice(String storeId, CreateStoreNoticeDTO data);
 
     //매장 공지 수정
-    public void updateStoreNotice(String storeId, UpdateStoreNoticeDTO data);
+    void updateStoreNotice(String storeId, UpdateStoreNoticeDTO data);
 
     //매장 공지 삭제
-    public void deleteStoreNotice(String storeId, DeleteStoreNoticeDTO data);
+    void deleteStoreNotice(String storeId, DeleteStoreNoticeDTO data);
 
     //매장 공지 리스트
-    public List<StoreNotice> selectStoreNotice(String storeId);
+    List<StoreNotice> selectStoreNotice(String storeId);
 
     //매장 공지 읽기
-    public StoreNotice readStoreNotice(int noticeNum);
+    StoreNotice readStoreNotice(long noticeNo);
 }

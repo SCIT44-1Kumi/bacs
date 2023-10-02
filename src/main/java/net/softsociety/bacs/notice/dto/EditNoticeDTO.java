@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 @Builder
 public record EditNoticeDTO(
         @NotBlank
-        int noticeNum,
+        long noticeNo,
         @NotBlank
         String noticeTitle,
         @NotBlank

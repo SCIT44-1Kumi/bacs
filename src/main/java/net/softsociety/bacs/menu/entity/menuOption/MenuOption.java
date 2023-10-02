@@ -1,11 +1,14 @@
-package net.softsociety.bacs.menu.entity;
+package net.softsociety.bacs.menu.entity.menuOption;
 
 
 import lombok.*;
+import lombok.Builder.Default;
+import lombok.ToString.Exclude;
+import net.softsociety.bacs.menu.entity.menu.Menu;
 import net.softsociety.bacs.order.entity.RecipeOption;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,16 +18,13 @@ import java.util.List;
 @Getter
 @Builder
 @EntityListeners(AuditingEntityListener.class)
+@ToString
 public class MenuOption {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "OPTION_NO_SEQ")
     @Column(name = "OPTION_NO")
     private Long id;
-
-    @Column(unique = true)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BACS_MENU_OPTION_SEQ")
-    private int optionNum;
 
     @Column(nullable = false)
     private String optionName;
@@ -33,14 +33,24 @@ public class MenuOption {
     private String optionValue;
 
     @Column(nullable = false)
-    private long optionPrice;
+    private int optionPrice;
 
     @ManyToOne
     @JoinColumn(name = "menu_no")
     private Menu menu;
 
+    @Default
     @OneToMany(mappedBy = "option")
-    private List<RecipeOption> recipeOptions;
+    @Exclude
+    private List<RecipeOption> recipeOptions = new ArrayList<>();
+
+    public void setRecipeOptions(List<RecipeOption> recipeOptions) {
+        this.recipeOptions = recipeOptions;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
 
     public void addRecipeOption(RecipeOption recipeOption) {
         this.recipeOptions.add(recipeOption);
@@ -52,7 +62,7 @@ public class MenuOption {
     public void update(
             String optionName,
             String optionValue,
-            long optionPrice,
+            int optionPrice,
             Menu menu_id
     ) {
         this.optionName = optionName;

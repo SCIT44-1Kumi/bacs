@@ -31,6 +31,7 @@ public class KioskServiceImpl implements KioskService {
 
         Kiosk kiosk = Kiosk.builder()
                 .storeCode(dto.storeCode())
+                .store(store)
                 .build();
         kioskRepository.save(kiosk);
         store.addKiosk(kiosk);
@@ -41,7 +42,7 @@ public class KioskServiceImpl implements KioskService {
         Store store = storeRepository.findByStoreId(storeId)
                 .orElseThrow(StoreErrorCode.STORE_NULL::defaultException);
 
-        Kiosk kiosk = kioskRepository.findByKioskNum(dto.kioskNum())
+        Kiosk kiosk = kioskRepository.findById(dto.kioskNo())
                 .orElseThrow(KioskErrorCode.KIOSK_NULL::defaultException);
 
         kioskRepository.delete(kiosk);
@@ -51,7 +52,7 @@ public class KioskServiceImpl implements KioskService {
     @Override
     public void updateKiosk(String storeId, UpdateKioskDTO dto) {
         // TODO: 매장번호 검증 기능
-        Kiosk kiosk = kioskRepository.findByKioskNum(dto.kioskNum())
+        Kiosk kiosk = kioskRepository.findById(dto.kioskNo())
                 .orElseThrow(KioskErrorCode.KIOSK_NULL::defaultException);
 
         kiosk.update(dto.storeCode());
@@ -60,7 +61,7 @@ public class KioskServiceImpl implements KioskService {
     @Override
     public Kiosk getKiosk(GetKioskDTO dto) {
 
-        return kioskRepository.findByKioskNum(dto.kioskNum())
+        return kioskRepository.findById(dto.kioskNo())
                 .orElseThrow(KioskErrorCode.KIOSK_NULL::defaultException);
 
     }

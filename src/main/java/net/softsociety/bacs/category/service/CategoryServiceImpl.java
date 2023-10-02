@@ -42,11 +42,11 @@ public class CategoryServiceImpl implements CategoryService
         // 카테고리 객체 생성
         Category category = Category.builder()
                 .categoryName(dto.categoryName())
+                .store(store)
                 .build();
 
         // DB에 카테고리 등록
         categoryRepository.save(category);
-
         // 매장에 카테고리 등록
         store.addCategory(category);
         storeRepository.save(store);
@@ -61,7 +61,7 @@ public class CategoryServiceImpl implements CategoryService
                 .orElseThrow(StoreErrorCode.STORE_NULL::defaultException);
 
         Category category = categoryRepository
-                .findByCategoryNumAndStore(dto.categoryNum(), store)
+                .findByIdAndStore(dto.categoryNo(), store)
                 .orElseThrow(CategoryErrorCode.CATEGORY_NULL::defaultException);
         categoryRepository.delete(category);
     }
@@ -73,7 +73,7 @@ public class CategoryServiceImpl implements CategoryService
                 .orElseThrow(StoreErrorCode.STORE_NULL::defaultException);
 
         Category category = categoryRepository
-                .findByCategoryNumAndStore(dto.categoryNum(), store)
+                .findByIdAndStore(dto.categoryNo(), store)
                 .orElseThrow(CategoryErrorCode.CATEGORY_NULL::defaultException);
 
         category.update(dto.categoryName());
@@ -89,6 +89,6 @@ public class CategoryServiceImpl implements CategoryService
         Store store = storeRepository.findByStoreId(storeId)
                 .orElseThrow(StoreErrorCode.STORE_NULL::defaultException);
 
-        return categoryRepository.findByStore_id(store);
+        return categoryRepository.findAllByStore_id(store.getId());
     }
 }
