@@ -6,10 +6,10 @@ import net.softsociety.bacs.category.entity.Category;
 import net.softsociety.bacs.category.entity.CategoryRepository;
 import net.softsociety.bacs.category.exception.CategoryErrorCode;
 import net.softsociety.bacs.menu.dto.*;
-import net.softsociety.bacs.menu.entity.Menu;
-import net.softsociety.bacs.menu.entity.MenuOption;
-import net.softsociety.bacs.menu.entity.MenuOptionRepository;
-import net.softsociety.bacs.menu.entity.MenuRepository;
+import net.softsociety.bacs.menu.entity.menu.Menu;
+import net.softsociety.bacs.menu.entity.menuOption.MenuOption;
+import net.softsociety.bacs.menu.entity.menuOption.MenuOptionRepository;
+import net.softsociety.bacs.menu.entity.menu.MenuRepository;
 import net.softsociety.bacs.menu.exception.MenuErrorCode;
 import net.softsociety.bacs.store.entity.Store;
 import net.softsociety.bacs.store.entity.StoreRepository;
@@ -18,14 +18,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
-@Transactional
 @RequiredArgsConstructor
+@Transactional
 public class MenuServiceImpl implements MenuService {
 
-//    private final MenuDAO dao;
     private final StoreRepository storeRepository;
     private final CategoryRepository categoryRepository;
     private final MenuRepository menuRepository;
@@ -39,28 +39,32 @@ public class MenuServiceImpl implements MenuService {
     public void createMenu(String storeId, InsertMenuDTO data) {
         Store store = storeRepository.findByStoreId(storeId)
                 .orElseThrow(StoreErrorCode.STORE_NULL::defaultException);
-        Category category = categoryRepository.findByCategoryNumAndStore(data.categoryNum(), store)
+        Category category = categoryRepository.findByIdAndStore(data.categoryNo(), store)
                 .orElseThrow(CategoryErrorCode.CATEGORY_NULL::defaultException);
 
-        Menu menu = menuRepository.save(data.menu());
+        Menu menu = Menu.builder()
+                .menuName(data.menuName())
+                .menuPrice(data.menuPrice())
+                .menuImg(data.menuImg())
+                .menuDesc(data.menuDesc())
+                .category(category)
+                .build();
+
+        menuRepository.save(menu);
+        log.debug("------menu: {}", menu.getId());
         category.addMenu(menu);
-        List<MenuOption> newOptions = menuOptionRepository.saveAll(data.options());
-        for(MenuOption option : newOptions) {
-            menu.addMenuOption(option);
-        }
-//
-//
-//        ArrayList<MenuOption> options = data.options();
-//
-////        menu.setCategoryNum(data.categoryNum());
-////        int n = dao.createMenu(menu);
-//        log.debug("=======메뉴=======: {}, {}", n, menu);
-//        for(BacsMenuOption option : options) {
-//            option.setMenuNum(menu.getMenuNum());
-//            log.debug("{}", option);
-//        }
-//        int m = dao.createOptions(options);
-//        return n != 0;
+
+        List<MenuOption> options = data.options().stream()
+            .map(optionDto -> MenuOption.builder()
+                    .optionName(optionDto.optionName())
+                    .optionValue(optionDto.optionValue())
+                    .optionPrice(optionDto.optionPrice())
+                    .menu(menu)
+                    .build())
+            .collect(Collectors.toList());
+        log.debug("---------options: {}", options);
+        menuOptionRepository.saveAll(options);
+        menu.addMenuOptions(options);
     }
 
     /**
@@ -71,7 +75,7 @@ public class MenuServiceImpl implements MenuService {
      */
     @Override
     public void deleteMenu(String storeId, DeleteMenuDTO data) {
-        Menu menu = menuRepository.findByMenuNum(data.menuNum())
+        Menu menu = menuRepository.findById(data.menuNo())
                         .orElseThrow(MenuErrorCode.MENU_NULL::defaultException);
         menuRepository.delete(menu);
     }
@@ -83,7 +87,7 @@ public class MenuServiceImpl implements MenuService {
      */
     @Override
     public void deleteMenuOption(DeleteMenuOptionDTO data) {
-        MenuOption menuOption = menuOptionRepository.findByOptionNum(data.optionNum())
+        MenuOption menuOption = menuOptionRepository.findById(data.optionNo())
                 .orElseThrow(MenuErrorCode.MENU_OPTION_NULL::defaultException);
         menuOptionRepository.delete(menuOption);
     }
@@ -96,14 +100,14 @@ public class MenuServiceImpl implements MenuService {
      */
     @Override
     public void updateMenu(String storeId, UpdateMenuDTO dto) {
-        Menu menu = menuRepository.findByMenuNum(dto.menuNum())
+        Menu menu = menuRepository.findById(dto.menuNo())
                 .orElseThrow(MenuErrorCode.MENU_NULL::defaultException);
         menu.update(
                 dto.menuName(),
                 dto.menuPrice(),
                 dto.menuImg(),
                 dto.menuDesc(),
-                dto.category_id()
+                dto.category()
         );
     }
 
@@ -113,13 +117,13 @@ public class MenuServiceImpl implements MenuService {
      */
     @Override
     public void updateMenuOption(UpdateMenuOptionDTO dto) {
-        MenuOption menuOption = menuOptionRepository.findByOptionNum(dto.optionNum())
+        MenuOption menuOption = menuOptionRepository.findById(dto.optionNo())
                 .orElseThrow(MenuErrorCode.MENU_OPTION_NULL::defaultException);
         menuOption.update(
                 dto.optionName(),
                 dto.optionValue(),
                 dto.optionPrice(),
-                dto.menu_id()
+                dto.menu()
         );
     }
 
@@ -132,6 +136,6 @@ public class MenuServiceImpl implements MenuService {
      */
     @Override
     public List<Menu> selectMenuList(String storeId, GetMenusDTO dto) {
-        return menuRepository.findByCategory_id(dto.category());
+        return menuRepository.findAllByCategory(dto.category());
     }
 }

@@ -8,16 +8,16 @@ import javax.validation.constraints.NotBlank;
 @Builder
 public record UpdateMenuDTO(
         @NotBlank
-        int menuNum,
+        long menuNo,
         @NotBlank
         String menuName,
         @NotBlank
-        long menuPrice,
+        int menuPrice,
         @NotBlank
         String menuImg,
         @NotBlank
         String menuDesc,
         @NotBlank
-        Category category_id
+        Category category
 ) {
 }

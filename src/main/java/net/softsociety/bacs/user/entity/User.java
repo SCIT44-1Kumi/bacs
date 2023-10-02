@@ -49,9 +49,11 @@ public class User {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
+    @Builder.Default
     @OneToMany(mappedBy = "user")
     private List<Store> stores = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "user")
     private List<Notice> notices = new ArrayList<>();
 

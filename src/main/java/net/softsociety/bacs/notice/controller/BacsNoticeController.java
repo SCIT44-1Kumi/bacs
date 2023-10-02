@@ -23,7 +23,7 @@ public class BacsNoticeController {
 
     /**
      * 전체 공지 생성
-     * @param data
+     * @param dto
      */
     @PostMapping("create")
     public void create(@RequestBody @Valid CreateNoticeDTO dto){
@@ -33,7 +33,7 @@ public class BacsNoticeController {
 
     /**
      * 공지 삭제
-     * @param data
+     * @param dto
      */
     @PostMapping("delete")
     public void delete(@RequestBody @Valid DeleteNoticeDTO dto){
@@ -65,13 +65,13 @@ public class BacsNoticeController {
 
     /**
      * 공지 글 읽기
-     * @param noticeNum
+     * @param noticeNo
      * @return
      */
     @GetMapping("readone/{noticeNum}")
-    public Notice readOne(@PathVariable("noticeNum") int noticeNum) {
-        log.debug("{}", noticeNum);
-        return service.readOne(noticeNum);
+    public Notice readOne(@PathVariable("noticeNum") long noticeNo) {
+        log.debug("{}", noticeNo);
+        return service.readOne(noticeNo);
     }
 
     // TODO: 회원 차단:수정상한테 넘어감

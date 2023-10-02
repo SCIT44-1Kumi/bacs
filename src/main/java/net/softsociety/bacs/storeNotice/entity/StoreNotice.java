@@ -2,7 +2,6 @@ package net.softsociety.bacs.storeNotice.entity;
 
 import lombok.*;
 import net.softsociety.bacs.store.entity.Store;
-import net.softsociety.bacs.user.entity.User;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -22,10 +21,6 @@ public class StoreNotice {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "STORE_NOTICE_NOTICE_NO_SEQ")
     @Column(name = "NOTICE_NO")
     private Long id;
-
-    @Column(unique = true)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "STORE_NOTICE_SEQ")
-    private int noticeNum;
 
     @Column(nullable = false)
     private String noticeTitle;

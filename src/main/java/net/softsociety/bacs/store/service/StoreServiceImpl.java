@@ -2,7 +2,6 @@ package net.softsociety.bacs.store.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.softsociety.bacs.domain.vo.BacsStore;
 import net.softsociety.bacs.store.dto.CreateStoreDTO;
 import net.softsociety.bacs.store.entity.Store;
 import net.softsociety.bacs.store.entity.StoreRepository;

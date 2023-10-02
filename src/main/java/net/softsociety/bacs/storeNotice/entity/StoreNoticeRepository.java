@@ -7,6 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface StoreNoticeRepository extends JpaRepository<StoreNotice, Long> {
-    Optional<StoreNotice> findByNoticeNum(int noticeNum);
+    Optional<StoreNotice> findById(Long id);
     List<StoreNotice> findByStore(Store store);
 }
