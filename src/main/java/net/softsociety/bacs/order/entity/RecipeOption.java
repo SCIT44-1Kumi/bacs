@@ -14,6 +14,7 @@ import javax.persistence.*;
 @Getter
 @Builder
 @EntityListeners(AuditingEntityListener.class)
+@ToString
 public class RecipeOption {
 
     @Id
@@ -24,10 +25,6 @@ public class RecipeOption {
     @Column(nullable = false)
     @ColumnDefault("1")
     private int roAmount;
-
-    @Column(nullable = false)
-    @ColumnDefault("0")
-    private int roPrice;
 
     @ManyToOne
     @JoinColumn(name = "option_no")
