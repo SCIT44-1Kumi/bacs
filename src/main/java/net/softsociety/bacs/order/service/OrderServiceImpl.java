@@ -17,9 +17,10 @@ import net.softsociety.bacs.store.exception.StoreErrorCode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -57,6 +58,8 @@ public class OrderServiceImpl implements OrderService {
         log.debug("-------order: {}", order);
     }
 
+
+
     private OrderRecipe createOrderRecipe(RecipeDTO recipeDTO, Order order) {
         Menu menu = menuRepository.findById(recipeDTO.menu_no())
                 .orElseThrow(MenuErrorCode.MENU_NULL::defaultException);
@@ -90,4 +93,10 @@ public class OrderServiceImpl implements OrderService {
                 .orderRecipe(orderRecipe)
                 .build();
     }
+//확인후 해야함
+    //@Override
+   // public List<Order> orderList(String storeId){
+     //   List<Order> orderList = orderRepository.findByStoreId(storeId);
+       // return orderList;
+   // }
 }
