@@ -10,4 +10,5 @@ public interface StoreAdminService {
     Optional<Long> saleToday(SaleTodayDTO dto);
 
 
+    Optional<Long> salesWeek(SaleTodayDTO dto);
 }
