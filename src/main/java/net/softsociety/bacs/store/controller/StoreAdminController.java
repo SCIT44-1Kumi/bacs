@@ -3,6 +3,7 @@ package net.softsociety.bacs.store.controller;
 import lombok.extern.slf4j.Slf4j;
 import net.softsociety.bacs.order.entity.SalesWeekResult;
 import net.softsociety.bacs.store.dto.SaleTodayDTO;
+import net.softsociety.bacs.store.projection.SalesWeekResultProjection;
 import net.softsociety.bacs.store.service.StoreAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,9 +35,10 @@ public class StoreAdminController {
     }
 
     @PostMapping("salesWeek")
-    public Optional<SalesWeekResult> salesWeek(SaleTodayDTO dto){
-        log.debug("{}",dto);
+    public List<SalesWeekResultProjection> salesWeek(SaleTodayDTO dto){
+        log.debug("-----------dto:{}",dto);
         return service.salesWeek(dto);
+
     }
 
 }

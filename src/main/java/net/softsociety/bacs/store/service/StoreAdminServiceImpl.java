@@ -8,10 +8,12 @@ import net.softsociety.bacs.store.dto.SaleTodayDTO;
 import net.softsociety.bacs.store.entity.Store;
 import net.softsociety.bacs.store.entity.StoreRepository;
 import net.softsociety.bacs.store.exception.StoreErrorCode;
+import net.softsociety.bacs.store.projection.SalesWeekResultProjection;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,10 +36,15 @@ public class StoreAdminServiceImpl implements StoreAdminService {
     }
 
     @Override
-    public Optional<SalesWeekResult> salesWeek(SaleTodayDTO dto) {
+    public List<SalesWeekResultProjection> salesWeek(SaleTodayDTO dto) {
         Store store = storeRepository.findByStoreId(dto.storeId())
                 .orElseThrow(StoreErrorCode.STORE_NULL::defaultException);
+        List<SalesWeekResultProjection> result = orderRepository.salesWeek(store.getId());
 
-        return orderRepository.salesWeek(store.getId());
+        for(SalesWeekResultProjection data: result) {
+            log.debug("------------result:{}", data);
+        }
+
+        return result;
     }
 }
