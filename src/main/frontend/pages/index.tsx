@@ -21,7 +21,7 @@ export interface IUser {
 const Home = () => {
 	const { t } = useTranslation();
 	return (
-		<div>
+		<div className={`mainBackground flex flex-col justify-around`}>
 			<MainNavBar />
 			<MainImg />
 			<MainFooter />

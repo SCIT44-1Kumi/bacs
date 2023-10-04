@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -15,8 +16,8 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     Optional<Long> saleToday(Long id);
 
 
-    @Query(value = "SELECT TRUNC(ORDER_DATE) AS order_date, SUM(TOTAL_PRICE) AS daily_total_price FROM BACS_ORDER WHERE ORDER_DATE BETWEEN TRUNC(SYSDATE) -7 AND TRUNC(SYSDATE) -1 and STORE_NO = :id GROUP BY TRUNC(ORDER_DATE) ORDER BY TRUNC(ORDER_DATE)", nativeQuery = true)
-    Optional<Long> salesWeek(Long id);
+    @Query(value = "SELECT TRUNC(ORDER_DATE) AS order_date, CAST(SUM(TOTAL_PRICE) AS NUMBER) AS daily_total_price FROM BACS_ORDER WHERE ORDER_DATE BETWEEN TRUNC(SYSDATE) -7 AND TRUNC(SYSDATE) -1 and STORE_NO = :id GROUP BY TRUNC(ORDER_DATE) ORDER BY TRUNC(ORDER_DATE)", nativeQuery = true)
+    Optional<SalesWeekResult> salesWeek(Long id);
 
 
 }

@@ -7,6 +7,7 @@ import net.softsociety.bacs.store.service.StoreAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +34,7 @@ public class StoreAdminController {
     }
 
     @PostMapping("salesWeek")
-    public List<SalesWeekResult> salesWeek(SaleTodayDTO dto){
+    public Optional<SalesWeekResult> salesWeek(SaleTodayDTO dto){
         log.debug("{}",dto);
         return service.salesWeek(dto);
     }

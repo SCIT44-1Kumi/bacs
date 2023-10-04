@@ -11,6 +11,7 @@ import net.softsociety.bacs.store.exception.StoreErrorCode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +34,7 @@ public class StoreAdminServiceImpl implements StoreAdminService {
     }
 
     @Override
-    public List<SalesWeekResult> salesWeek(SaleTodayDTO dto) {
+    public Optional<SalesWeekResult> salesWeek(SaleTodayDTO dto) {
         Store store = storeRepository.findByStoreId(dto.storeId())
                 .orElseThrow(StoreErrorCode.STORE_NULL::defaultException);
 
