@@ -28,27 +28,30 @@ const Login = () => {
 		return;
 	};
 	return (
-		<div className={`grid grid-cols-2`}>
-			<div>
-				<div className={`text-2xl`}>매장관리, 키오스크 한번에 BAC!</div>
-				<div className={`text-2xl`}>B A C S</div>
-			</div>
-			<form
-				onSubmit={handleSubmit(onSubmit)}
-				className={`grid grid-cols-1 place-items-center gap-4`}>
-				<SignForm isSignUp={isSignUp} register={register} />
-
-				<div className={`grid grid-cols-1 place-items-center w-full`}>
-					<div className={`flex justify-between w-1/2`}>
-						<input
-							type="button"
-							onClick={handleIsSignUp}
-							value={isSignUp ? "로그인하기" : "회원가입"}
-						/>
-						<input type="submit" value="확인" />
+		<div className={`loginBackground p-24`}>
+			<div className={`login grid grid-cols-2`}>
+				<div className={`grid place-items-center`}>
+					<div>
+						<div className={`text-2xl`}>매장관리, 키오스크 한번에 BAC!</div>
+						<div className={`text-2xl text-center`}>B A C S</div>
 					</div>
 				</div>
-			</form>
+				<form
+					onSubmit={handleSubmit(onSubmit)}
+					className={`grid grid-cols-1 place-items-center gap-4`}>
+					<SignForm isSignUp={isSignUp} register={register} />
+					<div className={`grid grid-cols-1 place-items-center w-full`}>
+						<div className={`flex justify-between w-1/2`}>
+							<input
+								type="button"
+								onClick={handleIsSignUp}
+								value={isSignUp ? "로그인하기" : "회원가입"}
+							/>
+							<input type="submit" value="확인" />
+						</div>
+					</div>
+				</form>
+			</div>
 		</div>
 	);
 };

@@ -20,7 +20,6 @@ export interface IUser {
 
 const Home = () => {
 	const { t } = useTranslation();
-
 	return (
 		<div>
 			<MainNavBar />
