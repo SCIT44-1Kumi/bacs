@@ -22,7 +22,7 @@ import java.util.List;
 public class MenuOption {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "OPTIONID_SEQ")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "OPTION_NO_SEQ")
     @Column(name = "OPTION_NO")
     private Long id;
 

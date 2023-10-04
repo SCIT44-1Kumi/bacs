@@ -23,7 +23,7 @@ public class User {
 
     @Id
     @Column(name = "user_no")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "USERID_SEQ")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "USER_NO_SEQ")
     private Long id;
 
     @Column(updatable = false, unique = true)

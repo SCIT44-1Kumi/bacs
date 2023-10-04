@@ -24,8 +24,8 @@ import java.util.List;
 public class Order {
 
     @Id
-    @Column(name = "order_no")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "ORDERID_SEQ")
+    @Column(name = "ORDER_NO")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "ORDER_NO_SEQ")
     private Long id;
 
     @Column(nullable = false)
