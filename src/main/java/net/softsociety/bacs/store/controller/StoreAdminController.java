@@ -3,11 +3,9 @@ package net.softsociety.bacs.store.controller;
 import lombok.extern.slf4j.Slf4j;
 import net.softsociety.bacs.store.dto.SaleTodayDTO;
 import net.softsociety.bacs.store.service.StoreAdminService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -27,13 +25,9 @@ public class StoreAdminController {
     // TODO: 당일매출조회
 
     @PostMapping("saleToday")
-    public Optional<Long> saleToday(@PathVariable(name = "storeId") String storeId){
-        log.debug("{}",storeId);
-        return service.saleToday(storeId);
+    public Optional<Long> saleToday(SaleTodayDTO dto){
+        log.debug("{}",dto);
+        return service.saleToday(dto);
     }
 
-    @PostMapping("salesWeek")
-    public Optional<Long> salesWeek(@PathVariable(name = "storeId") String storeId){
-        return service.salesWeek(storeId);
-    }
 }

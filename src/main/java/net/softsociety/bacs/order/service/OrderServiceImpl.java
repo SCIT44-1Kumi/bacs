@@ -7,10 +7,12 @@ import net.softsociety.bacs.menu.entity.menuOption.MenuOption;
 import net.softsociety.bacs.menu.entity.menuOption.MenuOptionRepository;
 import net.softsociety.bacs.menu.entity.menu.MenuRepository;
 import net.softsociety.bacs.menu.exception.MenuErrorCode;
+import net.softsociety.bacs.notice.exception.NoticeErrorCode;
 import net.softsociety.bacs.order.dto.CreateOrderDTO;
 import net.softsociety.bacs.order.dto.RecipeDTO;
 import net.softsociety.bacs.order.dto.RecipeOptionDTO;
 import net.softsociety.bacs.order.entity.*;
+import net.softsociety.bacs.order.exception.OrderErrorCode;
 import net.softsociety.bacs.store.entity.Store;
 import net.softsociety.bacs.store.entity.StoreRepository;
 import net.softsociety.bacs.store.exception.StoreErrorCode;
@@ -59,7 +61,6 @@ public class OrderServiceImpl implements OrderService {
     }
 
 
-
     private OrderRecipe createOrderRecipe(RecipeDTO recipeDTO, Order order) {
         Menu menu = menuRepository.findById(recipeDTO.menu_no())
                 .orElseThrow(MenuErrorCode.MENU_NULL::defaultException);
@@ -93,10 +94,11 @@ public class OrderServiceImpl implements OrderService {
                 .orderRecipe(orderRecipe)
                 .build();
     }
-//확인후 해야함
     //@Override
-   // public List<Order> orderList(String storeId){
-     //   List<Order> orderList = orderRepository.findByStoreId(storeId);
-       // return orderList;
-   // }
+    //public Optional<Order> orderlist(Store store) {
+        //Order orderlist = orderRepository.findAllByStoreAndCancelledIsFalse(store)
+          //      .orElseThrow(OrderErrorCode.ORDER_NULL::defaultException);
+
+      //  return orderlist;
+  //  }
 }

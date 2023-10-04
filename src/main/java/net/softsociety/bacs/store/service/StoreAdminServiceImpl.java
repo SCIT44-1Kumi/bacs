@@ -3,6 +3,7 @@ package net.softsociety.bacs.store.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.softsociety.bacs.order.entity.OrderRepository;
+import net.softsociety.bacs.store.dto.SaleTodayDTO;
 import net.softsociety.bacs.store.entity.Store;
 import net.softsociety.bacs.store.entity.StoreRepository;
 import net.softsociety.bacs.store.exception.StoreErrorCode;
@@ -22,19 +23,15 @@ public class StoreAdminServiceImpl implements StoreAdminService {
     private final StoreRepository storeRepository;
 
 
-    @Override
-    public Optional<Long> saleToday(String storeId) {
-        Store store = storeRepository.findByStoreId(storeId)
-                .orElseThrow(StoreErrorCode.STORE_NULL::defaultException);
 
-        return orderRepository.saleToday(store.getStoreId());
-    }
+
+
 
     @Override
-    public Optional<Long> salesWeek(String storeId) {
-        Store store = storeRepository.findByStoreId(storeId)
+    public Optional<Long> saleToday(SaleTodayDTO dto) {
+        Store store = storeRepository.findByStoreId(dto.storeId())
                 .orElseThrow(StoreErrorCode.STORE_NULL::defaultException);
 
-        return orderRepository.salesWeek(store.getStoreId());
+        return orderRepository.saleToday(store.getId());
     }
 }

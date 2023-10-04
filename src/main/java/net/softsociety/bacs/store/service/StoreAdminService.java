@@ -7,8 +7,7 @@ import java.util.Optional;
 
 public interface StoreAdminService {
 
-    Optional<Long> saleToday(String storeId);
+    Optional<Long> saleToday(SaleTodayDTO dto);
 
-    Optional<Long> salesWeek(String storeId);
 
 }
