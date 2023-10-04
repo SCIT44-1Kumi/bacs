@@ -30,4 +30,10 @@ public class StoreAdminController {
         return service.saleToday(dto);
     }
 
+    @PostMapping("salesWeek")
+    public Optional<Long> salesWeek(SaleTodayDTO dto){
+        log.debug("{}",dto);
+        return service.salesWeek(dto);
+    }
+
 }

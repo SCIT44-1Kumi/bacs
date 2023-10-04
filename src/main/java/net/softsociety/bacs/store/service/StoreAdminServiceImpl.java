@@ -22,16 +22,19 @@ public class StoreAdminServiceImpl implements StoreAdminService {
     private final OrderRepository orderRepository;
     private final StoreRepository storeRepository;
 
-
-
-
-
-
     @Override
     public Optional<Long> saleToday(SaleTodayDTO dto) {
         Store store = storeRepository.findByStoreId(dto.storeId())
                 .orElseThrow(StoreErrorCode.STORE_NULL::defaultException);
 
         return orderRepository.saleToday(store.getId());
+    }
+
+    @Override
+    public Optional<Long> salesWeek(SaleTodayDTO dto) {
+        Store store = storeRepository.findByStoreId(dto.storeId())
+                .orElseThrow(StoreErrorCode.STORE_NULL::defaultException);
+
+        return orderRepository.salesWeek(store.getId());
     }
 }
