@@ -1,7 +1,10 @@
 package net.softsociety.bacs.store.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
+import lombok.Builder.Default;
+import lombok.ToString.Exclude;
 import net.softsociety.bacs.category.entity.Category;
 import net.softsociety.bacs.kiosk.entity.Kiosk;
 import net.softsociety.bacs.order.entity.Order;
@@ -22,6 +25,7 @@ import java.util.List;
 @Getter
 @Builder
 @EntityListeners(AuditingEntityListener.class)
+@ToString
 public class Store {
     @Id
     @Column(name = "store_no")
@@ -51,21 +55,41 @@ public class Store {
     @JoinColumn(name = "user_no")
     private User user;
 
-    @Builder.Default
+    @Default
     @OneToMany(mappedBy = "store")
+    @Exclude
     private List<Category> categories = new ArrayList<>();
 
-    @Builder.Default
+    @Default
     @OneToMany(mappedBy = "store")
+    @Exclude
     private List<StoreNotice> storeNotices = new ArrayList<>();
 
-    @Builder.Default
+    @Default
     @OneToMany(mappedBy = "store")
+    @Exclude
     private List<Kiosk> kiosks = new ArrayList<>();
 
-    @Builder.Default
+    @Default
     @OneToMany(mappedBy = "store")
+    @Exclude
     private List<Order> orders = new ArrayList<>();
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public void setKiosks(List<Kiosk> kiosks) {
+        this.kiosks = kiosks;
+    }
+
+    public void setStoreNotices(List<StoreNotice> storeNotices) {
+        this.storeNotices = storeNotices;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
 
     public void addStoreNotices(StoreNotice storeNotice) {
         this.storeNotices.add(storeNotice);

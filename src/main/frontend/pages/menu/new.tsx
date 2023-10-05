@@ -2,6 +2,7 @@ import axios from "axios";
 import { useFieldArray, useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import InputMenu from "@/components/inputMenu";
+import { useState } from "react";
 
 export type Category = {
 	categoryNum: number;

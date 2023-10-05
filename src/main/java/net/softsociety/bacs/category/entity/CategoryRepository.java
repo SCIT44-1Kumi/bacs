@@ -16,4 +16,5 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     void delete(Category category);
 
     List<Category> findAllByStore_id(Long store_id);
+    Optional<List<Category>> findAllByStoreOrderById(Store store);
 }

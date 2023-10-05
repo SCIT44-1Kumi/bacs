@@ -1,5 +1,6 @@
 package net.softsociety.bacs.category.service;
 
+import net.softsociety.bacs.category.dto.response.CategoryResponseDTO;
 import net.softsociety.bacs.category.entity.Category;
 import net.softsociety.bacs.category.dto.CreateCategoryDTO;
 import net.softsociety.bacs.category.dto.UpdateCategoryDTO;
@@ -21,4 +22,5 @@ public interface CategoryService {
 
     //카테고리별 메뉴 리스트
     List<Category> selectCategory(String data);
+    List<CategoryResponseDTO> getCategory(String data);
 }

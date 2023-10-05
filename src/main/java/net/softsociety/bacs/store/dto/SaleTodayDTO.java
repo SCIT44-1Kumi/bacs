@@ -1,11 +1,14 @@
-package net.softsociety.bacs.admin.dto;
+package net.softsociety.bacs.store.dto;
 
 import lombok.Builder;
-
 import javax.validation.constraints.NotBlank;
 
 @Builder
 public record SaleTodayDTO(
-    @NotBlank
-    String storeId
-) {}
+        @NotBlank
+        String storeId
+) {
+
+
+
+}

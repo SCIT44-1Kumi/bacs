@@ -3,14 +3,15 @@ package net.softsociety.bacs.order.dto;
 import lombok.Builder;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Builder
 public record CreateOrderDTO(
-    @NotBlank
+    @NotNull
     boolean toGo,
 
-    @NotBlank
+    @NotNull
     List<RecipeDTO> recipeDTOList
 ) {
 }

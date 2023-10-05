@@ -1,6 +1,7 @@
 package net.softsociety.bacs.user.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import net.softsociety.bacs.notice.entity.Notice;
 import net.softsociety.bacs.store.entity.Store;
