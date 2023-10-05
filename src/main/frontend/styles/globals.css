@@ -2,3 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+/* KioskMainPage */
+/*  */
+.kioskSelectOrder {
+    @apply shadow-[4px_4px_7px_5px_rgba(0,0,0,0.25)] rounded-[3.125rem];
+}
+.kioskMain {
+    @apply shadow-[4px_4px_6px_2px_rgba(0,0,0,0.70)] rounded-[0rem_0rem_3.125rem_3.125rem];
+}
+.kioskMainHeaderString {
+    @apply text-black text-[2.0625rem] not-italic font-normal leading-[normal] tracking-[0.10313rem];
+    font-family: GangwonEduPower, serif;
+}
+.kioskMainStoreName {
+    @apply text-black text-center text-[6.5rem] not-italic font-normal leading-[normal] tracking-[0.325rem];
+    font-family: GangwonEduPower, serif;
+}
+.kioskSelectOrderBtn {
+    @apply w-[15.25rem] h-[27.8125rem] shrink-0 shadow-[4px_4px_7px_5px_rgba(0,0,0,0.25)] rounded-[3.125rem];
+}
+.SelectOrderBtnString {
+    @apply text-white text-center text-[3.125rem] not-italic font-normal leading-[normal];
+    font-family: GangwonEduPower;
+}
