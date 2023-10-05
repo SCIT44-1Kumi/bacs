@@ -27,8 +27,7 @@ import java.util.Base64.Encoder;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig {
-    @Autowired
-    private DataSource dataSource;
+    private final DataSource dataSource;
 
     // 설정
     @Bean
