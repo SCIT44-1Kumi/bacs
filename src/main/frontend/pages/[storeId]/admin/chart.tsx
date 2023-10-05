@@ -2,7 +2,6 @@
 import AdminNavBar from "@/components/admin/adminNavBar";
 import API from "@/utils/axiosApi";
 import { Store } from "@/pages/[storeId]/kiosk";
-import { useEffect, useState } from "react";
 
 import dynamic from "next/dynamic";
 import { Menu, MenuOption } from "@/pages/[storeId]/kiosk/menu";

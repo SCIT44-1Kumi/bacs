@@ -32,6 +32,7 @@ type MenuOrderProps = {
 	store: Store;
 };
 
+export type { Menu, MenuOption };
 const MenuOrder = ({ categories, store }: MenuOrderProps) => {
 	const [menuList, setMenuList] = useState<Menu[]>();
 	const [categoryNo, setCategoryNo] = useState<number>(categories[0].id);
