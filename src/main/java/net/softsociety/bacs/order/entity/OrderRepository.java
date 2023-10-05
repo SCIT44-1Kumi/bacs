@@ -1,12 +1,15 @@
 package net.softsociety.bacs.order.entity;
 
+import net.softsociety.bacs.store.entity.Store;
 import net.softsociety.bacs.store.projection.SalesWeekResultProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
     //당일 매출 조회
     @Query(value = "SELECT SUM(TOTAL_PRICE) AS daily_total_price FROM BACS_ORDER WHERE TRUNC(ORDER_DATE) = TRUNC(SYSDATE) and STORE_NO = :id", nativeQuery = true)
@@ -21,6 +24,8 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             "GROUP BY TRUNC(ORDER_DATE)\n" +
             "ORDER BY TRUNC(ORDER_DATE)", nativeQuery = true)
     List<SalesWeekResultProjection> salesWeek(Long id);
+
+    List<Order> findAllByStoreAndCancelledIsFalseOrderByOrderDateAsc(Store store);
 
 
 }

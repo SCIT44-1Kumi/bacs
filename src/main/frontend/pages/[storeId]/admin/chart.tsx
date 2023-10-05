@@ -5,11 +5,36 @@ import { Store } from "@/pages/[storeId]/kiosk";
 import { useEffect, useState } from "react";
 
 import dynamic from "next/dynamic";
+import { Menu, MenuOption } from "@/pages/[storeId]/kiosk/menu";
 const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 type AdminChartProps = {
 	store: Store;
 	data: Data[];
+	orderList: Order[];
+};
+
+type Order = {
+	id: number;
+	totalPrice: number;
+	toGo: boolean;
+	cancelled: boolean;
+	orderDate: string;
+	orderRecipes: OrderRecipe[];
+};
+
+type OrderRecipe = {
+	id: number;
+	menuAmount: number;
+	recipePrice: number;
+	menu: Menu;
+	recipeOptions: RecipeOption[];
+};
+
+type RecipeOption = {
+	id: number;
+	roAmount: number;
+	option: MenuOption;
 };
 
 type Data = {
@@ -17,9 +42,7 @@ type Data = {
 	daily_Total_Price: number;
 };
 
-const AdminChart = ({ store, data }: AdminChartProps) => {
-	const [isLoading, setIsLoading] = useState(false);
-
+const AdminChart = ({ store, data, orderList }: AdminChartProps) => {
 	// useEffect(() => {
 	// 	(async () => {
 	// 		const { data } = await API.get(`/${store.storeId}/admin/salesWeek`);
@@ -67,8 +90,38 @@ const AdminChart = ({ store, data }: AdminChartProps) => {
 						/>
 					</div>
 				</div>
-				<div className={`col-span-3`}>
+				<div className={`col-span-3 grid grid-cols-1 place-items-center`}>
 					<span>현재 주문 현황</span>
+					<div className={`grid grid-cols-1 overflow-x-scroll`}>
+						{orderList.map(order => (
+							<div key={order.id}>
+								<div>
+									<div>주문 번호</div>
+									<div>{order.id}</div>
+								</div>
+								<div>
+									<div>주문 시각</div>
+									<div>{order.orderDate}</div>
+								</div>
+								<div>
+									{order.orderRecipes.map(orderRecipe => (
+										<div key={orderRecipe.id}>
+											<span>{orderRecipe.menu.menuName}</span>
+											<span>{orderRecipe.menuAmount}</span>
+											<div>
+												{orderRecipe.recipeOptions.map(recipeOption => (
+													<div key={recipeOption.id}>
+														<span>{recipeOption.option.optionName}</span>
+														<span>{recipeOption.roAmount}</span>
+													</div>
+												))}
+											</div>
+										</div>
+									))}
+								</div>
+							</div>
+						))}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -79,11 +132,13 @@ export const getServerSideProps = async (context: { query: { storeId: string } }
 	const { storeId } = context.query;
 	const { data: store } = await API.get(`/store/get/${storeId}`);
 	const { data: data } = await API.post(`/${storeId}/admin/salesWeek`);
+	const { data: orderList } = await API.get(`/${storeId}/admin/orderPendingList`);
 
 	return {
 		props: {
 			store: JSON.parse(JSON.stringify(store)),
 			data: JSON.parse(JSON.stringify(data)),
+			orderList: JSON.parse(JSON.stringify(orderList)),
 		},
 	};
 };
