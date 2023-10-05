@@ -20,8 +20,8 @@ const AdminStore = () => {
 		console.log(data);
 		const { userId } = router.query;
 		const { storeId, storeName, storePhone, storeAddress, crNum } = data;
-		const { data: store } = await API.post(`/store/create`, { ...data });
-		console.log(store);
+		// const { data: store } = await API.post(`/store/create`, { ...data });
+		// console.log(store);
 		return await router.push(`/${storeId}/admin/chart`);
 	};
 	return (
