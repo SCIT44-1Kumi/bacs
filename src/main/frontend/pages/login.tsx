@@ -44,7 +44,7 @@ const Login = () => {
 					className={`grid grid-cols-1 place-items-center gap-4`}>
 					<SignForm isSignUp={isSignUp} register={register} />
 					<div className={`grid grid-cols-1 place-items-center w-full`}>
-						<div className={`${myFont.className} text-2xl flex justify-between w-3/6`}>
+						<div className={`${myFont.className} text-2xl flex justify-between w-4/6`}>
 							<input
 								className={`signButton`}
 								type="button"

@@ -19,7 +19,7 @@ type Order = {
 	toGo: boolean;
 	cancelled: boolean;
 	orderDate: string;
-	orderRecipes:
+	// orderRecipes:
 };
 
 type Data = {
@@ -38,46 +38,49 @@ const AdminChart = ({ store, data, orderList }: AdminChartProps) => {
 	return (
 		<div>
 			<AdminNavBar />
-			<div className={`grid grid-cols-3`}>
-				<div>
-					{/*<p>{storeId}</p>*/}
-					<div>
-						<p>전일 매장 매출</p>
-						{/*<p>{totalSales}</p>*/}
+			<div>
+				<div className={`grid grid-cols-2`}>
+					<div className={`chart1`}>
+						{/*<p>{storeId}</p>*/}
+						<div>
+							<p>전일 매장 매출</p>
+							{/*<p>{totalSales}</p>*/}
+						</div>
+						<div>
+							<p>현재 매장 매출</p>
+							{/*<p>{todaySales}</p>*/}
+						</div>
+						<button>조회</button>
 					</div>
-					<div>
-						<p>현재 매장 매출</p>
-						{/*<p>{todaySales}</p>*/}
+					<div className={`chart2 col-span-2`}>
+						<span>주간 매출</span>
+						<div className={`h-[100]`}>
+							<ApexChart
+								type={`line`}
+								series={[
+									{
+										data: data.map(d => {
+											return {
+												x: d.order_Date,
+												y: d.daily_Total_Price,
+											};
+										}),
+									},
+								]}
+								options={{
+									chart: {
+										height: 100,
+										width: 300,
+									},
+								}}
+								height={350}
+							/>
+						</div>
 					</div>
-					<button>조회</button>
-				</div>
-				<div className={`col-span-2`}>
-					<span>주간 매출</span>
-					<div>
-						<ApexChart
-							type={`line`}
-							series={[
-								{
-									data: data.map(d => {
-										return {
-											x: d.order_Date,
-											y: d.daily_Total_Price,
-										};
-									}),
-								},
-							]}
-							options={{
-								chart: {
-									height: 350,
-									width: 500,
-								},
-							}}
-						/>
+					<div className={`chart3 col-span-3 grid grid-cols-1 place-items-center`}>
+						<span>현재 주문 현황</span>
+						{/*<div className={`grid grid-cols-1 overflow-x-scroll`}>{}</div>*/}
 					</div>
-				</div>
-				<div className={`col-span-3 grid grid-cols-1 place-items-center`}>
-					<span>현재 주문 현황</span>
-					<div className={`grid grid-cols-1 overflow-x-scroll`}>{}</div>
 				</div>
 			</div>
 		</div>
