@@ -1,6 +1,7 @@
 package net.softsociety.bacs.menu.entity.menuOption;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.Builder.Default;
 import lombok.ToString.Exclude;
@@ -35,10 +36,12 @@ public class MenuOption {
     @Column(nullable = false)
     private int optionPrice;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "menu_no")
     private Menu menu;
 
+    @JsonIgnore
     @Default
     @OneToMany(mappedBy = "option")
     @Exclude

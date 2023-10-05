@@ -1,5 +1,6 @@
 package net.softsociety.bacs.storeNotice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import net.softsociety.bacs.store.entity.Store;
 import org.hibernate.annotations.ColumnDefault;
@@ -36,6 +37,7 @@ public class StoreNotice {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "store_NO")
     private Store store;

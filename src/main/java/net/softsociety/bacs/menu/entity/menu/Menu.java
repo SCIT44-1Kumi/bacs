@@ -1,5 +1,6 @@
 package net.softsociety.bacs.menu.entity.menu;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import net.softsociety.bacs.category.entity.Category;
 import net.softsociety.bacs.menu.entity.menuOption.MenuOption;
@@ -37,6 +38,7 @@ public class Menu {
     @Builder.Default
     private String menuDesc = "";
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "category_no")
     private Category category;

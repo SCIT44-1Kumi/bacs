@@ -2,6 +2,7 @@ package net.softsociety.bacs.store.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.Builder.Default;
 import lombok.ToString.Exclude;
@@ -51,6 +52,7 @@ public class Store {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_no")
     private User user;

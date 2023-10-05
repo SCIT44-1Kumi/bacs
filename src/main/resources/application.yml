@@ -13,6 +13,9 @@ logging:
 
 # ??? ?? ??
 spring:
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
   profiles:
     active: prod # prod, dev(test), local
 

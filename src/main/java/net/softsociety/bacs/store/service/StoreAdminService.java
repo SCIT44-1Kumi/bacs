@@ -1,8 +1,8 @@
 package net.softsociety.bacs.store.service;
 
 
-import net.softsociety.bacs.order.entity.SalesWeekResult;
 import net.softsociety.bacs.store.dto.SaleTodayDTO;
+import net.softsociety.bacs.order.dto.response.OrderResponseDTO;
 import net.softsociety.bacs.store.projection.SalesWeekResultProjection;
 
 import java.util.List;
@@ -15,4 +15,5 @@ public interface StoreAdminService {
 
     List<SalesWeekResultProjection> salesWeek(String storeId);
 
+    List<OrderResponseDTO> getOrderPendingList(String storeId);
 }
