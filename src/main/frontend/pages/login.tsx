@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import localFont from "next/font/local";
+import { useRouter } from "next/router";
+import API from "@/utils/axiosApi";
 
 const myFont = localFont({ src: "../public/fonts/BMHANNA.otf" });
 
@@ -17,6 +19,7 @@ export type ISignForm = {
 const Login = () => {
 	const [isSignUp, setIsSignUp] = useState(false);
 	const { control, register, handleSubmit } = useForm<ISignForm>();
+	const router = useRouter();
 	const handleIsSignUp = () => {
 		setIsSignUp(prev => !prev);
 	};
@@ -24,11 +27,13 @@ const Login = () => {
 		console.log(data);
 		const { userId, userPw, confirmPw, phone, email } = data;
 		if (confirmPw) {
-			await axios.post("/api/member/join", data);
-		} else {
-			await axios.post(`/api/member/temp-login`, data);
+			const { data: user } = await API.post("/member/join", data);
+			console.log(user);
 		}
-		return;
+		// else {
+		// 	await axios.post(`/api/member/temp-login`, data);
+		// }
+		return router.push(`/${userId}/admin/store`);
 	};
 	return (
 		<div className={`loginBackground p-12`}>
