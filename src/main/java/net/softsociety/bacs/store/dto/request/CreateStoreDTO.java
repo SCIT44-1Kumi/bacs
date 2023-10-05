@@ -1,4 +1,4 @@
-package net.softsociety.bacs.store.dto;
+package net.softsociety.bacs.store.dto.request;
 
 import lombok.Builder;
 

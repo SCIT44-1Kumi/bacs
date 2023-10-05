@@ -2,7 +2,9 @@ package net.softsociety.bacs.store.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.softsociety.bacs.store.dto.CreateStoreDTO;
+import net.softsociety.bacs.store.dto.request.CreateStoreDTO;
+import net.softsociety.bacs.store.dto.request.GetStoreDTO;
+import net.softsociety.bacs.store.dto.response.StoreResponseDTO;
 import net.softsociety.bacs.store.entity.Store;
 import net.softsociety.bacs.store.entity.StoreRepository;
 import net.softsociety.bacs.store.exception.StoreErrorCode;
@@ -42,13 +44,30 @@ public class StoreServiceImpl implements StoreService {
                 .crNum(createStoreDTO.crNum())
                 .user(user)
                 .build();
-        // db에 저장
 
+        // db에 저장
         user.addStore(newStore);
         storeRepository.save(newStore);
     }
 
+    // 매장 조회
+    @Override
+    public StoreResponseDTO getStore(String storeId) {
+        Store store = storeRepository.findByStoreId(storeId)
+                .orElseThrow(StoreErrorCode.STORE_NULL::defaultException);
+
+
+        log.debug("--------store: {}", store);
+        return StoreResponseDTO.builder()
+                .storeNo(store.getId())
+                .storeId(store.getStoreId())
+                .storeName(store.getStoreName())
+                .storePhone(store.getStorePhone())
+                .storeAddress(store.getStoreAddress())
+                .crNum(store.getCrNum())
+                .createdAt(store.getCreatedAt())
+                .build();
+    }
     // TODO: 매장 삭제
-    // TODO: 매장 조회
     // TODO: 매장 업데이트
 }
