@@ -13,6 +13,6 @@ public interface StoreAdminService {
     Optional<Long> saleToday(SaleTodayDTO dto);
 
 
-    List<SalesWeekResultProjection> salesWeek(SaleTodayDTO dto);
+    List<SalesWeekResultProjection> salesWeek(String storeId);
 
 }
