@@ -28,11 +28,11 @@ const Login = () => {
 		return;
 	};
 	return (
-		<div className={`loginBackground p-24`}>
+		<div className={`loginBackground p-12`}>
 			<div className={`login grid grid-cols-2`}>
 				<div className={`grid place-items-center`}>
 					<div>
-						<div className={`text-2xl`}>매장관리, 키오스크 한번에 BAC!</div>
+						<div className={`text-2xl `}>매장관리, 키오스크 한번에 BAC!</div>
 						<div className={`text-2xl text-center`}>B A C S</div>
 					</div>
 				</div>

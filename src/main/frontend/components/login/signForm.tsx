@@ -1,5 +1,8 @@
 import { UseFormRegister } from "react-hook-form";
 import { ISignForm } from "@/pages/login";
+import localFont from "next/font/local";
+
+const myFont = localFont({ src: "../../public/fonts/BMHANNA.otf" });
 
 type SignFormProps = {
 	isSignUp: boolean;
@@ -10,7 +13,8 @@ const SignForm = ({ isSignUp, register }: SignFormProps) => {
 		<>
 			<div className={`text-3xl`}>{isSignUp ? "Sign Up" : "LOGIN"}</div>
 			<div className={`grid grid-cols-1 gap-4 place-items-center w-full`}>
-				<div className={`flex justify-between w-1/2`}>
+				<div className={`${myFont.className} grid grid-cols-2 place-content-between items-center`}>
+					{/*<div className={`flex justify-between w-1/2`}>*/}
 					<div>ID</div>
 					<input
 						type="text"
@@ -18,7 +22,8 @@ const SignForm = ({ isSignUp, register }: SignFormProps) => {
 						className={`bg-gray-100 rounded-md`}
 					/>
 				</div>
-				<div className={`flex justify-between w-1/2`}>
+				<div className={`${myFont.className} grid grid-cols-2 place-content-between items-center`}>
+					{/*<div className={`flex justify-between w-1/2`}>*/}
 					<div>PASSWORD</div>
 					<input
 						type="password"
@@ -28,7 +33,8 @@ const SignForm = ({ isSignUp, register }: SignFormProps) => {
 				</div>
 				{isSignUp ? (
 					<>
-						<div className={`flex justify-between w-1/2`}>
+						<div
+							className={`${myFont.className} grid grid-cols-2 place-content-between items-center`}>
 							<div>CONFIRM PASSWORD</div>
 							<input
 								type="password"
@@ -36,7 +42,8 @@ const SignForm = ({ isSignUp, register }: SignFormProps) => {
 								className={`bg-gray-100 rounded-md`}
 							/>
 						</div>
-						<div className={`flex justify-between w-1/2`}>
+						<div
+							className={`${myFont.className} grid grid-cols-2 place-content-between items-center`}>
 							<div>Phone</div>
 							<input
 								type="text"
@@ -44,7 +51,8 @@ const SignForm = ({ isSignUp, register }: SignFormProps) => {
 								className={`bg-gray-100 rounded-md`}
 							/>
 						</div>
-						<div className={`flex justify-between w-1/2`}>
+						<div
+							className={`${myFont.className} grid grid-cols-2 place-content-between items-center`}>
 							<div>Email</div>
 							<input
 								type="email"
@@ -55,9 +63,9 @@ const SignForm = ({ isSignUp, register }: SignFormProps) => {
 					</>
 				) : null}
 				<div className={`grid grid-cols-1 w-1/2`}>
-					<div className={`flex justify-between`}>
+					<div className={`grid grid-cols-2 place-content-between items-center overflow-visible`}>
 						<div></div>
-						<div>아이디/패스워드 찾기</div>
+						<div className={`${myFont.className} min-w-max`}>아이디/패스워드 찾기</div>
 					</div>
 				</div>
 			</div>
