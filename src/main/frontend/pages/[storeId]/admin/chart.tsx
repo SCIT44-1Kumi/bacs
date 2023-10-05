@@ -19,7 +19,21 @@ type Order = {
 	toGo: boolean;
 	cancelled: boolean;
 	orderDate: string;
-	// orderRecipes:
+	orderRecipes: OrderRecipe[];
+};
+
+type OrderRecipe = {
+	id: number;
+	menuAmount: number;
+	recipePrice: number;
+	menu: Menu;
+	recipeOptions: RecipeOption[];
+};
+
+type RecipeOption = {
+	id: number;
+	roAmount: number;
+	option: MenuOption;
 };
 
 type Data = {
@@ -38,6 +52,75 @@ const AdminChart = ({ store, data, orderList }: AdminChartProps) => {
 	return (
 		<div>
 			<AdminNavBar />
+			<div className={`grid grid-cols-3`}>
+				<div>
+					{/*<p>{storeId}</p>*/}
+					<div>
+						<p>전일 매장 매출</p>
+						{/*<p>{totalSales}</p>*/}
+					</div>
+					<div>
+						<p>현재 매장 매출</p>
+						{/*<p>{todaySales}</p>*/}
+					</div>
+					<button>조회</button>
+				</div>
+				<div className={`col-span-2`}>
+					<span>주간 매출</span>
+					<div>
+						<ApexChart
+							type={`line`}
+							series={[
+								{
+									data: data.map(d => {
+										return {
+											x: d.order_Date,
+											y: d.daily_Total_Price,
+										};
+									}),
+								},
+							]}
+							options={{
+								chart: {
+									height: 350,
+									width: 500,
+								},
+							}}
+						/>
+					</div>
+				</div>
+				<div className={`col-span-3 grid grid-cols-1 place-items-center`}>
+					<span>현재 주문 현황</span>
+					<div className={`grid grid-cols-1 overflow-x-scroll`}>
+						{orderList.map(order => (
+							<div key={order.id}>
+								<div>
+									<div>주문 번호</div>
+									<div>{order.id}</div>
+								</div>
+								<div>
+									<div>주문 시각</div>
+									<div>{order.orderDate}</div>
+								</div>
+								<div>
+									{order.orderRecipes.map(orderRecipe => (
+										<div key={orderRecipe.id}>
+											<span>{orderRecipe.menu.menuName}</span>
+											<span>{orderRecipe.menuAmount}</span>
+											<div>
+												{orderRecipe.recipeOptions.map(recipeOption => (
+													<div key={recipeOption.id}>
+														<span>{recipeOption.option.optionName}</span>
+														<span>{recipeOption.roAmount}</span>
+													</div>
+												))}
+											</div>
+										</div>
+									))}
+								</div>
+							</div>
+						))}
+					</div>
 			<div>
 				<div className={`grid grid-cols-2`}>
 					<div className={`chart1`}>
