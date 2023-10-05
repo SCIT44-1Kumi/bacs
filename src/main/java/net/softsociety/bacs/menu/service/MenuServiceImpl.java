@@ -6,6 +6,8 @@ import net.softsociety.bacs.category.entity.Category;
 import net.softsociety.bacs.category.entity.CategoryRepository;
 import net.softsociety.bacs.category.exception.CategoryErrorCode;
 import net.softsociety.bacs.menu.dto.*;
+import net.softsociety.bacs.menu.dto.response.MenuOptionResponseDTO;
+import net.softsociety.bacs.menu.dto.response.MenuResponseDTO;
 import net.softsociety.bacs.menu.entity.menu.Menu;
 import net.softsociety.bacs.menu.entity.menuOption.MenuOption;
 import net.softsociety.bacs.menu.entity.menuOption.MenuOptionRepository;
@@ -145,6 +147,40 @@ public class MenuServiceImpl implements MenuService {
      */
     @Override
     public List<Menu> selectMenuList(String storeId, GetMenusDTO dto) {
-        return menuRepository.findAllByCategory(dto.category());
+        Category category = categoryRepository.findById(dto.categoryNo())
+                .orElseThrow(CategoryErrorCode.CATEGORY_NULL::defaultException);
+
+        return menuRepository.findAllByCategory(category);
+    }
+
+    @Override
+    public List<MenuResponseDTO> getMenuList(long categoryNo) {
+        Category category = categoryRepository.findById(categoryNo)
+                .orElseThrow(CategoryErrorCode.CATEGORY_NULL::defaultException);
+        List<Menu> menus = menuRepository.findAllByCategory(category);
+        return menus.stream()
+                .map(menu -> {
+                    List<MenuOption> menuOptionList = menuOptionRepository.findAllByMenu(menu);
+                    List<MenuOptionResponseDTO> menuOptionResponseDTOList = menuOptionList.stream()
+                            .map(menuOption -> MenuOptionResponseDTO.builder()
+                                    .id(menuOption.getId())
+                                    .optionName(menuOption.getOptionName())
+                                    .optionValue(menuOption.getOptionValue())
+                                    .optionPrice(menuOption.getOptionPrice())
+                                    .build()
+                            )
+                            .toList();
+
+                    return MenuResponseDTO.builder()
+                            .id(menu.getId())
+                            .menuOptions(menuOptionResponseDTOList)
+                            .menuDesc(menu.getMenuDesc())
+                            .menuImg(menu.getMenuImg())
+                            .menuName(menu.getMenuName())
+                            .menuPrice(menu.getMenuPrice())
+                            .build();
+                }
+                )
+                .toList();
     }
 }

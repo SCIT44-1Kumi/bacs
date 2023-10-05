@@ -35,7 +35,7 @@ public class MenuOption {
     @Column(nullable = false)
     private int optionPrice;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "menu_no")
     private Menu menu;
 
