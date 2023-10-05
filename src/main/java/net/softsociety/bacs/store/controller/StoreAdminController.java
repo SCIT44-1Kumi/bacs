@@ -1,12 +1,16 @@
 package net.softsociety.bacs.store.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import net.softsociety.bacs.order.entity.SalesWeekResult;
+import net.softsociety.bacs.store.dto.SaleTodayDTO;
+import net.softsociety.bacs.store.projection.SalesWeekResultProjection;
 import net.softsociety.bacs.store.service.StoreAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.sql.Timestamp;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @Slf4j
@@ -19,6 +23,21 @@ public class StoreAdminController {
     // TODO: 관리자 페이지 조회
     @GetMapping("statics")
     public void getStatics(@PathVariable(name = "storeId") String storeId) {
+
+    }
+
+    // TODO: 당일매출조회
+
+    @PostMapping("saleToday")
+    public Optional<Long> saleToday(SaleTodayDTO dto){
+        log.debug("{}",dto);
+        return service.saleToday(dto);
+    }
+
+    @PostMapping("salesWeek")
+    public List<SalesWeekResultProjection> salesWeek(SaleTodayDTO dto){
+        log.debug("-----------dto:{}",dto);
+        return service.salesWeek(dto);
 
     }
 
