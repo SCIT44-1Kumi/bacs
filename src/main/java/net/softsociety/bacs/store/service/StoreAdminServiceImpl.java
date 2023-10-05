@@ -36,15 +36,12 @@ public class StoreAdminServiceImpl implements StoreAdminService {
     }
 
     @Override
-    public List<SalesWeekResultProjection> salesWeek(SaleTodayDTO dto) {
-        Store store = storeRepository.findByStoreId(dto.storeId())
+    public List<SalesWeekResultProjection> salesWeek(String storeId) {
+        Store store = storeRepository.findByStoreId(storeId)
                 .orElseThrow(StoreErrorCode.STORE_NULL::defaultException);
         List<SalesWeekResultProjection> result = orderRepository.salesWeek(store.getId());
 
-        for(SalesWeekResultProjection data: result) {
-            log.debug("------------result:{}", data);
-        }
-
+        result.forEach(data -> log.debug("------------result:{}", data));
         return result;
     }
 }

@@ -13,7 +13,13 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     Optional<Long> saleToday(Long id);
 
 
-    @Query(value = "SELECT TRUNC(ORDER_DATE) AS order_date, CAST(SUM(TOTAL_PRICE) AS NUMBER) AS daily_total_price FROM BACS_ORDER WHERE ORDER_DATE BETWEEN TRUNC(SYSDATE) -7 AND TRUNC(SYSDATE) -1 and STORE_NO = :id GROUP BY TRUNC(ORDER_DATE) ORDER BY TRUNC(ORDER_DATE)", nativeQuery = true)
+    @Query(value = "SELECT TRUNC(ORDER_DATE) AS order_date, SUM(TOTAL_PRICE) AS daily_total_price\n" +
+            "FROM BACS_ORDER\n" +
+            "WHERE STORE_NO = :id\n" +
+            "  AND ORDER_DATE >= TRUNC(SYSDATE) - 7\n" +
+            "  AND ORDER_DATE < TRUNC(SYSDATE)\n" +
+            "GROUP BY TRUNC(ORDER_DATE)\n" +
+            "ORDER BY TRUNC(ORDER_DATE)", nativeQuery = true)
     List<SalesWeekResultProjection> salesWeek(Long id);
 
 

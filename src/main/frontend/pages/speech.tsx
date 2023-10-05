@@ -18,7 +18,7 @@ function Speech() {
 		listen();
 		setTimeout(async () => {
 			await stop();
-		}, 8000);
+		}, 6000);
 	};
 	const reqValue = async (text: string) => {
 		console.log(value);

@@ -35,9 +35,9 @@ public class StoreAdminController {
     }
 
     @PostMapping("salesWeek")
-    public List<SalesWeekResultProjection> salesWeek(SaleTodayDTO dto){
-        log.debug("-----------dto:{}",dto);
-        return service.salesWeek(dto);
+    public List<SalesWeekResultProjection> salesWeek(@PathVariable(name = "storeId") String storeId){
+        log.debug("-----------dto:{}",storeId);
+        return service.salesWeek(storeId);
 
     }
 

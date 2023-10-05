@@ -27,15 +27,7 @@ public record LoginRequestDto(
 
         @NotBlank // NotNull, NotEmpty, NotBlank(prevents null, "", " ", ... every white space)
         // ...
-        String userPw,
-
-
-        @NotBlank
-        String Email,
-
-
-        @NotBlank
-        String Phone
+        String userPw
 ) {
 
 }
