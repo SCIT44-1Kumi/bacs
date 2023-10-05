@@ -2,6 +2,7 @@ package net.softsociety.bacs.category.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.softsociety.bacs.category.dto.response.CategoryResponseDTO;
 import net.softsociety.bacs.category.entity.Category;
 import net.softsociety.bacs.category.entity.CategoryRepository;
 import net.softsociety.bacs.category.exception.CategoryErrorCode;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -90,5 +92,19 @@ public class CategoryServiceImpl implements CategoryService
                 .orElseThrow(StoreErrorCode.STORE_NULL::defaultException);
 
         return categoryRepository.findAllByStore_id(store.getId());
+    }
+
+    @Override
+    public List<CategoryResponseDTO> getCategory(String storeId) {
+        Store store = storeRepository.findByStoreId(storeId)
+                .orElseThrow(StoreErrorCode.STORE_NULL::defaultException);
+        List<Category> categories = categoryRepository.findAllByStoreOrderById(store)
+                .orElseThrow(CategoryErrorCode.CATEGORY_NULL::defaultException);
+        return categories.stream()
+                .map(category -> CategoryResponseDTO.builder()
+                        .id(category.getId())
+                        .categoryName(category.getCategoryName())
+                        .build())
+                .toList();
     }
 }
