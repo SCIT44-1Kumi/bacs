@@ -3,6 +3,7 @@ package net.softsociety.bacs.menu.service;
 import net.softsociety.bacs.menu.dto.*;
 
 
+import net.softsociety.bacs.menu.dto.response.MenuOptionResponseDTO;
 import net.softsociety.bacs.menu.dto.response.MenuResponseDTO;
 import net.softsociety.bacs.menu.entity.menu.Menu;
 
@@ -31,4 +32,6 @@ public interface MenuService {
     List<Menu> selectMenuList(String storeId, GetMenusDTO dto);
 
     List<MenuResponseDTO> getMenuList(long dto);
+
+    List<MenuOptionResponseDTO> getMenuOptions(long menuId);
 }

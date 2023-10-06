@@ -8,4 +8,6 @@ public interface StoreService {
     void createStore(CreateStoreDTO createStoreDTO);
 
     StoreResponseDTO getStore(String storeId);
+
+    StoreResponseDTO getStoreByUser(String userId);
 }

@@ -1,10 +1,12 @@
 "use client";
 import KioskBG from "@/components/kiosk/kioskBG";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import KioskMain from "@/components/kiosk/kioskMain";
 import API from "@/utils/axiosApi";
 import { Store } from "@/pages/[storeId]/kiosk/index";
 import Image from "next/image";
+import SelectOptionModal from "@/components/kiosk/selectOptionModal";
+import { useRouter } from "next/router";
 
 type Category = {
 	id: number;
@@ -34,17 +36,54 @@ type MenuOrderProps = {
 
 export type { Menu, MenuOption };
 const MenuOrder = ({ categories, store }: MenuOrderProps) => {
+	const router = useRouter();
 	const [menuList, setMenuList] = useState<Menu[]>();
 	const [categoryNo, setCategoryNo] = useState<number>(categories[0].id);
 	const [color, setColor] = useState("bg-[#E71817]");
 	const [selectList, setSelectList] = useState<Menu[]>();
+	const [showModal, setShowModal] = useState(false);
+	const [menuOptions, setMenuOptions] = useState<MenuOption[]>();
+	const [selectMenu, setSelectMenu] = useState<Menu>();
+	const [selectOption, setSelectOption] = useState<number>();
+
+	const onClickOrder = async () => {
+		console.log(selectMenu!.id, selectOption);
+		const { data } = await API.post(`/${store.storeId}/kiosk/order/create`, {
+			toGo: false,
+			recipeDTOList: [
+				{
+					menu_no: selectMenu!.id,
+					menuAmount: 1,
+					recipeOptionDTOList: [
+						{
+							option_no: 5,
+							roAmount: 1,
+						},
+					],
+				},
+			],
+		});
+		await router.push(`/${store.storeId}/kiosk/order`);
+		return data;
+	};
+	const onClickMenu = async (menuId: number) => {
+		const { data: menuOptions } = await API.get(`/${store.storeId}/menu/getMenu`, {
+			params: { menuId },
+		});
+		setSelectMenu(menuList?.find(menu => menu.id == menuId));
+		console.log(selectMenu);
+		setMenuOptions(menuOptions);
+		setShowModal(prev => !prev);
+	};
+
+	const setOption = (optionId: number) => setSelectOption(optionId);
+	const clickModal = () => setShowModal(!showModal);
 	const getMenus = async () => {
 		const { data } = await API.get(`/${store.storeId}/menu/getMenus`, {
 			params: {
 				categoryNo,
 			},
 		});
-		console.log(data);
 		return data;
 	};
 	useEffect(() => {
@@ -75,7 +114,7 @@ const MenuOrder = ({ categories, store }: MenuOrderProps) => {
 					<div
 						className={`row-span-5 grid grid-cols-4 place-items-center rounded-xl bg-stone-200 mx-12`}>
 						{menuList?.map(menu => (
-							<div key={menu.id}>
+							<div key={menu.id} onClick={() => onClickMenu(menu.id)}>
 								<div className={`grid place-items-center`}>이미지</div>
 								<div className={`grid grid-cols-1 place-items-center`}>
 									<span>{menu.menuName}</span>
@@ -86,8 +125,14 @@ const MenuOrder = ({ categories, store }: MenuOrderProps) => {
 						))}
 					</div>
 					<div className={`grid grid-cols-6 row-span-2 p-12 gap-6`}>
-						<div className={`col-span-5 bg-stone-200 rounded-xl`}></div>
-						<div className={`${color} text-white rounded-xl grid place-items-center text-2xl`}>
+						<div className={`col-span-5 bg-stone-200 rounded-xl`}>
+							{selectMenu?.menuName}
+							{selectMenu?.menuPrice}
+							{selectOption}
+						</div>
+						<div
+							onClick={onClickOrder}
+							className={`${color} text-white rounded-xl grid place-items-center text-2xl`}>
 							주문하기
 						</div>
 					</div>
@@ -106,6 +151,13 @@ const MenuOrder = ({ categories, store }: MenuOrderProps) => {
 					</span>
 				</div>
 			</KioskBG>
+			{showModal && (
+				<SelectOptionModal
+					setOption={() => setSelectOption}
+					options={menuOptions!}
+					clickModal={clickModal}
+				/>
+			)}
 		</div>
 	);
 };

@@ -33,7 +33,9 @@ const Login = () => {
 		// else {
 		// 	await axios.post(`/api/member/temp-login`, data);
 		// }
-		return router.push(`/admin/${userId}/store`);
+		const { data: store } = await API.get(`/store/get/byUser/${userId}`);
+		console.log(store);
+		return await router.push(`/${store.storeId}/admin/chart`);
 	};
 	return (
 		<div className={`loginBackground p-12`}>
