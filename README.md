@@ -6,6 +6,7 @@
 
 ```bash
 cd src/main/frontend
+npm install --force
 npm run dev
 
 // lint 명령어
