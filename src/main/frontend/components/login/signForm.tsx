@@ -11,20 +11,20 @@ type SignFormProps = {
 const SignForm = ({ isSignUp, register }: SignFormProps) => {
 	return (
 		<>
-			<div className={`text-3xl`}>{isSignUp ? "Sign Up" : "LOGIN"}</div>
+			<div className={`${myFont.className} text-3xl`}>{isSignUp ? "Sign Up" : "LOGIN"}</div>
 			<div className={`grid grid-cols-1 gap-4 place-items-center w-full`}>
-				<div className={`${myFont.className} grid grid-cols-2 place-content-between items-center`}>
+				<div className={`grid grid-cols-2 place-content-between items-center`}>
 					{/*<div className={`flex justify-between w-1/2`}>*/}
-					<div>ID</div>
+					<div className={`${myFont.className}`}>ID</div>
 					<input
 						type="text"
 						{...register("userId", { required: true })}
 						className={`bg-gray-100 rounded-md`}
 					/>
 				</div>
-				<div className={`${myFont.className} grid grid-cols-2 place-content-between items-center`}>
+				<div className={`grid grid-cols-2 place-content-between items-center`}>
 					{/*<div className={`flex justify-between w-1/2`}>*/}
-					<div>PASSWORD</div>
+					<div className={`${myFont.className}`}>PASSWORD</div>
 					<input
 						type="password"
 						{...register("userPw", { required: true })}
@@ -33,27 +33,24 @@ const SignForm = ({ isSignUp, register }: SignFormProps) => {
 				</div>
 				{isSignUp ? (
 					<>
-						<div
-							className={`${myFont.className} grid grid-cols-2 place-content-between items-center`}>
-							<div>CONFIRM PASSWORD</div>
+						<div className={`grid grid-cols-2 place-content-between items-center`}>
+							<div className={`${myFont.className}`}>CONFIRM PASSWORD</div>
 							<input
 								type="password"
 								{...register("confirmPw", { required: false })} // name="confirmPw" id="confirmPw"
 								className={`bg-gray-100 rounded-md`}
 							/>
 						</div>
-						<div
-							className={`${myFont.className} grid grid-cols-2 place-content-between items-center`}>
-							<div>Phone</div>
+						<div className={`grid grid-cols-2 place-content-between items-center`}>
+							<div className={`${myFont.className}`}>PHONE</div>
 							<input
 								type="text"
 								{...register("phone", { required: false })} // name="phone" id="phone"
 								className={`bg-gray-100 rounded-md`}
 							/>
 						</div>
-						<div
-							className={`${myFont.className} grid grid-cols-2 place-content-between items-center`}>
-							<div>Email</div>
+						<div className={`grid grid-cols-2 place-content-between items-center`}>
+							<div className={`${myFont.className}`}>EMAIL</div>
 							<input
 								type="email"
 								{...register("email", { required: false })}

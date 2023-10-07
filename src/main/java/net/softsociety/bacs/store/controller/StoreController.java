@@ -37,4 +37,11 @@ public class StoreController {
         return store;
     }
 
+    @GetMapping("get/byUser/{userId}")
+    public StoreResponseDTO getStoreByUser(@PathVariable(name = "userId") String userId) {
+        StoreResponseDTO store = storeService.getStoreByUser(userId);
+        log.debug("------controller store : {}", store);
+        return store;
+    }
+
 }

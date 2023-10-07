@@ -1,5 +1,6 @@
 package net.softsociety.bacs.order.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.Builder.Default;
 import lombok.ToString.Exclude;
@@ -42,6 +43,7 @@ public class Order {
     @Column(updatable = false, nullable = false)
     private LocalDateTime orderDate;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "store_no")
     private Store store;

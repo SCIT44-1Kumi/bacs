@@ -67,6 +67,25 @@ public class StoreServiceImpl implements StoreService {
                 .createdAt(store.getCreatedAt())
                 .build();
     }
+
+    @Override
+    public StoreResponseDTO getStoreByUser(String userId) {
+        User user = userRepository.findByUserId(userId)
+                .orElseThrow(AuthenticationErrorCode.USER_NULL::defaultException);
+
+        Store store = storeRepository.findByUser(user)
+                .orElseThrow(StoreErrorCode.STORE_NULL::defaultException);
+
+        return StoreResponseDTO.builder()
+                .storeNo(store.getId())
+                .storeId(store.getStoreId())
+                .storeName(store.getStoreName())
+                .storePhone(store.getStorePhone())
+                .storeAddress(store.getStoreAddress())
+                .crNum(store.getCrNum())
+                .createdAt(store.getCreatedAt())
+                .build();
+    }
     // TODO: 매장 삭제
     // TODO: 매장 업데이트
 }

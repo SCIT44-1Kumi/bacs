@@ -6,6 +6,7 @@ import SelectOrderBtn from "@/components/kiosk/selectOrderBtn";
 import { useRouter } from "next/router";
 import API from "@/utils/axiosApi";
 import { GetServerSideProps } from "next";
+import Image from "next/image";
 
 type Store = {
 	storeNo: number;
@@ -43,8 +44,18 @@ const Kiosk = ({ store }: { store: Store }) => {
 					</Link>
 				</div>
 			</KioskMain>
-			<div className={`flex justify-center`}>
-				<span className={``}>앉은 자리에서 QR코드로 주문 가능!</span>
+			<div className={`grid grid-cols-3 place-items-center row-span-1`}>
+				<div className={`relative w-[100px] h-[100px]`}>
+					<Image
+						src={`http://api.qrserver.com/v1/create-qr-code/?data=http://10.10.17.246:3000/${store.storeId}/kiosk&size=100x100`}
+						alt={`qrcode`}
+						fill
+					/>
+				</div>
+
+				<span className={`col-span-2 items-center justify-self-start text-3xl`}>
+					앉은 자리에서 QR코드로 주문 가능!
+				</span>
 			</div>
 		</KioskBG>
 	);

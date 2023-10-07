@@ -1,14 +1,13 @@
 package net.softsociety.bacs.store.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import net.softsociety.bacs.order.entity.SalesWeekResult;
 import net.softsociety.bacs.store.dto.SaleTodayDTO;
+import net.softsociety.bacs.order.dto.response.OrderResponseDTO;
 import net.softsociety.bacs.store.projection.SalesWeekResultProjection;
 import net.softsociety.bacs.store.service.StoreAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,7 +37,13 @@ public class StoreAdminController {
     public List<SalesWeekResultProjection> salesWeek(@PathVariable(name = "storeId") String storeId){
         log.debug("-----------dto:{}",storeId);
         return service.salesWeek(storeId);
+    }
 
+    @GetMapping("orderPendingList")
+    public List<OrderResponseDTO> getOrderPendingList(@PathVariable(name = "storeId") String storeId) {
+        List<OrderResponseDTO> orderResponseDTOList = service.getOrderPendingList(storeId);
+        log.debug("----------orderResponseDTOList {}", orderResponseDTOList);
+        return orderResponseDTOList;
     }
 
 }

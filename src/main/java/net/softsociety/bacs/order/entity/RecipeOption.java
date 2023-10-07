@@ -1,5 +1,6 @@
 package net.softsociety.bacs.order.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import net.softsociety.bacs.menu.entity.menuOption.MenuOption;
 import org.hibernate.annotations.ColumnDefault;
@@ -26,10 +27,12 @@ public class RecipeOption {
     @ColumnDefault("1")
     private int roAmount;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "option_no")
     private MenuOption option;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "recipe_no")
     private OrderRecipe orderRecipe;

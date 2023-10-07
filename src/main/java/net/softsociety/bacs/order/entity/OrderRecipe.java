@@ -1,5 +1,6 @@
 package net.softsociety.bacs.order.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.Builder.Default;
 import lombok.ToString.Exclude;
@@ -38,6 +39,7 @@ public class OrderRecipe {
     @JoinColumn(name = "menu_no")
     private Menu menu;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "order_no")
     private Order order;

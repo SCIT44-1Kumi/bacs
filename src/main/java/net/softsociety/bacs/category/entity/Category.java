@@ -1,5 +1,6 @@
 package net.softsociety.bacs.category.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import net.softsociety.bacs.menu.entity.menu.Menu;
 import net.softsociety.bacs.store.entity.Store;
@@ -26,6 +27,7 @@ public class Category {
     @Column(nullable = false)
     private String categoryName;
 
+    @JsonIgnore
     @ManyToOne()
     @JoinColumn(name = "store_no")
     private Store store;

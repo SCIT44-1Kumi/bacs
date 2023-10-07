@@ -183,4 +183,20 @@ public class MenuServiceImpl implements MenuService {
                 )
                 .toList();
     }
+
+    @Override
+    public List<MenuOptionResponseDTO> getMenuOptions(long menuId) {
+        Menu menu = menuRepository.findById(menuId).orElseThrow(MenuErrorCode.MENU_NULL::defaultException);
+        List<MenuOption> menuOptionList = menuOptionRepository.findAllByMenu(menu);
+
+        return menuOptionList.stream()
+                .map(menuOption -> MenuOptionResponseDTO.builder()
+                        .id(menuOption.getId())
+                        .optionPrice(menuOption.getOptionPrice())
+                        .optionValue(menuOption.getOptionValue())
+                        .optionName(menuOption.getOptionName())
+                        .build()
+                )
+                .toList();
+    }
 }

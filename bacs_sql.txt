@@ -54,7 +54,6 @@ CREATE TABLE BACS_MENU (
     MENU_PRICE NUMBER NOT NULL , -- 메뉴 가격
     MENU_IMG VARCHAR2(1000) DEFAULT '' , -- 메뉴 이미지
     MENU_DESC VARCHAR2(100) DEFAULT '' , -- 메뉴 설명
-    STORE_NO number NOT NULL , -- 매장 아이디 외래키
     CATEGORY_NO NUMBER DEFAULT 0  -- 메뉴 카테고리 번호 외래키
 );
 

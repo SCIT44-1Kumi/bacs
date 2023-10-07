@@ -15,20 +15,13 @@
     @apply h-[729px] shrink-0 shadow-[4px_4px_4px_10px_rgba(0,0,0,0.25)] rounded-[50px];
 }
 
-
-
-.login1 {
-    @apply w-[600px] h-[729px] shrink-0 opacity-70 rounded-[50px_0px_0px_50px];
-    background: #04be22;
-}
-
 .signUp {
     @apply w-[1200px] h-[729px] shrink-0 shadow-[4px_4px_4px_10px_rgba(0,0,0,0.25)] rounded-[50px];
     background: rgba(130, 233, 121, 0.7);
 }
 .signButton {
-    @apply w-[266px] h-[84px] shrink-0 shadow-[0px_4px_10px_0px_rgba(255,255,255,0.45)_inset,0px_-3px_10px_0px_rgba(0,0,0,0.45),0px_4px_4px_0px_rgba(0,0,0,0.25)] rounded-[20px];
-    background: linear-gradient(93deg, #04d83f 7.18%, #04631f 99.14%);
+    @apply text-white w-[130px] h-[60px] shrink-0 shadow-[0px_4px_10px_0px_rgba(255,255,255,0.45)_inset,0px_-3px_10px_0px_rgba(0,0,0,0.45),0px_4px_4px_0px_rgba(0,0,0,0.25)] rounded-[20px];
+    background: linear-gradient(93deg, rgba(255, 255, 255, 0.44) 7.18%, rgba(134, 121, 94, 0.47) 99.14%);
 }
 
 .loginBackground{
@@ -50,6 +43,20 @@
     text-align: center;
 }
 
+
+/* Admin */
+.chart1 {
+    @apply w-[442px] h-[391px] shrink-0 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.75),3px_3px_4px_0px_rgba(255,255,255,0.25),0px_4px_10px_0px_rgba(0,0,0,0.25)] rounded-[20px];
+    background: linear-gradient(106deg, #f0f6f2 0%, #afcdab 100%);
+}
+.chart2 {
+    @apply w-[827px] h-[391px] shrink-0 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.75),3px_3px_4px_0px_rgba(255,255,255,0.25),0px_4px_10px_0px_rgba(0,0,0,0.25)] rounded-[20px];
+    background: linear-gradient(106deg, #f0f6f2 0%, #afcdab 100%);
+}
+.chart3 {
+    @apply w-[1308px] h-[371px] shrink-0 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.75),3px_3px_4px_0px_rgba(255,255,255,0.25),0px_4px_10px_0px_rgba(0,0,0,0.25)] rounded-[20px];
+    background: linear-gradient(106deg, #f0f6f2 0%, #afcdab 100%);
+}
 
 
 
