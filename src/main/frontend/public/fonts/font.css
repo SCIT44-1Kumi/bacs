@@ -1,9 +1,0 @@
-@font-face{
-    font-family: "Barcode";
-    src: url("/fonts/LibreBarcode39Text-Regular.woff");
-}
-
-:root {
-    --font-googleGugi: "LibreBarcode39Text-Regular";
-    --font-googleSingleDay: "LibreBarcode39Text-Regular";
-}
